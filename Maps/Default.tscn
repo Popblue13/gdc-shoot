@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://27dxcrv3ostv"]
+
+[ext_resource type="Texture2D" uid="uid://b7b8tego25aq3" path="res://PrototypeAssets/PrototypeMapAssets/Vector/texture_02.svg" id="1_clmtl"]
+[ext_resource type="Script" uid="uid://c8vcha0bpxltm" path="res://Maps/level.gd" id="1_qt646"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qt646"]
+albedo_texture = ExtResource("1_clmtl")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qt646"]
+
+[sub_resource type="Sky" id="Sky_firbl"]
+sky_material = SubResource("ProceduralSkyMaterial_qt646")
+
+[sub_resource type="Environment" id="Environment_n31ts"]
+background_mode = 2
+background_energy_multiplier = 1.07
+sky = SubResource("Sky_firbl")
+ambient_light_color = Color(0.63375676, 0.6337568, 0.63375676, 1)
+
+[node name="Default" type="Node3D" node_paths=PackedStringArray("player_spawn")]
+script = ExtResource("1_qt646")
+player_spawn = NodePath("PlayerSpawner")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://bcx63mqj80yes")
+spawn_path = NodePath("../PlayerSpawner")
+spawn_limit = 20
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.523632, 0, 1.4092712)
+material_override = SubResource("StandardMaterial3D_qt646")
+use_collision = true
+size = Vector3(54.756798, 1, 58.8974)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_n31ts")
+
+[node name="PlayerSpawner" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3790727, 0)
