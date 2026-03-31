@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://e87yttxx4cre"]
+
+[ext_resource type="Script" uid="uid://01fq2mp8vd8q" path="res://MultiplayerStuff/Server/Lobby/lobby.gd" id="1_j3nwk"]
+[ext_resource type="Script" uid="uid://cv604ucylqjo0" path="res://MultiplayerStuff/Server/Lobby/map_voting.gd" id="2_jbcu6"]
+
+[node name="Lobby" type="Node" unique_id=1972131471]
+script = ExtResource("1_j3nwk")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=895859345]
+spawn_path = NodePath("..")
+spawn_limit = 1
+
+[node name="MapVoting" type="Panel" parent="." unique_id=162767974]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 23.0
+offset_right = -19.0
+offset_bottom = -34.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_jbcu6")
+
+[node name="MapButtonVBox" type="VBoxContainer" parent="MapVoting" unique_id=249349763]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 57.0
+offset_right = -20.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VoteForMap" type="RichTextLabel" parent="MapVoting" unique_id=369442300]
+layout_mode = 0
+offset_left = 504.0
+offset_top = 14.0
+offset_right = 718.0
+offset_bottom = 43.0
+text = "Vote For Map"

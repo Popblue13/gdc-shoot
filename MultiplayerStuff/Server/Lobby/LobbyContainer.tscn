@@ -1,11 +1,85 @@
 [gd_scene format=3 uid="uid://dtib8ppqweogq"]
 
 [ext_resource type="Script" uid="uid://bt8mw0x7olnpa" path="res://MultiplayerStuff/Server/Lobby/lobby_container.gd" id="1_mv773"]
+[ext_resource type="Script" uid="uid://5fglh17poklv" path="res://MultiplayerStuff/Server/Lobby/lobby_viewer.gd" id="2_yi4sf"]
+[ext_resource type="PackedScene" uid="uid://dqhs1etxa5bos" path="res://MultiplayerStuff/Server/Lobby/lobby_info.tscn" id="3_6sr8i"]
 
-[node name="LobbyContainer" type="Node" unique_id=1974402244]
+[node name="LobbyContainer" type="Node" unique_id=1974402244 groups=["LobbyContainer"]]
 script = ExtResource("1_mv773")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1806822229]
-_spawnable_scenes = PackedStringArray("uid://27dxcrv3ostv")
+_spawnable_scenes = PackedStringArray("uid://e87yttxx4cre")
 spawn_path = NodePath("..")
-spawn_limit = 1
+spawn_limit = 64
+
+[node name="LobbyViewer" type="Control" parent="." unique_id=2009145587]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_yi4sf")
+
+[node name="Panel" type="Panel" parent="LobbyViewer" unique_id=1295855545]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 27.0
+offset_top = 27.0
+offset_right = -30.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="LobbyViewer/Panel" unique_id=1985447984]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 313.0
+offset_top = 13.0
+offset_right = -302.0
+offset_bottom = -494.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 52
+bbcode_enabled = true
+text = "[rainbow] Select Your Lobby
+"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="LobbyViewer/Panel" unique_id=603674363]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 90.0
+offset_right = -21.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LobbyViewer/Panel/ScrollContainer" unique_id=766339204]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LobbyInfo" parent="LobbyViewer/Panel/ScrollContainer/VBoxContainer" unique_id=1771511531 instance=ExtResource("3_6sr8i")]
+layout_mode = 2
+
+[node name="create_lobby_button" type="Button" parent="LobbyViewer/Panel" unique_id=742597945]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 807.0
+offset_top = 25.0
+offset_right = -24.0
+offset_bottom = -521.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "create_lobby"
+
+[connection signal="pressed" from="LobbyViewer/Panel/create_lobby_button" to="." method="_on_create_lobby_button_pressed"]

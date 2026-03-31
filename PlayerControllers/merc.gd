@@ -1,0 +1,1 @@
+class_name Merc extends CharacterBody3D

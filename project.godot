@@ -17,26 +17,26 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="GDCShoot"
 run/main_scene="uid://d3a6djfre3wqt"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://tw5h2tr05v4x"
 
 [autoload]
 
 Director="*res://Misc/director.gd"
 ServerDatabase="*uid://vp0x81lmogrn"
 
-[display]
-
-window/stretch/mode="viewport"
-
 [file_customization]
 
 folder_colors={
-"res://Maps/": "teal",
+"res://MapsAndGamemodes/": "teal",
 "res://Misc/": "gray",
 "res://MultiplayerStuff/": "green",
-"res://Player Conrollers/": "blue",
+"res://PlayerControllers/": "blue",
 "res://PrototypeAssets/": "gray"
 }
+
+[global_group]
+
+LobbyContainer=""
 
 [input]
 

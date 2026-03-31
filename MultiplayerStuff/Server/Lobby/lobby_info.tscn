@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://dqhs1etxa5bos"]
+
+[ext_resource type="Script" uid="uid://cf4hyrat5bg36" path="res://MultiplayerStuff/Server/Lobby/lobby_info.gd" id="1_6uhdn"]
+
+[node name="LobbyInfo" type="HBoxContainer" unique_id=1771511531]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+script = ExtResource("1_6uhdn")
+
+[node name="LobbyID" type="RichTextLabel" parent="." unique_id=872622557]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "lobbyID"
+vertical_alignment = 1
+
+[node name="PlayerCount" type="RichTextLabel" parent="." unique_id=951454772]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0/10"
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="." unique_id=1344340103]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Join"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
