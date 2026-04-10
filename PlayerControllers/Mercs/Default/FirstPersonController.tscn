@@ -12,13 +12,16 @@
 collision_layer = 2
 script = ExtResource("1_sjy6i")
 camera = NodePath("Camera3D")
-abilities = [NodePath("EvilGun"), NodePath("JumpAbility")]
+abilities = [NodePath("EvilGun"), NodePath("JumpAbility"), NodePath("EvilGun2")]
 
 [node name="JumpAbility" parent="." unique_id=27473948 instance=ExtResource("2_lfvw0")]
 auto_bhop = true
 trigger_key = "Space"
 
 [node name="EvilGun" parent="." unique_id=1600695075 instance=ExtResource("2_4fgnm")]
+
+[node name="EvilGun2" parent="." unique_id=1336151495 instance=ExtResource("2_4fgnm")]
+trigger_key = "2"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1977683154]
 shape = SubResource("CapsuleShape3D_lwjk5")

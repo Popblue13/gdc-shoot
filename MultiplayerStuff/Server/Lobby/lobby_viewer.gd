@@ -3,9 +3,10 @@ extends Control
 const LOBBY_INFO = preload("res://MultiplayerStuff/Server/Lobby/lobby_info.tscn")
 
 func _ready() -> void:
-	create_lobby_views()
+	
 	ServerDatabase.connect("lobbies_updated", create_lobby_views)
-
+	create_lobby_views()
+	
 func create_lobby_views():
 	for i in v_box_container.get_children():
 		i.queue_free()

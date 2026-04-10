@@ -24,7 +24,6 @@ var address = "localhost"
 #region PRESET DATABASE
 var PRESETMAPS : Dictionary [String, PackedScene] = {
 	"lobby" = load("res://MapsAndGamemodes/Maps/sb_Lobby/sb_lobby.tscn")
-	
 }
 
 var PRESETMERCS : Dictionary [String, PackedScene] = {
@@ -66,3 +65,10 @@ func sync_lobbies(_lobbies):
 func _ready() -> void:
 	Maps = PRESETMAPS
 	Mercs = PRESETMERCS
+	if !multiplayer.is_server(): return
+	multiplayer.peer_connected.connect(_on_client_connected)
+
+func _on_client_connected(peer_id : int):
+	if !multiplayer.is_server(): return
+	rpc_id(peer_id, "sync_lobbies", Lobbies)
+	rpc_id(peer_id, "sync_players", Players)

@@ -7,6 +7,7 @@ signal player_left_lobby(player_id: int)
 @onready var spawner: MultiplayerSpawner = $MultiplayerSpawner
 
 var current_map : Map
+var connected_players : Array[int] = [] # The Lobby's master list
 
 func _ready() -> void:
 	register_spawnable_maps()
@@ -23,7 +24,7 @@ func register_spawnable_maps(): #<ALL>
 		if scene and scene.resource_path != "":
 			spawner.add_spawnable_scene(scene.resource_path)
 
-func change_map(map : String): #maps hold gamemodes #<1>
+func change_map(map : String): 
 	if !multiplayer.is_server(): return
 	if current_map: current_map.queue_free()
 	
@@ -32,11 +33,26 @@ func change_map(map : String): #maps hold gamemodes #<1>
 	
 	add_child(new_map)
 	current_map = new_map
+	
+	# --- NEW: Await the map's setup ---
+	await current_map.map_ready
+	
+	# Now that the map and UI are 100% loaded, push all existing players to it!
+	for player_id in connected_players:
+		player_joined_lobby.emit(player_id)
 
 func on_player_joined(player_id: int) -> void:
-	player_joined_lobby.emit(player_id)
+	# 1. Add them to the master list
+	if not connected_players.has(player_id):
+		connected_players.append(player_id)
+		
+	# 2. If they joined mid-game (map is already fully loaded), emit immediately
+	if current_map and current_map.is_map_ready:
+		player_joined_lobby.emit(player_id)
 
 func on_player_left(player_id: int) -> void:
+	# Keep the master list clean
+	connected_players.erase(player_id)
 	player_left_lobby.emit(player_id)
 
 func game_end():

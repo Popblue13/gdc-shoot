@@ -13,7 +13,6 @@ var player_stats : Dictionary[int, Dictionary]
 func custom_ready():
 	sandbox_leaderboard = SANDBOX_LEADERBOARD_UI.instantiate()
 	add_child(sandbox_leaderboard)
-	
 
 func custom_process(delta : float):
 	# 1. Only the server manages respawns
@@ -64,21 +63,6 @@ func _respawn_player(player_id: int):
 		print("Player ", player_id, " respawned!")
 		sync_player_stats.rpc(player_stats)
 	
-func _on_player_joined(player_id: int) -> void:
-	if !multiplayer.is_server(): return
-	
-	print("Player ", player_id, " joined the SB Map!")
-	
-	player_stats[player_id] = {
-		"kills": 0,
-		"deaths": 0,
-		"is_dead": false,
-		"respawn_timer": 0.0
-	}
-	
-	if not has_node(str(player_id)):
-		player_spawner.spawn({"merc_type" = "default", "position" = Vector3.ZERO, "peer_id" = player_id})
-	sync_player_stats.rpc(player_stats)
 
 func _on_player_left(player_id: int) -> void:
 	if !multiplayer.is_server(): return
@@ -100,3 +84,9 @@ func sync_player_stats(new_stats: Dictionary) -> void:
 	# Push the fresh data to the UI!
 	if sandbox_leaderboard and sandbox_leaderboard.has_method("update_ui"):
 		sandbox_leaderboard.update_ui(player_stats)
+
+func _on_player_joined(player_id: int) -> void:
+	if not multiplayer.is_server(): return
+	# They connected to the network! Set up their scoreboard stats right away.
+	player_stats[player_id] = { "kills": 0, "deaths": 0, "is_dead": true, "respawn_timer": 0.0 }
+	sync_player_stats.rpc(player_stats)

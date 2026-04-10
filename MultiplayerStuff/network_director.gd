@@ -15,6 +15,8 @@ func _setup_server():
 	add_child(server_logic)
 
 func _setup_client():
+	randomize()
 	get_window().position.x += ceil(get_window().size.x / 2.0 + 8)
+	get_window().position.y += ceil(get_window().size.y / 2.0 + randf_range(-8,8))
 	var client_logic = ClientLogic.new()
 	add_child(client_logic)
