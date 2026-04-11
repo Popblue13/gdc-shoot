@@ -12,7 +12,9 @@ var is_map_ready : bool = false # Lobby checks this for mid-game joiners
 
 func _ready() -> void:
 	player_spawner = MultiplayerSpawner.new()
+	player_spawner.name = "player_spawner"
 	add_child(player_spawner)
+	
 	player_spawner.spawn_path = get_path()
 	player_spawner.spawn_limit = 58
 	
