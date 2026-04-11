@@ -13,8 +13,7 @@ func _ready():
 	multiplayer_spawner.spawn_function = _custom_lobby_spawn
 	if !multiplayer.is_server(): return
 	multiplayer.peer_disconnected.connect(_on_player_disconnected)
-	
-	
+
 # The server calls this to build the lobby package
 @rpc("any_peer", "call_remote", "reliable")
 func create_new_lobby(lobby_id: String, players_in_lobby: Array[int]):
@@ -27,7 +26,8 @@ func create_new_lobby(lobby_id: String, players_in_lobby: Array[int]):
 		
 		if lobbies.size() == 1:
 			lob.call_deferred("change_map", "hm_home")
-
+		else:
+			lob.call_deferred("change_map", "sb_lobby")
 # This runs on EVERY machine when the lobby spawns
 func _custom_lobby_spawn(data: Dictionary) -> Node:
 	var lobby_scene: Lobby = LOBBY.instantiate()
@@ -44,7 +44,6 @@ func _custom_lobby_spawn(data: Dictionary) -> Node:
 
 @rpc("any_peer","call_remote",'reliable')
 func add_player_to_lobby(lobby_id : String, player_id : int):
-	
 	if !multiplayer.is_server():
 		add_player_to_lobby.rpc_id(1, lobby_id, player_id)
 		return
@@ -86,6 +85,46 @@ func remove_player_from_lobby(lobby_id: String, player_id: int):
 				
 			print("Player ", player_id, " removed from ", lobby_id)
 
+@rpc("any_peer", "call_remote", "reliable")
+func change_lobby(new_lobby_id: String, player_id: int) -> void:
+	# 1. Route client requests to the server
+	if !multiplayer.is_server():
+		change_lobby.rpc_id(1, new_lobby_id, player_id)
+		return
+		
+	# 2. Make sure the destination actually exists
+	if not lobbies.has(new_lobby_id):
+		print("Cannot change lobby: Destination lobby does not exist.")
+		return
+
+	# 3. Find the player's current lobby
+	var old_lobby_id: String = ""
+	for l_id in lobbies.keys():
+		if player_id in lobbies[l_id]:
+			old_lobby_id = l_id
+			break
+
+	# 4. Prevent redundant work if they are already there
+	if old_lobby_id == new_lobby_id:
+		print("Player " + str(player_id) + " is already in lobby: " + new_lobby_id)
+		return
+
+	# 5. Execute the swap
+	if old_lobby_id != "":
+		remove_player_from_lobby(old_lobby_id, player_id)
+		# Put the old lobby to sleep on the client side so it disappears
+		put_lobby_to_sleep.rpc_id(player_id, old_lobby_id)
+
+	# 6. Add them to the new lobby (This already calls wake_up_lobby for the client!)
+	add_player_to_lobby(new_lobby_id, player_id)
+
+@rpc("authority", "call_remote", "reliable")
+func put_lobby_to_sleep(lobby_id: String): # nighty night
+	var inactive_lobby: Lobby = get_node_or_null(lobby_id.validate_node_name())
+	if inactive_lobby:
+		inactive_lobby.hide()
+		inactive_lobby.process_mode = Node.PROCESS_MODE_DISABLED
+
 @rpc("authority", "call_remote", "reliable")
 func wake_up_lobby(lobby_id: String): #wakey waky, its time for schoo
 	var active_lobby :Lobby = get_node_or_null(lobby_id.validate_node_name())
@@ -93,12 +132,11 @@ func wake_up_lobby(lobby_id: String): #wakey waky, its time for schoo
 		active_lobby.show()
 		#print("position = ", active_lobby.position, " ", lobby_id)
 		active_lobby.process_mode = Node.PROCESS_MODE_INHERIT
-	
+
 func _on_create_lobby_button_pressed() -> void:
 	if !multiplayer.is_server():
 		var array_of_player :Array[int] = []
 		create_new_lobby.rpc_id(1, "server_lobby_" + str(randi_range(1,9999)), array_of_player)
-		return
 
 func _on_player_disconnected(peer_id: int):
 	# Search our local lobbies dictionary to find where they were

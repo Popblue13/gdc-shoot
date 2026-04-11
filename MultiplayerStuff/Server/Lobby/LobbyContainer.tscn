@@ -11,7 +11,7 @@ _spawnable_scenes = PackedStringArray("uid://e87yttxx4cre")
 spawn_path = NodePath("..")
 spawn_limit = 64
 
-[node name="LobbyViewer" type="Control" parent="." unique_id=2009145587]
+[node name="LobbyViewer" type="Control" parent="." unique_id=1785813309]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_yi4sf")
 
-[node name="Panel" type="Panel" parent="LobbyViewer" unique_id=1295855545]
+[node name="Panel" type="Panel" parent="LobbyViewer" unique_id=875913062]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,7 +32,7 @@ offset_bottom = -35.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="LobbyViewer/Panel" unique_id=1985447984]
+[node name="RichTextLabel" type="RichTextLabel" parent="LobbyViewer/Panel" unique_id=123566803]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -48,7 +48,7 @@ bbcode_enabled = true
 text = "[rainbow] Select Your Lobby
 "
 
-[node name="ScrollContainer" type="ScrollContainer" parent="LobbyViewer/Panel" unique_id=603674363]
+[node name="ScrollContainer" type="ScrollContainer" parent="LobbyViewer/Panel" unique_id=1715769973]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -60,12 +60,12 @@ offset_bottom = -19.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="LobbyViewer/Panel/ScrollContainer" unique_id=766339204]
+[node name="VBoxContainer" type="VBoxContainer" parent="LobbyViewer/Panel/ScrollContainer" unique_id=206612218]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="create_lobby_button" type="Button" parent="LobbyViewer/Panel" unique_id=742597945]
+[node name="create_lobby_button" type="Button" parent="LobbyViewer/Panel" unique_id=1205153913]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.703
@@ -79,4 +79,4 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "create_lobby"
 
-[connection signal="pressed" from="LobbyViewer/Panel/create_lobby_button" to="." method="_on_create_lobby_button_pressed"]
+[connection signal="pressed" from="LobbyViewer/Panel/create_lobby_button" to="LobbyViewer" method="_on_create_lobby_button_pressed"]

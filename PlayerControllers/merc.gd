@@ -36,7 +36,6 @@ func _ready() -> void:
 	
 	if is_multiplayer_authority():
 		camera.make_current()
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		get_tree().physics_frame.connect(check_abilities)
 		custom_ready()
 		abilites_ui = ABILITY_UI.instantiate()
@@ -130,6 +129,10 @@ func sv_airaccelerate(movement_dir, delta):
 
 func _input(event: InputEvent) -> void:
 	if !is_multiplayer_authority(): return
+	
+	if event is InputEventMouseButton:
+			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * 0.005)

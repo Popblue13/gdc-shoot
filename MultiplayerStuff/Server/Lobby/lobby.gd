@@ -13,7 +13,7 @@ var starting_map = 'sb_lobby' #exits to fight race conditions
 func _ready() -> void:
 	register_spawnable_maps()
 	if not multiplayer.is_server(): return
-	#
+
 	#await get_tree().create_timer(1.0).timeout
 	#
 	#call_deferred("change_map", "sb_lobby") #FIX
