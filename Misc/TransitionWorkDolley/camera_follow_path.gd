@@ -37,6 +37,8 @@ func ease_dolley():
 	)
 	await tween.finished
 	done_dolley.emit()
+	await get_tree().create_timer(1.0).timeout
+	path_follow_3d.progress_ratio = 0.0
 
 func set_dolly_points(path: CameraFollowPath, path_new: CameraFollowPath):
 	# 1. PREVENT CRASHES: Ensure everything exists and has points

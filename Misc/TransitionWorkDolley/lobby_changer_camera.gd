@@ -10,6 +10,8 @@ var current_path_following : CameraFollowPath
 # Exposed so you can easily tweak transition times in the inspector
 @export var transition_duration: float = 1.0
 
+func _ready() -> void:
+	process_priority = 10
 func _process(delta: float) -> void:
 	if current_path_following:
 		# 1. Lerp Position
@@ -42,10 +44,9 @@ func set_dolley_sequence(queue: Array[CameraFollowPath]):
 		var current_dolley = queue[i]
 		var is_last_index = (i == queue.size() - 1)
 		
+		# This will set the path and wait for the transition duration
 		transition_to_next_dolley(current_dolley)
 		await done_transfering_dollies
-		
-		current_path_following = current_dolley
 		
 		if is_last_index:
 			current_dolley.display_lobby_name()
@@ -57,27 +58,11 @@ func set_dolley_sequence(queue: Array[CameraFollowPath]):
 	
 	finished_with_all_camera_transitions.emit()
 
-
 func transition_to_next_dolley(dolley: CameraFollowPath):
-	# Temporarily disable _process tracking so it doesn't fight our Tween
-	current_path_following = null 
+	# Set the target immediately so _process takes over the lerping
+	current_path_following = dolley 
 	
-	var target_start_pos = dolley.path_follow_3d.global_position
-	var target_look_pos = dolley.marker_3d.global_position
+	# Wait for the designated duration while _process handles the smooth movement
+	await get_tree().create_timer(transition_duration).timeout
 	
-	# Calculate the final transform the camera needs to have when it reaches the dolley
-	var final_transform = Transform3D(Basis(), target_start_pos).looking_at(target_look_pos, Vector3.UP)
-	var final_quat = final_transform.basis.get_rotation_quaternion()
-	
-	var tween = create_tween()
-	tween.set_parallel(true) # Make position and rotation animate simultaneously
-	tween.set_ease(Tween.EASE_IN_OUT)
-	tween.set_trans(Tween.TRANS_CUBIC) # Cubic looks great for smooth camera flights
-	
-	# Tween position
-	tween.tween_property(self, "global_position", target_start_pos, transition_duration)
-	
-	tween.tween_property(self, "quaternion", final_quat, transition_duration)
-	
-	await tween.finished
 	done_transfering_dollies.emit()

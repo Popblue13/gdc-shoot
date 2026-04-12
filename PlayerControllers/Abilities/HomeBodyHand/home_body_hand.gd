@@ -25,6 +25,12 @@ func pull_headset_on():
 	animation_player.play("equip_headset")
 	await get_tree().create_timer(.45).timeout
 	return true
+
+func pull_headset_on_reverse():
+	animation_player.play_backwards("equip_headset")
+	await get_tree().create_timer(.45).timeout
+	return true
+
 func equip():
 	show()
 

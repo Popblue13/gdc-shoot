@@ -13,6 +13,7 @@ script = ExtResource("1_i3ncc")
 easing_graph = SubResource("Curve_doon7")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="." unique_id=1301980135]
+loop = false
 
 [node name="CameraTargetPoint" type="Marker3D" parent="." unique_id=1641026556]
 

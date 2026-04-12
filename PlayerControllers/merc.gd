@@ -98,6 +98,7 @@ func _physics_process(delta: float) -> void:
 		
 		return # Skip all the local movement code below
 	
+	if dead: return
 	if camera: camera.fov = camera_fov
 	
 	var input = Vector2.ZERO
@@ -151,6 +152,7 @@ func sv_airaccelerate(movement_dir, delta):
 func _input(event: InputEvent) -> void:
 	if !is_multiplayer_authority(): return
 	
+	if dead: return
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * 0.005)
 		camera.rotate_x(-event.relative.y * .005)

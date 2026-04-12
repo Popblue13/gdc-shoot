@@ -179,6 +179,7 @@ func finalize_lobby_change_on_server(old_lobby_id: String, new_lobby_id: String)
 
 	# 6. Add them to the new lobby
 	add_player_to_lobby(new_lobby_id, player_id)
+
 @rpc("authority", "call_remote", "reliable")
 func put_lobby_to_sleep(lobby_id: String): # nighty night
 	var inactive_lobby: Lobby = get_node_or_null(lobby_id.validate_node_name())
