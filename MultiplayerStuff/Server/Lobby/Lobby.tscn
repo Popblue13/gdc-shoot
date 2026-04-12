@@ -2,6 +2,14 @@
 
 [ext_resource type="Script" uid="uid://01fq2mp8vd8q" path="res://MultiplayerStuff/Server/Lobby/lobby.gd" id="1_j3nwk"]
 [ext_resource type="Script" uid="uid://cv604ucylqjo0" path="res://MultiplayerStuff/Server/Lobby/map_voting.gd" id="2_jbcu6"]
+[ext_resource type="PackedScene" uid="uid://bs0ioqnyph33c" path="res://Misc/TransitionWorkDolley/camera_follow_path.tscn" id="3_a11av"]
+
+[sub_resource type="Curve3D" id="Curve3D_a11av"]
+_data = {
+"points": PackedVector3Array(0.75959015, 0, 34.6745, -0.75959015, 0, -34.6745, 64.39396, 41.448723, 0.11457801, 46.120438, 0, 0.30952454, -46.120438, 0, -0.30952454, 1.2492213, 41.448723, -63.649246, 0.619133, 0, -36.215523, -0.619133, 0, 36.215523, -63.75267, 41.448723, 0.73349833, -52.00157, 0, 0.6190491, 52.00157, 0, -0.6190491, -0.29844713, 41.448723, 65.116516, 0.61909485, 0, 33.120056, -0.61909485, 0, -33.120056, 64.39396, 41.448723, 1.971772),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
 
 [node name="Lobby" type="Node3D" unique_id=850969054]
 script = ExtResource("1_j3nwk")
@@ -12,33 +20,35 @@ spawn_limit = 1
 
 [node name="MapVoting" type="Panel" parent="." unique_id=162767974]
 visible = false
+self_modulate = Color(1, 1, 1, 0.25882354)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 32.0
-offset_top = 23.0
-offset_right = -19.0
-offset_bottom = -34.0
+offset_left = 11.0
+offset_top = 102.0
+offset_right = -1108.0
+offset_bottom = -327.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_jbcu6")
 
-[node name="MapButtonVBox" type="VBoxContainer" parent="MapVoting" unique_id=249349763]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 13.0
-offset_top = 57.0
-offset_right = -20.0
-offset_bottom = -21.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VoteForMap" type="RichTextLabel" parent="MapVoting" unique_id=369442300]
+[node name="VoteLabel" type="RichTextLabel" parent="MapVoting" unique_id=369442300]
 layout_mode = 0
-offset_left = 504.0
-offset_top = 14.0
-offset_right = 718.0
-offset_bottom = 43.0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 153.0
+offset_bottom = 281.0
+bbcode_enabled = true
 text = "Vote For Map"
+
+[node name="CameraFollowPath" parent="." unique_id=1495840154 instance=ExtResource("3_a11av")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0454669, -0.011956215, -0.14295387)
+curve = SubResource("Curve3D_a11av")
+dur = 5.0
+
+[node name="PathFollow3D" parent="CameraFollowPath" index="0" unique_id=1301980135]
+transform = Transform3D(0.99974906, 0, 0.021900434, 0, 0.99998957, 0, -0.021900808, 0, 0.99973196, 64.39396, 41.448723, 0.11457801)
+
+[connection signal="vote_finished" from="MapVoting" to="." method="_on_map_voting_vote_finished"]
+
+[editable path="CameraFollowPath"]

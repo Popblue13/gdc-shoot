@@ -9,15 +9,17 @@ var abilites_ui : AbilitiesUI
 
 @export_group("Universal Properties")
 @export var health :float = 100.0
-@export var gravity = 9.8
-@export var friction = .1
-@export var air_acceleration = .3
-@export var speed = 1
-
+@export var gravity := 9.8
+@export var friction := .1
+@export var air_acceleration := .3
+@export var speed := 1.0
+@export var visual_body : Node3D
+@export var visual_hand : Node3D
+@export var merc_UI_color : Color
+@export var camera_fov : float = 90.0
 
 var target_position: Vector3 #what other people see
 var target_rotation: Vector3
-
 
 @export var abilities : Array[Ability]
 #reminder abilities  can have their own ui
@@ -27,7 +29,6 @@ var ability_ui
 signal died(_self) #Server will disable input on character
 signal took_damage
 
-
 func _ready() -> void:
 	target_position = global_position
 	target_rotation = global_rotation
@@ -36,12 +37,24 @@ func _ready() -> void:
 	
 	if is_multiplayer_authority():
 		camera.make_current()
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		get_tree().physics_frame.connect(check_abilities)
 		custom_ready()
 		abilites_ui = ABILITY_UI.instantiate()
 		add_child(abilites_ui)
 		abilites_ui.generate_ui(self)
+		if visual_body:
+			visual_body.hide()
+		if visual_hand:
+			visual_hand.hide()
+		
+		show_visual_body_to_world.rpc()
+
+@rpc("any_peer","call_remote","reliable")
+func show_visual_body_to_world():
+	if visual_body:
+		visual_body.show()
+	if visual_hand:
+		visual_hand.show()
 
 func _setup_synchronizer() -> void:
 	var synchronizer = MultiplayerSynchronizer.new()
@@ -85,6 +98,9 @@ func _physics_process(delta: float) -> void:
 		
 		return # Skip all the local movement code below
 	
+	if dead: return
+	if camera: camera.fov = camera_fov
+	
 	var input = Vector2.ZERO
 	input.x = float(Input.is_physical_key_pressed(KEY_D)) - float(Input.is_physical_key_pressed(KEY_A))
 	input.y = float(Input.is_physical_key_pressed(KEY_S)) - float(Input.is_physical_key_pressed(KEY_W))
@@ -108,6 +124,11 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	if is_multiplayer_authority():
 		receive_pos_from_server.rpc(global_position, global_rotation)
+	
+	if global_position.y < -1000:
+		dead = true
+		death_effects.rpc()
+		die.rpc_id(1)
 
 func sv_airaccelerate(movement_dir, delta):
 	var air_strength = 3
@@ -131,6 +152,7 @@ func sv_airaccelerate(movement_dir, delta):
 func _input(event: InputEvent) -> void:
 	if !is_multiplayer_authority(): return
 	
+	if dead: return
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * 0.005)
 		camera.rotate_x(-event.relative.y * .005)
@@ -140,6 +162,7 @@ func _input(event: InputEvent) -> void:
 func check_abilities() -> void:
 	if abilities.size() <= 0: return
 	for i in abilities:
+		if i == null: return
 		if !i.is_multiplayer_authority():
 			i.set_multiplayer_authority(int(name), true)
 		

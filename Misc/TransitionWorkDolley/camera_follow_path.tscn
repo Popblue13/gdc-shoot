@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bs0ioqnyph33c"]
+
+[ext_resource type="Script" uid="uid://q2t5lngmwtv7" path="res://Misc/TransitionWorkDolley/camera_follow_path.gd" id="1_i3ncc"]
+[ext_resource type="FontFile" uid="uid://dahun501afygc" path="res://Misc/UI/fonts/GothicA1-ExtraBold.ttf" id="2_js8wr"]
+[ext_resource type="Script" uid="uid://h24kva8s11nq" path="res://Misc/TransitionWorkDolley/lobby_name.gd" id="3_gubs0"]
+
+[sub_resource type="Curve" id="Curve_doon7"]
+_data = [Vector2(0, 0), 0.0, 1.1165311, 0, 1, Vector2(0.8956311, 1), -0.1598329, 0.0, 0, 0]
+point_count = 2
+
+[node name="CameraFollowPath" type="Path3D" unique_id=1495840154]
+script = ExtResource("1_i3ncc")
+easing_graph = SubResource("Curve_doon7")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="." unique_id=1301980135]
+loop = false
+
+[node name="CameraTargetPoint" type="Marker3D" parent="." unique_id=1641026556]
+
+[node name="LobbyName" type="Label" parent="." unique_id=2089817884]
+visible = false
+offset_left = 45.0
+offset_top = 231.0
+offset_right = 1164.0
+offset_bottom = 393.0
+theme_override_fonts/font = ExtResource("2_js8wr")
+text = "LOBBY NAME"
+script = ExtResource("3_gubs0")

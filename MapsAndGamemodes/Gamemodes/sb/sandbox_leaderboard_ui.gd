@@ -2,6 +2,9 @@ extends Control
 
 @onready var v_box_container: VBoxContainer = $Panel/VBoxContainer
 
+func _ready() -> void:
+	hide()
+
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("show_leaderboard"):
 		show()

@@ -17,12 +17,13 @@ background_energy_multiplier = 1.07
 sky = SubResource("Sky_firbl")
 ambient_light_color = Color(0.63375676, 0.6337568, 0.63375676, 1)
 
-[node name="Lobby" type="Node3D" unique_id=678425904 node_paths=PackedStringArray("player_spawn")]
+[node name="sb_lobby" type="Node3D" unique_id=678425904 node_paths=PackedStringArray("player_spawn")]
 script = ExtResource("1_5cp0e")
 player_spawn = NodePath("PlayerSpawner")
+map_name = "sb_lobby"
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1588121579]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.523632, -1.8967204, 1.4092712)
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=409190496]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.7690873, 0)
 material_override = SubResource("StandardMaterial3D_qt646")
 use_collision = true
 size = Vector3(54.756798, 1, 58.8974)
@@ -35,3 +36,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3790727, 0)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=937780086]
 transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, -17.34317, 34.01458, 34.429657)
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=912998942]
+_spawnable_scenes = PackedStringArray("uid://bcx63mqj80yes")
+spawn_path = NodePath(".")
+spawn_limit = 58

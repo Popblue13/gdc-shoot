@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://i3hbs8cyl3de"]
+
+[ext_resource type="Script" uid="uid://bsf55tn5c3yh4" path="res://PlayerControllers/Mercs/HomeBody/homebody.gd" id="1_c4nve"]
+[ext_resource type="PackedScene" uid="uid://0dr7xw7mcvp6" path="res://PlayerControllers/Abilities/HomeBodyHand/HomeBodyHand.tscn" id="2_6lw5w"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lwjk5"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g1ecg"]
+
+[node name="HomeBody" type="CharacterBody3D" unique_id=728258314 node_paths=PackedStringArray("camera", "visual_body", "abilities")]
+collision_layer = 2
+script = ExtResource("1_c4nve")
+camera = NodePath("Camera3D")
+visual_body = NodePath("MeshInstance3D")
+abilities = [NodePath("HomeBodyHand")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1977683154]
+shape = SubResource("CapsuleShape3D_lwjk5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1865011546]
+transform = Transform3D(0.77857435, 0, 0, 0, 1, 0, 0, 0, 0.74186414, 0, 0, 0.053175926)
+mesh = SubResource("CapsuleMesh_g1ecg")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="MeshInstance3D" unique_id=1634025672]
+transform = Transform3D(1.2843989, 0, 0, 0, 1, 0, 0, 0, 1.3479558, 0.079084806, 0.5287742, -0.47123873)
+radius = 0.08499079
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="MeshInstance3D" unique_id=1896206089]
+transform = Transform3D(1.2843989, 0, 0, 0, 1, 0, 0, 0, 1.3479558, -0.16282727, 0.5287742, -0.41791928)
+radius = 0.06879895
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="MeshInstance3D" unique_id=230304803]
+transform = Transform3D(1.2843989, 0, 0, 0, 1, 0, 0, 0, 1.3479558, -0.10547187, 0.3591274, -0.45436686)
+radius = 0.06879895
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1609023110]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.64104, 0)
+fov = 90.0
+
+[node name="HomeBodyHand" parent="." unique_id=2122495283 instance=ExtResource("2_6lw5w")]

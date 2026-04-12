@@ -1,17 +1,21 @@
 @abstract
 class_name Map extends Node3D
-var player_spawner : MultiplayerSpawner
-
-
 #implementspawnpoint system and gamemode system
 #create a trello of what we need to do and a general flow chart
 #call start_gamemode to start the game
-var player_data_base : Dictionary[int, Dictionary] #playerid -> data(gametag, etc.)
 
-func _ready() -> void:#<ALL>
-	
+signal map_ready # The signal the Lobby is waiting for
+
+var player_spawner : MultiplayerSpawner
+var player_data_base : Dictionary[int, Dictionary]
+var is_map_ready : bool = false # Lobby checks this for mid-game joiners
+@export var map_name : String = 'default'
+
+func _ready() -> void:
 	player_spawner = MultiplayerSpawner.new()
+	player_spawner.name = "player_spawner"
 	add_child(player_spawner)
+	
 	player_spawner.spawn_path = get_path()
 	player_spawner.spawn_limit = 58
 	
@@ -20,19 +24,31 @@ func _ready() -> void:#<ALL>
 	
 	var parent_lobby = get_parent()
 	if parent_lobby is Lobby:
+		# Connect directly to your abstract functions now! No queue needed.
+		
 		parent_lobby.player_joined_lobby.connect(_on_player_joined)
 		parent_lobby.player_left_lobby.connect(_on_player_left)
 	
 	custom_ready()
+	
 	if !multiplayer.is_server(): return
-	start_gamemode()
+	call_deferred("_finalize_setup")
+
+func _finalize_setup() -> void:
+	is_map_ready = true
+	map_ready.emit() # Tell the Lobby: "Send me the players!"
+	
+	if multiplayer.is_server():
+		start_gamemode()
 
 func _process(delta: float) -> void:
 	custom_process(delta)
 
 func _game_ended(): #<1>
 	if !multiplayer.is_server(): return
-	pass
+	var parent_lobby = get_parent()
+	if parent_lobby is Lobby:
+		parent_lobby.game_end()
 
 func register_players(): #<ALL> registers MERCS
 	player_spawner.clear_spawnable_scenes()
@@ -56,18 +72,9 @@ func _spawn_player(spawn_data:Dictionary):
 
 func get_lobby_player_ids(): return int(name)
 
-@abstract
-func start_gamemode()
-
-@abstract
-func end_gamemode()
-
-@abstract
-func player_died(merc : Merc)
-
+@abstract func start_gamemode()
+@abstract func player_died(merc : Merc)
 @abstract func _on_player_joined(player_id: int)
-	
 @abstract func _on_player_left(player_id: int)
-
 @abstract func custom_ready()
 @abstract func custom_process(delta : float)

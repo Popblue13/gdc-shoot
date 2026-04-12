@@ -1,7 +1,7 @@
 extends Node
 class_name ClientLogic
 
-
+var lobby_container : LobbyContainer = null
 func _ready() -> void:
 	name = "NetworkConnection"
 	var peer = ENetMultiplayerPeer.new()
@@ -16,3 +16,6 @@ func _ready() -> void:
 	
 func _on_connection_success():
 	print('Yay! we are connected to server yayyy :D')
+	lobby_container.add_player_to_lobby('home', multiplayer.get_unique_id())
+	#wait untill everyone is connected which implies everyone has their code and scenes set?
+	#I hope....

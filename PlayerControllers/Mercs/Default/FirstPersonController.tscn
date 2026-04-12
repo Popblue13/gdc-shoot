@@ -8,17 +8,21 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_g1ecg"]
 
-[node name="Player" type="CharacterBody3D" unique_id=728258314 node_paths=PackedStringArray("camera", "abilities")]
+[node name="Player" type="CharacterBody3D" unique_id=728258314 node_paths=PackedStringArray("camera", "visual_hand", "abilities")]
 collision_layer = 2
 script = ExtResource("1_sjy6i")
 camera = NodePath("Camera3D")
-abilities = [NodePath("EvilGun"), NodePath("JumpAbility")]
+visual_hand = NodePath("Hand")
+abilities = [NodePath("EvilGun"), NodePath("JumpAbility"), NodePath("EvilGun2")]
 
 [node name="JumpAbility" parent="." unique_id=27473948 instance=ExtResource("2_lfvw0")]
 auto_bhop = true
 trigger_key = "Space"
 
 [node name="EvilGun" parent="." unique_id=1600695075 instance=ExtResource("2_4fgnm")]
+
+[node name="EvilGun2" parent="." unique_id=1336151495 instance=ExtResource("2_4fgnm")]
+trigger_key = "2"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1977683154]
 shape = SubResource("CapsuleShape3D_lwjk5")
@@ -62,3 +66,7 @@ offset_top = 2.0
 offset_right = -2.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Hand" type="CSGSphere3D" parent="." unique_id=427775565]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25360978, 0.23060426, -0.48329479)
+radius = 0.09193548

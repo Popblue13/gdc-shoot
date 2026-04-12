@@ -1,0 +1,26 @@
+[gd_resource type="Theme" format=3 uid="uid://bqxkokut137fe"]
+
+[ext_resource type="FontFile" uid="uid://6v8rtjai6ol4" path="res://Misc/UI/fonts/GothicA1-Regular.ttf" id="1_8oq2i"]
+[ext_resource type="StyleBox" uid="uid://dmk5xh71lnuxc" path="res://Misc/UI/BackGroundBasic.tres" id="2_s4cbv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5j8kf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fhu56"]
+bg_color = Color(0.14767182, 0.14767182, 0.14767176, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.08567437, 0.27054858, 0, 1)
+
+[resource]
+default_font = ExtResource("1_8oq2i")
+/styles/base = SubResource("StyleBoxFlat_5j8kf")
+Button/colors/font_color = Color(0.20374972, 0.5413262, 7.70092e-07, 1)
+Button/fonts/font = ExtResource("1_8oq2i")
+Button/styles/disabled = ExtResource("2_s4cbv")
+Button/styles/focus = ExtResource("2_s4cbv")
+Button/styles/hover = ExtResource("2_s4cbv")
+Button/styles/normal = ExtResource("2_s4cbv")
+Button/styles/pressed = ExtResource("2_s4cbv")
+Panel/styles/panel = SubResource("StyleBoxFlat_fhu56")

@@ -47,9 +47,6 @@ func _listen_to_console():
 		elif input == "help":
 			print("Commands: ip, rehost <port>, exit")
 
-func create_new_lobby(id : String): #TODO delete this?
-	lobby_container.create_new_lobby(id, []) #not exactly needed, you could call it local since we know this zastard is the server but idk this could do some cool stuff lol
-
 func _on_client_connected(peer_id : int):
 	print(' :} client connected with id ', str(peer_id))
 	ServerDatabase.add_player(peer_id)
@@ -79,5 +76,6 @@ func rehost_server(new_port: int) -> void:
 	if error == OK:
 		multiplayer.multiplayer_peer = peer
 		print("Successfully re-hosted on Port: ", ServerDatabase.port)
+		lobby_container.create_new_lobby('home', [])
 	else:
 		print("Failed to re-host. Error: ", error)

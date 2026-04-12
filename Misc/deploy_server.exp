@@ -1,0 +1,32 @@
+#!/usr/bin/expect -f
+
+# --- Configuration ---
+set timeout -1
+set user "bondh020"
+set host "csdev03"
+
+# 1. Start the SSH connection
+spawn ssh $user@$host
+
+
+# 3. Wait for the remote shell prompt (usually ends in $ or # or %)
+expect -re {[\$\%] }
+
+# 4. Resume the screen session
+send "screen -r\r"
+sleep 2
+
+# 5. Send Ctrl+C to stop the current process in screen
+# \003 is the ASCII code for Ctrl+C
+send "\003"
+expect -re {[\$\%] }
+
+# 6. Run Git Pull
+send "git pull\r"
+expect -re {[\$\%] }
+
+# 7. Restart the server
+send "./GDCShoot.x86_64 --server --headless\r"
+
+# 8. Give control back to you so you can see the server logs
+interact

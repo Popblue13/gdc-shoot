@@ -12,6 +12,7 @@ extends WeaponAbility
 func _ready() -> void:
 	fire_attack_speed.wait_time
 	hide()
+
 func _process(delta: float) -> void:
 	if !is_multiplayer_authority(): pass
 	if !currently_active: return
