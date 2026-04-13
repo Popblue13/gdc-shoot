@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://l6sian0yldb7" path="res://PlayerControllers/Abilities/Grenade/GrenadeAbility.tscn" id="2_6heus"]
 [ext_resource type="PackedScene" uid="uid://byblikkwgri3q" path="res://PlayerControllers/Abilities/Sprint/SprintAbility.tscn" id="2_fheum"]
 [ext_resource type="PackedScene" uid="uid://b36uuh56645j5" path="res://PlayerControllers/Abilities/Jump/JumpAbility.tscn" id="2_lfvw0"]
+[ext_resource type="PackedScene" uid="uid://b2o8qrqm1mtei" path="res://PlayerControllers/Abilities/EvilShotgun/EvilShotgun.tscn" id="3_3ccpb"]
+[ext_resource type="PackedScene" uid="uid://q1amjn7ixxvn" path="res://PlayerControllers/Abilities/EvilMachineGun/EvilMachineGunAbility.tscn" id="4_0wf0o"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lwjk5"]
 
@@ -16,12 +18,16 @@ script = ExtResource("1_sjy6i")
 camera = NodePath("Camera3D")
 visual_body = NodePath("MeshInstance3D")
 visual_hand = NodePath("Hand")
-abilities = [null, NodePath("JumpAbility"), NodePath("GrenadeAbility"), NodePath("SprintAbility")]
+abilities = [NodePath("EvilGun"), NodePath("JumpAbility"), NodePath("GrenadeAbility"), NodePath("SprintAbility"), NodePath("EvilGunShotgun"), NodePath("EvilMachineGun")]
 
 [node name="SprintAbility" parent="." unique_id=699710493 instance=ExtResource("2_fheum")]
 AbilityDescription = "if you must go fast"
 
-[node name="GrenadeAbility" parent="." unique_id=1600695075 instance=ExtResource("2_6heus")]
+[node name="EvilGunShotgun" parent="." unique_id=1600695075 instance=ExtResource("3_3ccpb")]
+
+[node name="EvilMachineGun" parent="." unique_id=1738857750 instance=ExtResource("4_0wf0o")]
+
+[node name="GrenadeAbility" parent="." unique_id=13388828 instance=ExtResource("2_6heus")]
 
 [node name="JumpAbility" parent="." unique_id=27473948 instance=ExtResource("2_lfvw0")]
 auto_bhop = true
