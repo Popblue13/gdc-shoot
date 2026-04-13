@@ -41,31 +41,48 @@ func _ready() -> void:
 	
 	team_select_ui.side_chosen.connect(_on_local_team_locked_in)
 	char_select_ui.character_locked_in.connect(_on_local_character_locked_in)
-
 func _process(delta: float) -> void:
 	# --- UI & TIME LOGIC (Runs on Server AND Clients) ---
 	if match_started:
 		time_left -= delta
 		
-		# Calculate scores for the UI
 		var my_id = multiplayer.get_unique_id()
-		var my_kills = 0
-		var top_kills = 0
+		
+		# 1. Calculate Team Scores for the UI
+		var red_score = 0
+		var blue_score = 0
 		
 		if leaderboard and leaderboard.stats:
-			# Get local player's kills safely
-			if leaderboard.stats.has(my_id):
-				my_kills = leaderboard.stats[my_id].get("kills", 0)
-			
-			# Find the highest kills in the lobby
 			for player_data in leaderboard.stats.values():
 				var kills = player_data.get("kills", 0)
-				if kills > top_kills:
-					top_kills = kills
+				var p_team = player_data.get("team", "default")
+				
+				if p_team == "red":
+					red_score += kills
+				elif p_team == "blue":
+					blue_score += kills
 		
-		# Feed the UI
-		if match_ui:
-			match_ui.update_ui(my_kills, top_kills, max(time_left, 0.0))
+		# 2. Feed the unmodified VSUI!
+		if match_ui and match_ui.has_method("update_ui"):
+			# Figure out what team the local client is on
+			var my_team = master_team_database.get(my_id, "default")
+			
+			var my_team_score = 0
+			var enemy_team_score = 0
+			
+			if my_team == "red":
+				my_team_score = red_score
+				enemy_team_score = blue_score
+			elif my_team == "blue":
+				my_team_score = blue_score
+				enemy_team_score = red_score
+			else: 
+				# If they haven't picked a team yet, default to showing red vs blue
+				my_team_score = red_score 
+				enemy_team_score = blue_score
+				
+			# We pass the team scores into the existing 'my_points' and 'top_points' parameters
+			match_ui.update_ui(my_team_score, enemy_team_score, max(time_left, 0.0))
 
 	# --- RESPAWN LOGIC (Server Only) ---
 	if !multiplayer.is_server() or !match_started: 
