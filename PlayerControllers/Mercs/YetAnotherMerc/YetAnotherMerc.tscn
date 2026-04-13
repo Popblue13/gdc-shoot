@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://4wm411ylum0m"]
+
+[ext_resource type="Script" uid="uid://dgodpaidmm08a" path="res://PlayerControllers/Mercs/YetAnotherMerc/yet_another_merc.gd" id="1_mpngw"]
+[ext_resource type="PackedScene" uid="uid://b2o8qrqm1mtei" path="res://PlayerControllers/Abilities/EvilShotgun/EvilShotgun.tscn" id="2_nltnw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8ppig"]
+
+[node name="YetAnotherMerc" type="CharacterBody3D" unique_id=1806716565 node_paths=PackedStringArray("camera", "abilities")]
+script = ExtResource("1_mpngw")
+camera = NodePath("Camera3D")
+merc_UI_color = Color(0.21284103, 0.4399235, 1, 1)
+camera_fov = 115.0
+debug_mode = true
+abilities = [NodePath("EvilGunShotgun")]
+metadata/_custom_type_script = "uid://2ip0lrtrrhsr"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=920532566]
+shape = SubResource("CapsuleShape3D_8ppig")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1948415982]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="EvilGunShotgun" parent="." unique_id=1600695075 instance=ExtResource("2_nltnw")]
+is_auto = true
+max_ammo = 12
+damage = 3.0
+fire_speed = 0.2
+trigger_key = "1"
