@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://v0rn32lmi5nx"]
+
+[ext_resource type="Script" uid="uid://b8dihjq8f2xls" path="res://gasnade.gd" id="1_4cbnl"]
+[ext_resource type="ArrayMesh" uid="uid://0cbbnb1vap8q" path="res://PlayerControllers/Mercs/TrenchGuy/Assets/trenchnade.obj" id="2_l642p"]
+[ext_resource type="Texture2D" uid="uid://ss02kfymukef" path="res://PlayerControllers/Mercs/TrenchGuy/Assets/grenade.png" id="3_ep7qf"]
+[ext_resource type="AudioStream" uid="uid://b3dmryrnbfpm0" path="res://PlayerControllers/Mercs/TrenchGuy/Assets/gas.wav" id="4_ep7qf"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ep7qf"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_t86gr"]
+sky_material = SubResource("ProceduralSkyMaterial_ep7qf")
+
+[sub_resource type="Environment" id="Environment_fbou1"]
+background_mode = 2
+sky = SubResource("Sky_t86gr")
+tonemap_mode = 2
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t86gr"]
+albedo_texture = ExtResource("3_ep7qf")
+albedo_texture_force_srgb = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2ralt"]
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_2migg"]
+width = 146
+height = 103
+noise = SubResource("FastNoiseLite_2ralt")
+seamless = true
+
+[sub_resource type="FogMaterial" id="FogMaterial_5u0mh"]
+albedo = Color(0.7475467, 0.97, 0.6596, 1)
+height_falloff = 0.266159
+edge_fade = 0.26390123
+density_texture = SubResource("NoiseTexture3D_2migg")
+
+[node name="gasnade" type="Node3D" unique_id=2003499107]
+script = ExtResource("1_4cbnl")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=341810710]
+environment = SubResource("Environment_fbou1")
+
+[node name="ImporterMeshInstance3D" type="CSGMesh3D" parent="." unique_id=1660837366]
+transform = Transform3D(0.495, 0, 0, 0, 0.495, 0, 0, 0, 0.495, 0, 0, 0)
+mesh = ExtResource("2_l642p")
+material = SubResource("StandardMaterial3D_t86gr")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=397417844]
+stream = ExtResource("4_ep7qf")
+
+[node name="FogVolume" type="FogVolume" parent="." unique_id=382649801]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8271942, 5.297865, 0.8323059)
+size = Vector3(41.819305, 36.63391, 34.51007)
+shape = 0
+material = SubResource("FogMaterial_5u0mh")

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dityse1aoysa5"]
+
+[ext_resource type="Script" uid="uid://vq6rqbwquln0" path="res://PlayerControllers/Mercs/TrenchGuy/trench_guy.gd" id="1_1e37m"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_db7px"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qvrgb"]
+
+[node name="TrenchGuy" type="CharacterBody3D" unique_id=282008741]
+script = ExtResource("1_1e37m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=349362904]
+shape = SubResource("CapsuleShape3D_db7px")
+
+[node name="MeshInstance3D" type="CSGMesh3D" parent="." unique_id=994012954]
+mesh = SubResource("CylinderMesh_qvrgb")
