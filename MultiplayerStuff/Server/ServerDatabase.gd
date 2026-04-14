@@ -23,7 +23,7 @@ var Maps : Dictionary [String, PackedScene] = {
 var Mercs : Dictionary [String, PackedScene] = {
 	"default" = load("res://PlayerControllers/Mercs/Default/FirstPersonController.tscn"),
 	"homebody" = load("res://PlayerControllers/Mercs/HomeBody/HomeBody.tscn"),
-	"hyde" = load("res://PlayerControllers/Mercs/Hyde/Hyde.tscn"),
+	#"hyde" = load("res://PlayerControllers/Mercs/Hyde/Hyde.tscn"),
 	"Jhomas" = load("res://PlayerControllers/Mercs/Jhomas/Jhomas.tscn")
 }
 
