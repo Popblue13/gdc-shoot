@@ -16,11 +16,8 @@ var was_held_last_frame: bool = false
 var current_merc: CharacterBody3D = null
 
 func _physics_process(delta: float) -> void:
-	if current_cooldown > 0:
-		current_cooldown -= delta
-		
-	if current_buffer > 0:
-		current_buffer -= delta
+	if current_cooldown > 0: current_cooldown -= delta
+	if current_buffer > 0: current_buffer -= delta
 		
 	# Attempt the jump if we have a buffered input and no cooldown
 	if current_merc and current_buffer > 0 and current_cooldown <= 0:
@@ -30,10 +27,14 @@ func _physics_process(delta: float) -> void:
 			# Consume the buffer so we don't double jump, and start the cooldown
 			current_buffer = 0.0 
 			current_cooldown = jump_cooldown
+			success.emit()
+			activated.emit(true)
 			
 	# If the player is still holding the button, activate() will turn this back to true.
 	was_held_last_frame = is_held_this_frame
 	is_held_this_frame = false
+	
+	# TODO: Make this emit the failure and activated(false) signals when a jump was attempted but failed
 
 
 func activate(abilities: Array[Ability], merc: Merc) -> void:

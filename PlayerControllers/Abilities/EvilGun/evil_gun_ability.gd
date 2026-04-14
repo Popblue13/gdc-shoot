@@ -88,6 +88,9 @@ func shoot():
 	fire_attack_speed.start()
 	label.text = str(ammo) + "/" + str(max_ammo)
 	# 4. Fire every raycast in the array (1 for Pistol, Many for Shotgun)
+	_do_raycasts()
+
+func _do_raycasts() -> void:
 	for rc in raycasts:
 		if not is_instance_valid(rc): continue
 		
@@ -105,7 +108,6 @@ func shoot():
 			# Spawn tracer fading off into the distance if they missed
 			var miss_point = rc.global_transform * rc.target_position
 			tracer_effect._create_tracer_effect.rpc(tracer_effect.global_position, miss_point)
-
 
 func equip():
 	show()

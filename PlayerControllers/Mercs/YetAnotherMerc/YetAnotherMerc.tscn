@@ -1,7 +1,18 @@
 [gd_scene format=3 uid="uid://4wm411ylum0m"]
 
 [ext_resource type="Script" uid="uid://dgodpaidmm08a" path="res://PlayerControllers/Mercs/YetAnotherMerc/yet_another_merc.gd" id="1_mpngw"]
+[ext_resource type="PackedScene" uid="uid://bwbfmr1nmjwg" path="res://PlayerControllers/Abilities/EvilGun/EvilGunAbility.tscn" id="2_5xqyl"]
 [ext_resource type="PackedScene" uid="uid://b2o8qrqm1mtei" path="res://PlayerControllers/Abilities/EvilShotgun/EvilShotgun.tscn" id="2_nltnw"]
+[ext_resource type="Script" uid="uid://dfvybr130ixi0" path="res://PlayerControllers/Mercs/YetAnotherMerc/base_money_gun.gd" id="3_l55cr"]
+[ext_resource type="PackedScene" uid="uid://q1amjn7ixxvn" path="res://PlayerControllers/Abilities/EvilMachineGun/EvilMachineGunAbility.tscn" id="4_l55cr"]
+[ext_resource type="Script" uid="uid://duh751bbqbgx6" path="res://PlayerControllers/Mercs/YetAnotherMerc/money_shotgun.gd" id="5_ernmp"]
+[ext_resource type="PackedScene" uid="uid://l6sian0yldb7" path="res://PlayerControllers/Abilities/Grenade/GrenadeAbility.tscn" id="5_xeqhp"]
+[ext_resource type="PackedScene" uid="uid://b36uuh56645j5" path="res://PlayerControllers/Abilities/Jump/JumpAbility.tscn" id="6_ernmp"]
+[ext_resource type="Script" uid="uid://ct2ekrrrkadls" path="res://PlayerControllers/Mercs/YetAnotherMerc/money_machine_gun.gd" id="7_ernmp"]
+[ext_resource type="PackedScene" uid="uid://byblikkwgri3q" path="res://PlayerControllers/Abilities/Sprint/SprintAbility.tscn" id="7_qh8cp"]
+[ext_resource type="Script" uid="uid://de742iy8iq6a3" path="res://PlayerControllers/Mercs/YetAnotherMerc/money_grenade.gd" id="9_qh8cp"]
+[ext_resource type="Script" uid="uid://c3xib2wiq032w" path="res://PlayerControllers/Mercs/YetAnotherMerc/money_jump.gd" id="11_hid7e"]
+[ext_resource type="Script" uid="uid://jw4xg8xmvwg0" path="res://PlayerControllers/Mercs/YetAnotherMerc/money_sprint.gd" id="13_f2hxi"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8ppig"]
 
@@ -11,7 +22,7 @@ camera = NodePath("Camera3D")
 merc_UI_color = Color(0.21284103, 0.4399235, 1, 1)
 camera_fov = 115.0
 debug_mode = true
-abilities = [NodePath("EvilGunShotgun")]
+abilities = [NodePath("MoneyGun"), NodePath("MoneyShotgun"), NodePath("MoneyMachineGun"), NodePath("MoneyGrenade"), NodePath("JumpAbility"), NodePath("SprintAbility")]
 metadata/_custom_type_script = "uid://2ip0lrtrrhsr"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=920532566]
@@ -20,9 +31,30 @@ shape = SubResource("CapsuleShape3D_8ppig")
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1948415982]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="EvilGunShotgun" parent="." unique_id=1600695075 instance=ExtResource("2_nltnw")]
+[node name="MoneyGun" parent="." unique_id=1600695075 instance=ExtResource("2_5xqyl")]
+script = ExtResource("3_l55cr")
+AbilityDescription = "Money Pistol"
+
+[node name="MoneyShotgun" parent="." unique_id=845874724 instance=ExtResource("2_nltnw")]
+script = ExtResource("5_ernmp")
 is_auto = true
 max_ammo = 12
 damage = 3.0
 fire_speed = 0.2
-trigger_key = "1"
+AbilityDescription = "Money Shotgun"
+
+[node name="MoneyMachineGun" parent="." unique_id=1904938717 instance=ExtResource("4_l55cr")]
+script = ExtResource("7_ernmp")
+AbilityDescription = "Money Machinegun"
+
+[node name="MoneyGrenade" parent="." unique_id=580170457 instance=ExtResource("5_xeqhp")]
+script = ExtResource("9_qh8cp")
+AbilityDescription = "Throw a Golden Grenade"
+
+[node name="JumpAbility" parent="." unique_id=27473948 instance=ExtResource("6_ernmp")]
+script = ExtResource("11_hid7e")
+AbilityDescription = "Jump"
+trigger_key = "Space"
+
+[node name="SprintAbility" parent="." unique_id=699710493 instance=ExtResource("7_qh8cp")]
+script = ExtResource("13_f2hxi")
