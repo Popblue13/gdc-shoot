@@ -9,12 +9,26 @@ var cash: float = 100.0:
 
 var cost_per_bullet: float = 0.0
 
-var available_ammo: float = cash / cost_per_bullet:
+var available_ammo: float = cash / (cost_per_bullet * cost_mult):
 	set(total_cash):
-		available_ammo = floor(max(0, min(total_cash / cost_per_bullet, cash)))
+		available_ammo = floor(max(0, min(total_cash / cost_per_bullet * cost_mult, cash)))
 		@warning_ignore("narrowing_conversion")
 		ammo = available_ammo
-		label.text = "%0.2f/%0.2f: %0.0f" % [cash, cost_per_bullet, available_ammo]
+		label.text = "%0.2f/%0.2f: %0.0f" % [cash, cost_per_bullet * cost_mult, available_ammo]
+
+var cost_mult: float = 1.0
+func update_cost_mult(mult: float) -> void: 
+	cost_mult = mult
+	cash = cash
+
+signal uses_updated(uses: int, prior: int)
+var activations: int = 0:
+	set(n):
+		if n != activations:
+			var old := activations
+			activations = max(0, n)
+			uses_updated.emit(activations, old)
+func get_activations() -> int: return activations
 
 func _connect_cash(player: Merc) -> void:
 	if player.has_signal("cash_updated"):
@@ -33,15 +47,16 @@ func shoot():
 		# Optional: Play a "click" sound here for empty ammo
 		return
 	
-	cash -= cost_per_bullet
+	cash -= (cost_per_bullet * cost_mult)
 	
 	# Restart animation and start the cooldown timer
 	animation_player.stop() 
 	animation_player.play("fire")
 	fire_attack_speed.start()
-	label.text = "%0.2f/%0.2f: %0.0f" % [cash, cost_per_bullet, available_ammo]
+	label.text = "%0.2f/%0.2f: %0.0f" % [cash, (cost_per_bullet * cost_mult), available_ammo]
 	
 	# 4. Fire every raycast in the array (1 for Pistol, Many for Shotgun)
 	_do_raycasts()
 	
-	fired.emit(cost_per_bullet)
+	fired.emit(cost_per_bullet * cost_mult)
+	activations += 1

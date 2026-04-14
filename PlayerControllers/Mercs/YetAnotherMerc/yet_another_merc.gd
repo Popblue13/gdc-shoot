@@ -1,7 +1,7 @@
 extends Merc
 
 signal cash_updated(new_cash: float)
-@export var cash: float = 100.0:
+@export var cash: float = 1000.0:
 	set(m):
 		var tmp: float = max(0, min(m, 9999))
 		if tmp != cash:

@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://de742iy8iq6a3" path="res://PlayerControllers/Mercs/YetAnotherMerc/money_grenade.gd" id="9_qh8cp"]
 [ext_resource type="Script" uid="uid://c3xib2wiq032w" path="res://PlayerControllers/Mercs/YetAnotherMerc/money_jump.gd" id="11_hid7e"]
 [ext_resource type="Script" uid="uid://jw4xg8xmvwg0" path="res://PlayerControllers/Mercs/YetAnotherMerc/money_sprint.gd" id="13_f2hxi"]
+[ext_resource type="Script" uid="uid://cpmibxxp622lk" path="res://PlayerControllers/Mercs/YetAnotherMerc/supply_and_demand.gd" id="14_0oa5j"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8ppig"]
 
@@ -22,7 +23,7 @@ camera = NodePath("Camera3D")
 merc_UI_color = Color(0.21284103, 0.4399235, 1, 1)
 camera_fov = 115.0
 debug_mode = true
-abilities = [NodePath("MoneyGun"), NodePath("MoneyShotgun"), NodePath("MoneyMachineGun"), NodePath("MoneyGrenade"), NodePath("JumpAbility"), NodePath("SprintAbility")]
+abilities = [NodePath("MoneyGun"), NodePath("MoneyShotgun"), NodePath("MoneyMachineGun"), NodePath("MoneyGrenade"), NodePath("JumpAbility"), NodePath("SprintAbility"), NodePath("SupplyAndDemand")]
 metadata/_custom_type_script = "uid://2ip0lrtrrhsr"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=920532566]
@@ -58,3 +59,8 @@ trigger_key = "Space"
 
 [node name="SprintAbility" parent="." unique_id=699710493 instance=ExtResource("7_qh8cp")]
 script = ExtResource("13_f2hxi")
+
+[node name="SupplyAndDemand" type="Node3D" parent="." unique_id=769101498]
+script = ExtResource("14_0oa5j")
+AbilityDescription = "The Invisible Hand of the Market will gide your weapon choice"
+trigger_key = "M"
