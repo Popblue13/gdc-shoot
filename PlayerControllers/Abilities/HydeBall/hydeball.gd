@@ -2,11 +2,11 @@ extends Ability
 @onready var mesh = $Hydeball
 @onready var area = $Area3D
 var safe_merc
-var activated = false
 
-func activate(abilities : Array[Ability], merc : Merc):
+var ball_activated = false
+func activate():
 	$AudioStreamPlayer3D.playing = true
-	activated = true
+	ball_activated = true
 	visible = true
 	safe_merc = merc
 	area.monitoring = true
@@ -14,7 +14,7 @@ func activate(abilities : Array[Ability], merc : Merc):
 	top_level = true
 
 func _process(delta: float) -> void:
-	if activated == true:
+	if ball_activated == true:
 		mesh.rotation.y += 0.1
 
 func _on_area_3d_body_entered(body: Node3D) -> void:

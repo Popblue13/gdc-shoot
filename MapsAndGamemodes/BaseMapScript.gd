@@ -59,6 +59,9 @@ func register_players(): #<ALL> registers MERCS
 
 func _spawn_player(spawn_data:Dictionary):
 	#TODO throw error if dict does not match
+	if !ServerDatabase.Maps.keys().has(spawn_data["merc_type"]):
+		spawn_data["merc_type"] = "default"
+	
 	var merc_spanwed : PackedScene = ServerDatabase.Mercs[spawn_data["merc_type"]]
 	var merc_real : Merc = merc_spanwed.instantiate()
 	

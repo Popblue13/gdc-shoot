@@ -37,7 +37,7 @@ func _physics_process(delta: float) -> void:
 	# TODO: Make this emit the failure and activated(false) signals when a jump was attempted but failed
 
 
-func activate(abilities: Array[Ability], merc: Merc) -> void:
+func activate() -> void:
 	is_held_this_frame = true
 	current_merc = merc
 	# If this is a brand NEW press, OR if they are allowed to hold it down:

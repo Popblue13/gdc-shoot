@@ -3,12 +3,11 @@
 @abstract func shoot()
 @abstract func equip()
 @abstract func dequip()
-var merc : Merc
 
 ##
 ## DO NOT FREAKING OVERRIDE ACTIVATE FOR THE WEAPON CLASS THIS EXISTS HERE 
 ##
-func activate(abilities : Array[Ability], merc : Merc):
+func activate():
 	if !currently_active:
 		currently_active = true
 		for i in abilities:

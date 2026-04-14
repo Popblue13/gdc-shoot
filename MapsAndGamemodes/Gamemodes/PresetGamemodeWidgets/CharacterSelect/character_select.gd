@@ -18,6 +18,10 @@ func _ready() -> void:
 	
 	register_mercs()
 
+func _process(delta: float) -> void:
+	if visible:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
 func register_mercs() -> void:
 	# 1. Clear out any placeholder buttons from the editor
 	for child in merc_select_buttons.get_children():

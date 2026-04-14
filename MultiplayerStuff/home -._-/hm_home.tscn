@@ -1451,7 +1451,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.04814, -1.0077102, 3.84792
 curve = SubResource("Curve3D_jma86")
 
 [node name="PathFollow3D" parent="TransOutPath" index="0" unique_id=1301980135]
-transform = Transform3D(0.0014489888, -0.07825765, -0.9968834, 0, 0.9968844, -0.07825774, 0.99994713, 0.000113400456, 0.0014445492, 0.26595688, 2.4640374, -0.26728296)
+transform = Transform3D(0.0014489888, -0.07825765, -0.9968834, 0, 0.9968844, -0.07825774, 0.9999471, 0.000113400456, 0.0014445492, 0.26595688, 2.4640374, -0.26728296)
 
 [node name="TESTCAM" type="Camera3D" parent="TransOutPath/PathFollow3D" index="0" unique_id=344265971]
 transform = Transform3D(0.9983976, 0, -0.056588236, 0, 1, 0, 0.056588236, 0, 0.9983976, 0, 0, 0)
@@ -1465,7 +1465,7 @@ curve = SubResource("Curve3D_cisks")
 dur = 2.0
 
 [node name="PathFollow3D" parent="TransMiddle" index="0" unique_id=1301980135]
-transform = Transform3D(-0.0048909737, 0.02402893, -0.99968266, -1.8626114e-09, 0.99969804, 0.024029138, 0.9999699, 0.00011753027, -0.0048895683, 0.039081573, 0.07580018, -0.010753155)
+transform = Transform3D(-0.004890973, 0.02402893, -0.99968266, -1.8626113e-09, 0.99969804, 0.024029138, 0.99996984, 0.00011753027, -0.0048895683, 0.039081573, 0.07580018, -0.010753155)
 
 [node name="TESTCAM" type="Camera3D" parent="TransMiddle/PathFollow3D" index="0" unique_id=1110072097]
 transform = Transform3D(0.9983976, 0, -0.056588236, 0, 1, 0, 0.056588236, 0, 0.9983976, 0, 0, 0)

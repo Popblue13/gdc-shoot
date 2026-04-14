@@ -232,14 +232,16 @@ func check_abilities() -> void:
 		if i == null: return
 		if !i.is_multiplayer_authority():
 			i.set_multiplayer_authority(int(name), true)
+		if i.abilities !=abilities: i.abilities = abilities
+		if i.merc != self: i.merc = self
 		
-		if i.trigger_key != 'Passive':
+		if i.trigger_key != 'None':
 			# Convert key to the integer keycode (e.g. Q -> 81)
 			var key_code = OS.find_keycode_from_string(i.trigger_key)
 			
 			# Finally, check the hardware state
 			if Input.is_physical_key_pressed(key_code):
-				i.activate(abilities, self)
+				i.activate()
 
 # ==========================================
 # ABILITY MANAGEMENT (SERVER ONLY)

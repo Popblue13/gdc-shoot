@@ -12,7 +12,7 @@ func custom_process(delta : float):
 func custom_ready():
 	for i in abilities:
 		if i is HomeBodyHand:
-			i.activate(abilities, self)
+			i.activate()
 
 func play_headset_anim():
 	for i in abilities:

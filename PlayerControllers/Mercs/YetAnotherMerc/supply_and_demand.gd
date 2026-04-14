@@ -59,7 +59,7 @@ func get_new_mult(activations: int) -> float:
 	# Ignore the "1.0 *" bs, it's just so that godot stops complaining about int div
 
 # Ran whenever "activated". I assume that because this is passive it is every frame
-func activate(_abilities: Array[Ability], merc: Merc) -> void:
+func activate() -> void:
 	print("ACTIVATED!")
 	connect_to_abilities(merc)
 	_do_price_update = true

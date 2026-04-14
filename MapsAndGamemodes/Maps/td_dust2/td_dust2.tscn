@@ -1427,9 +1427,10 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_xruax")
 
-[node name="td_dust2" type="Node3D" unique_id=448037285 node_paths=PackedStringArray("spawn_points")]
+[node name="td_dust2" type="Node3D" unique_id=448037285 node_paths=PackedStringArray("red_spawn_points", "blue_spawn_points")]
 script = ExtResource("1_h6iao")
-spawn_points = [NodePath("Marker3D"), NodePath("Marker3D2"), NodePath("Marker3D3"), NodePath("Marker3D4"), NodePath("Marker3D5"), NodePath("Marker3D6"), NodePath("Marker3D7"), NodePath("Marker3D8"), NodePath("Marker3D9"), NodePath("Marker3D10")]
+red_spawn_points = [NodePath("Marker3D"), NodePath("Marker3D2"), NodePath("Marker3D3"), NodePath("Marker3D4"), NodePath("Marker3D5")]
+blue_spawn_points = [NodePath("Marker3D6"), NodePath("Marker3D7"), NodePath("Marker3D8"), NodePath("Marker3D9"), NodePath("Marker3D10")]
 gamemode_length = 900.0
 map_name = "td_dust2"
 

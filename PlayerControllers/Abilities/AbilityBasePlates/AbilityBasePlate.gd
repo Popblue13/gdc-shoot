@@ -6,6 +6,8 @@ signal failure
 signal activated(status: bool)
 
 var currently_active = false
+var abilities : Array[Ability]
+var merc : Merc
 
 const PRIORITY_KEYS: Array[String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 const FALLBACK_KEYS: Array[String] = [
@@ -13,13 +15,14 @@ const FALLBACK_KEYS: Array[String] = [
 	"Shift", "Ctrl", "Alt", "Space", "CapsLock", "Enter",
 ]
 
-@abstract func activate(abilities : Array[Ability], merc : Merc)
+#plays every frame when the trigger key is pressed
+@abstract func activate() 
 @export var AbilityDescription : String = "no description"
 @export var visual_hand : Node3D
 
 @export_category("Ability Mapping")
 @export_enum(
-	"Passive",
+	"None",
 	# --- LETTERS ---
 	"E", "Q", "F",
 	"G", "H", "V", "B", "N", "M", "T", "Y", "X", "C", "Z",
@@ -27,8 +30,7 @@ const FALLBACK_KEYS: Array[String] = [
 	"1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
 	# --- MODIFIERS ---
 	"Shift", "Ctrl", "Alt", "Space", "CapsLock", "Enter",
-) var trigger_key: String = "Passive"
-
+) var trigger_key: String = "None"
 
 func equip_ability(abilities: Array[Ability]) -> void:
 	# Passives generally shouldn't conflict with active keybinds, 
@@ -68,7 +70,6 @@ func equip_ability(abilities: Array[Ability]) -> void:
 				if not used_keys.has(key):
 					trigger_key = key
 					break
-
 
 func dequip_ability() -> void:
 	pass
