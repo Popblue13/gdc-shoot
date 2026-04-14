@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://lcdhjh42bmiv"
+path="res://.godot/imported/University of Minnesota Duluth 6.mp3-0a338c2cbeff821e135107de9731338b.mp3str"
+
+[deps]
+
+source_file="res://PlayerControllers/Mercs/Hyde/Assets/University of Minnesota Duluth 6.mp3"
+dest_files=["res://.godot/imported/University of Minnesota Duluth 6.mp3-0a338c2cbeff821e135107de9731338b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

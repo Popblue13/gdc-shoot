@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://bq4ufv5drkxi2"]
+
+[ext_resource type="ArrayMesh" uid="uid://c1h618r01rh0s" path="res://PlayerControllers/Abilities/HydeBall/hydeball.obj" id="1_d2650"]
+[ext_resource type="Script" uid="uid://bjgr1whkyff2r" path="res://PlayerControllers/Abilities/HydeBall/hydeball.gd" id="1_h1a56"]
+[ext_resource type="Texture2D" uid="uid://b4jatsm80iflq" path="res://PlayerControllers/Abilities/HydeBall/IMG_3701-removebg-preview.png" id="2_h1a56"]
+[ext_resource type="AudioStream" uid="uid://be3ayuk3c22d1" path="res://PlayerControllers/Abilities/HydeBall/University of Minnesota Duluth 13.mp3" id="4_xffcd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xffcd"]
+transparency = 1
+albedo_texture = ExtResource("2_h1a56")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xffcd"]
+radius = 1.8894625
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_me03t"]
+properties/0/path = NodePath(".:visible")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath("AudioStreamPlayer3D:playing")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+
+[node name="HydeBall" type="Node3D" unique_id=1171776785]
+script = ExtResource("1_h1a56")
+
+[node name="Hydeball" type="MeshInstance3D" parent="." unique_id=187136470]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013388932, 0, 0.010724515)
+mesh = ExtResource("1_d2650")
+surface_material_override/0 = SubResource("StandardMaterial3D_xffcd")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1247743312]
+collision_layer = 0
+collision_mask = 2
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=719754256]
+shape = SubResource("SphereShape3D_xffcd")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=191343682]
+replication_config = SubResource("SceneReplicationConfig_me03t")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=2002208871]
+stream = ExtResource("4_xffcd")
+unit_size = 13.73
+pitch_scale = 1.45
+parameters/looping = true
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

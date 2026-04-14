@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dfn7on1kwmfot"]
+
+[ext_resource type="Script" uid="uid://b0cmxjlxb016w" path="res://PlayerControllers/Abilities/HydeTwerk/twerk.gd" id="1_cm6mk"]
+
+[node name="Twerk" type="Node3D" unique_id=1305742805]
+script = ExtResource("1_cm6mk")
