@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://ikvcp5jtjlhx"]
+
+[ext_resource type="Script" uid="uid://2ip0lrtrrhsr" path="res://PlayerControllers/merc.gd" id="1_8s5eu"]
+[ext_resource type="PackedScene" uid="uid://wmv3bnp7y8da" path="res://PlayerControllers/Mercs/Chomp/Chester Chomper/chomper_bodybrandc.dae" id="2_5i05u"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5i05u"]
+
+[node name="Chomp" type="CharacterBody3D" unique_id=211504080 node_paths=PackedStringArray("camera")]
+script = ExtResource("1_8s5eu")
+camera = NodePath("Camera3D")
+debug_mode = true
+metadata/_custom_type_script = "uid://2ip0lrtrrhsr"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1128660379]
+shape = SubResource("CapsuleShape3D_5i05u")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1561256942]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6054889, 2.236246)
+
+[node name="chomper_bodybrandc" parent="." unique_id=1064638181 instance=ExtResource("2_5i05u")]
+transform = Transform3D(-0.9999992, 0, -0.0012566166, 0, 1, 0, 0.0012566166, 0, -0.9999992, -0.55686164, -1.2504224, 0.19867373)

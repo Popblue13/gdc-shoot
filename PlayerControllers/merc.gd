@@ -216,6 +216,7 @@ func sv_airaccelerate(movement_dir, delta):
 
 func _input(event: InputEvent) -> void:
 	if !is_multiplayer_authority(): return
+	if !ClientUI: return
 	if ClientUI.menu.visible: return
 	if dead: return
 	if event is InputEventMouseMotion:
