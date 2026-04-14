@@ -6801,9 +6801,12 @@ points = PackedVector3Array(-0.34612, -0.213464, -1.1818384, 0.5525621, 0.214428
 
 [node name="Node3D" type="Node3D" unique_id=1600260928 node_paths=PackedStringArray("spawn_points")]
 script = ExtResource("1_tb2g2")
-spawn_points = [NodePath("spawns/Marker3D")]
+spawn_points = [NodePath("spawns/Marker3D"), NodePath("spawns/Marker3D2"), NodePath("spawns/Marker3D3"), NodePath("spawns/Marker3D4"), NodePath("spawns/Marker3D5"), NodePath("spawns/Marker3D6"), NodePath("spawns/Marker3D7")]
 gamemode_length = 500.0
 map_name = "dm_grahhh"
+
+[node name="Player" parent="." unique_id=728258314 instance=ExtResource("32_du516")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.374987, 0.7445256, -3.052824)
 
 [node name="dm_grahhh" type="Node3D" parent="." unique_id=1976147213]
 transform = Transform3D(2.89, 0, 0, 0, 2.89, 0, 0, 0, 2.89, -9, -0.6544622, 0)
@@ -6833,6 +6836,7 @@ surface_material_override/0 = ExtResource("3_7b3oa")
 transform = Transform3D(7.6946735, 0, 0, 0, 0.9983606, 0, 0, 0, 0.9983606, 3.5821981, 0.24803759, -4.235849)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="dm_grahhh/CSGMesh3D7" unique_id=751257639]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.14140749)
 shape = SubResource("ConcavePolygonShape3D_p0xh4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="dm_grahhh/CSGMesh3D7" unique_id=1162735449]
@@ -7496,7 +7500,7 @@ mesh = SubResource("ArrayMesh_le0rn")
 transform = Transform3D(-4.2017206e-08, 0, 0.78226614, 0, 0.5989561, 0, -0.9612416, 0, -3.419393e-08, 6.678426, 0.42025405, -3.382497)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="dm_grahhh/CSGMesh3D8" unique_id=1556988005]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.9999999, 0, -3.5527137e-15, 0, 0.99999994, 0, 0.045098335, 0)
+transform = Transform3D(0.9999999, 0, -3.5527137e-15, 0, 0.9999997, 0, -7.1054274e-15, 0, 0.9999999, 0, 0.058831215, 0)
 shape = SubResource("ConcavePolygonShape3D_clnxs")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="dm_grahhh/CSGMesh3D8" unique_id=1325195784]
@@ -7713,9 +7717,6 @@ transform = Transform3D(4.5229645, 1.2001804, -0.19233933, -0.9255523, 5.8650103
 
 [node name="Sketchfab_Scene3" parent="dm_grahhh" unique_id=1832544918 instance=ExtResource("25_vidfe")]
 transform = Transform3D(4.582342, 0.70971596, 0.18871462, -0.5499239, 6.0200524, 0.42789623, -0.11648122, -0.5014747, 5.40384, 9.943624, -1.9276346, 11.584905)
-
-[node name="Player" parent="dm_grahhh" unique_id=728258314 instance=ExtResource("32_du516")]
-transform = Transform3D(0.34602073, 0, 0, 0, 0.34602073, 0, 0, 0, 0.34602073, 4.572441, 0.48407918, -0.94534475)
 
 [node name="blahhh_reference" type="Node3D" parent="." unique_id=1043247549]
 transform = Transform3D(-2.4, 0, -3.6238995e-07, 0, 2.4, 0, 3.6238995e-07, 0, -2.4, 3.0944529, 6.810874, 64.08603)
