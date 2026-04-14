@@ -1,6 +1,10 @@
 @abstract 
 class_name Ability extends Node3D
 
+signal success
+signal failure
+signal activated(status: bool)
+
 var currently_active = false
 
 const PRIORITY_KEYS: Array[String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
