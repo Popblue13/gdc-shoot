@@ -248,7 +248,7 @@ func _on_player_disconnected(peer_id: int):
 # ==========================================
 
 func _start_lobby_deletion_timer(lobby_id: String) -> void:
-	if empty_lobby_timers.has(lobby_id) or lobby_id == 'home':
+	if empty_lobby_timers.has(lobby_id) or lobby_id == '``':
 		return # Timer is already running
 		
 	var timer = Timer.new()
