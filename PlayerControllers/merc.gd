@@ -6,12 +6,17 @@ signal took_damage
 ## THIS THE BASE CLASS, DO NOT CHANGE AN OF THIS UNLESS ITS IN THE INSPECTOR
 const ABILITY_UI = preload("res://Misc/UI/ability_ui.tscn")
 const MERC_LABEL = preload("res://MultiplayerStuff/Client/MercLabel.tscn")
+const HEALTH_BAR = preload("res://Misc/UI/health_bar.tscn")
+var health_bar : ProgressBar
 
 @export_category("REQUIRED OBJECTS")
 @export var camera : Camera3D
 
 @export_group("Universal Properties")
-@export var health :float = 100.0
+@export var health :float = 100.0:
+	set(value):
+		if health_bar: health_bar.value = value
+
 @export var gravity := 9.8
 @export var friction := .1
 @export var air_acceleration := .3
@@ -104,6 +109,11 @@ func _ready() -> void:
 		abilites_ui = ABILITY_UI.instantiate()
 		add_child(abilites_ui)
 		abilites_ui.generate_ui(self)
+		health_bar = HEALTH_BAR.instantiate()
+		add_child(health_bar)
+		health_bar.max_value = health
+		health_bar.value = health
+		
 		if visual_body:
 			visual_body.hide()
 		if visual_hand:
@@ -160,6 +170,7 @@ func _physics_process(delta: float) -> void:
 		global_rotation.y = lerp_angle(global_rotation.y, target_rotation.y, lerp_speed)
 		global_rotation.z = lerp_angle(global_rotation.z, target_rotation.z, lerp_speed)
 		
+		if health_bar: health_bar.hide()
 		return # Skip all the local movement code below
 	
 	if dead: return
@@ -349,12 +360,13 @@ func take_damage(damage: float):
 	# TELL EVERYONE TO FLASH THIS PLAYER YELLOW
 	_sync_flash_damage.rpc() 
 	
-	if health <= 0 and not dead:
+	if health <= 0 and not dead and is_multiplayer_authority():
 		dead = true
 		death_effects.rpc()
 		die.rpc_id(1)
 	else:
 		emit_signal("took_damage")
+
 
 @rpc("authority", "call_local", "unreliable")
 func _sync_flash_damage() -> void:

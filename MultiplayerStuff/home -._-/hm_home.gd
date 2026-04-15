@@ -34,7 +34,7 @@ func _on_player_joined(peer_id: int):
 		# --- PLAYER IS JOINING FOR THE FIRST TIME ---
 		print("Player ", peer_id, " joined home for the first time. Spawning body.")
 		player_spawner.spawn({'merc_type' = 'homebody', "peer_id" = peer_id, "position" = Vector3.ZERO})
-
+		
 func custom_ready():
 	pass
 

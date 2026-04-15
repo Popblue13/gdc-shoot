@@ -2,9 +2,12 @@ extends Node
 class_name LobbyContainer
 
 const LOBBY = preload("res://MultiplayerStuff/Server/Lobby/Lobby.tscn")
+const LOBBY_TIMEOUT_SECONDS = 300.0 # 5 Minutes
 
 #RUNS ONLY ON SERVER
 var lobbies : Dictionary[String, Array] = {} #lobbyid = [player_id, ...]
+var empty_lobby_timers: Dictionary[String, Timer] = {} # NEW: Tracks deletion timers
+
 @onready var multiplayer_spawner: MultiplayerSpawner = $MultiplayerSpawner
 @onready var lobby_changer_camera: LobbyChangerCamera = $LobbyChangerCamera
 @onready var map_dropdown: OptionButton = $LobbyViewer/Panel/OptionButton
@@ -61,6 +64,10 @@ func create_new_lobby(desired_lobby_id: String, players_in_lobby: Array[int], se
 			lob.call_deferred("change_map", "hm_home")
 		else:
 			lob.call_deferred("change_map", selected_map)
+			
+		# NEW: If lobby is created empty, immediately start the deletion timer
+		if players_in_lobby.is_empty():
+			_start_lobby_deletion_timer(final_lobby_id)
 
 # This runs on EVERY machine when the lobby spawns
 func _custom_lobby_spawn(data: Dictionary) -> Node:
@@ -94,6 +101,9 @@ func add_player_to_lobby(lobby_id : String, player_id : int):
 	
 	if lobbies.has(lobby_id):
 		if player_id not in lobbies[lobby_id]:
+			# NEW: Stop the deletion countdown because someone joined!
+			_cancel_lobby_deletion_timer(lobby_id)
+			
 			lobbies[lobby_id].append(player_id)
 			ServerDatabase.update_lobbies(lobbies)
 			wake_up_lobby.rpc_id(player_id, lobby_id)
@@ -106,8 +116,6 @@ func add_player_to_lobby(lobby_id : String, player_id : int):
 	else:
 		print("lobby does not exist :(")
 
-# We don't need an RPC here if it's only called by the server internally,
-# but you can add one later if players can manually click a "Leave Lobby" button.
 @rpc("any_peer", "call_remote", "reliable")
 func remove_player_from_lobby(lobby_id: String, player_id: int):
 	# 1. If a client calls this, route it to the server
@@ -128,6 +136,10 @@ func remove_player_from_lobby(lobby_id: String, player_id: int):
 				active_lobby.on_player_left(player_id)
 				
 			print("Player ", player_id, " removed from ", lobby_id)
+			
+			# NEW: Check if the lobby is now completely empty
+			if lobbies[lobby_id].is_empty() and lobby_id != "home":
+				_start_lobby_deletion_timer(lobby_id)
 
 @rpc("any_peer", "call_remote", "reliable")
 func change_lobby(new_lobby_id: String, player_id: int) -> void:
@@ -154,20 +166,14 @@ func change_lobby(new_lobby_id: String, player_id: int) -> void:
 		return
 	
 	# 4.5 Trigger the client-side camera transition
-	# We pass the responsibility to the client so it can animate locally.
 	if old_lobby_id == 'home':
 		start_client_camera_transition.rpc_id(player_id, old_lobby_id, new_lobby_id)
 	else:
 		finalize_lobby_change_on_server(old_lobby_id, new_lobby_id)
 
-# --- NEW: Runs ONLY on the specific client doing the transition ---
 @rpc("authority", "call_remote", "reliable")
 func start_client_camera_transition(old_lobby_id: String, new_lobby_id: String):
-	# NOTE: Ensure that get_node(lobby_id) actually returns a CameraFollowPath.
-	# If your Lobby scene is a standard Node3D, you may need to target the path node inside it:
-	# e.g., get_node(old_lobby_id).get_node("CameraFollowPath")
-	
-	wake_up_lobby(new_lobby_id)#make sure you can diddle that tween path
+	wake_up_lobby(new_lobby_id)
 	
 	var old_lobby : Lobby = get_node_or_null(old_lobby_id.validate_node_name())
 	var new_lobby : Lobby = get_node_or_null(new_lobby_id.validate_node_name())
@@ -189,7 +195,6 @@ func start_client_camera_transition(old_lobby_id: String, new_lobby_id: String):
 	finalize_lobby_change_on_server.rpc_id(1, old_lobby_id, new_lobby_id)
 
 
-# --- NEW: Runs ONLY on the server after the client finishes ---
 @rpc("any_peer", "call_remote", "reliable")
 func finalize_lobby_change_on_server(old_lobby_id: String, new_lobby_id: String):
 	if !multiplayer.is_server(): return
@@ -206,32 +211,29 @@ func finalize_lobby_change_on_server(old_lobby_id: String, new_lobby_id: String)
 	add_player_to_lobby(new_lobby_id, player_id)
 
 @rpc("authority", "call_remote", "reliable")
-func put_lobby_to_sleep(lobby_id: String): # nighty night
+func put_lobby_to_sleep(lobby_id: String): 
 	var inactive_lobby: Lobby = get_node_or_null(lobby_id.validate_node_name())
 	if inactive_lobby:
 		inactive_lobby.hide()
 		inactive_lobby.process_mode = Node.PROCESS_MODE_DISABLED
 
 @rpc("authority", "call_remote", "reliable")
-func wake_up_lobby(lobby_id: String): #wakey waky, its time for schoo
+func wake_up_lobby(lobby_id: String): 
 	var active_lobby :Lobby = get_node_or_null(lobby_id.validate_node_name())
 	if active_lobby:
 		active_lobby.show()
-		#print("position = ", active_lobby.position, " ", lobby_id)
 		active_lobby.process_mode = Node.PROCESS_MODE_INHERIT
 
 func _on_create_lobby_button_pressed() -> void:
 	if !multiplayer.is_server():
 		var array_of_player :Array[int] = []
 		
-		# Grab the string of the currently selected map
 		var selected_map = map_dropdown.get_item_text(map_dropdown.selected)
 		var desired_name = lobby_name_input.text.strip_edges()
 		
-		# Fallback if they left it blank
 		if desired_name == "":
 			desired_name = "Server_Lobby_" + str(randi_range(1000, 9999))
-		# You would then pass `selected_map` in your RPC to tell the server what to load
+			
 		create_new_lobby.rpc_id(1, desired_name, array_of_player, selected_map)
 		
 func _on_player_disconnected(peer_id: int):
@@ -239,4 +241,56 @@ func _on_player_disconnected(peer_id: int):
 	for lobby_id in lobbies.keys():
 		if peer_id in lobbies[lobby_id]:
 			remove_player_from_lobby(lobby_id, peer_id)
-			return # Assuming a player can only be in one lobby at a time
+			return
+
+#region LOBBY SAFTEY TIMER DELETION
+#LOBBY TIMEOUT SAFETY LOGIC
+# ==========================================
+
+func _start_lobby_deletion_timer(lobby_id: String) -> void:
+	if empty_lobby_timers.has(lobby_id):
+		return # Timer is already running
+		
+	var timer = Timer.new()
+	timer.wait_time = LOBBY_TIMEOUT_SECONDS
+	timer.one_shot = true
+	# Use a lambda to pass the lobby_id parameter into the timeout function
+	timer.timeout.connect(func(): _on_empty_lobby_timeout(lobby_id))
+	add_child(timer)
+	timer.start()
+	
+	empty_lobby_timers[lobby_id] = timer
+	print("Lobby '", lobby_id, "' is empty. Safely closing in 5 minutes.")
+
+func _cancel_lobby_deletion_timer(lobby_id: String) -> void:
+	if empty_lobby_timers.has(lobby_id):
+		var timer = empty_lobby_timers[lobby_id]
+		if is_instance_valid(timer):
+			timer.stop()
+			timer.queue_free()
+		empty_lobby_timers.erase(lobby_id)
+		print("Player joined Lobby '", lobby_id, "'. Deletion cancelled.")
+
+func _on_empty_lobby_timeout(lobby_id: String) -> void:
+	if !multiplayer.is_server(): return
+	
+	# Double check that the lobby is still empty and actually exists
+	if lobbies.has(lobby_id) and lobbies[lobby_id].is_empty():
+		print("Lobby '", lobby_id, "' was empty for 5 minutes. Deleting...")
+		
+		# 1. Clean up databases
+		lobbies.erase(lobby_id)
+		ServerDatabase.update_lobbies(lobbies)
+		
+		# 2. Delete the actual node from the world
+		var active_lobby: Lobby = get_node_or_null(lobby_id.validate_node_name())
+		if active_lobby:
+			active_lobby.queue_free()
+			
+	# 3. Clean up the timer reference
+	if empty_lobby_timers.has(lobby_id):
+		var timer = empty_lobby_timers[lobby_id]
+		if is_instance_valid(timer):
+			timer.queue_free()
+		empty_lobby_timers.erase(lobby_id)
+#endregion

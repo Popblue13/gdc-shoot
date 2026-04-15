@@ -1,9 +1,6 @@
 @abstract
 class_name Map extends Node3D
-#implementspawnpoint system and gamemode system
-#create a trello of what we need to do and a general flow chart
-#call start_gamemode to start the game
-
+#DO NOT EDIT THIS CODE
 signal map_ready # The signal the Lobby is waiting for
 
 var player_spawner : MultiplayerSpawner
@@ -59,7 +56,7 @@ func register_players(): #<ALL> registers MERCS
 
 func _spawn_player(spawn_data:Dictionary):
 	#TODO throw error if dict does not match
-	if !ServerDatabase.Maps.keys().has(spawn_data["merc_type"]):
+	if !ServerDatabase.Mercs.keys().has(spawn_data["merc_type"]):
 		spawn_data["merc_type"] = "default"
 	
 	var merc_spanwed : PackedScene = ServerDatabase.Mercs[spawn_data["merc_type"]]

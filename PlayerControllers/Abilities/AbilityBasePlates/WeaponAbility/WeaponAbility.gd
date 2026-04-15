@@ -15,7 +15,6 @@ func activate():
 				i.dequip()
 				i.currently_active = false
 		equip()
-		self.merc = merc
 
 func connected_process():
 	pass

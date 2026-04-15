@@ -1,5 +1,6 @@
 @abstract 
 class_name Ability extends Node3D
+#DO NOT EDIT THIS CODE
 
 signal success
 signal failure

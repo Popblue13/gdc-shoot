@@ -2,7 +2,7 @@ extends Merc
 class_name HomeBody
 
 var sitting_in_chair = false
-var current_chair = null # <--- NEW: Remembers the chair!
+var current_chair = null
 
 #nothing here! other than some basic ui and text stuff!
 func custom_process(delta : float): 
