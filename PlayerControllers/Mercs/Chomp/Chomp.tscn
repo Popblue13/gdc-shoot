@@ -18,7 +18,7 @@ collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_8s5eu")
 camera = NodePath("Camera3D")
-debug_mode = true
+health = 200.0
 abilities = [NodePath("JumpAbility"), NodePath("SprintAbilityChomp"), NodePath("TornadoDashAbility"), NodePath("TunnelAbility")]
 metadata/_custom_type_script = "uid://2ip0lrtrrhsr"
 
@@ -43,6 +43,7 @@ trigger_key = "2"
 
 [node name="ExplosionRadius" type="Area3D" parent="TunnelAbility" unique_id=369782369]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.17849016, 0, 0.119)
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TunnelAbility/ExplosionRadius" unique_id=2073510617]
 transform = Transform3D(1.4343741, -5.9604645e-08, 2.9802322e-08, 0, 1.4343741, 0, -1.4901161e-08, 1.4901161e-08, 1.4343741, -1.4510155, 0, 0)
@@ -64,6 +65,7 @@ trigger_key = "1"
 
 [node name="ExplosionRadius" type="Area3D" parent="TornadoDashAbility" unique_id=1652752749]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.556542, -1.451014)
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TornadoDashAbility/ExplosionRadius" unique_id=557212973]
 transform = Transform3D(1.4343741, -5.9604645e-08, 2.9802322e-08, 0, 1.4343741, 0, -1.4901161e-08, 1.4901161e-08, 1.4343741, -1.4510155, 0, 0)
