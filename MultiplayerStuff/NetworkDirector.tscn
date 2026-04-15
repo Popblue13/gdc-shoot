@@ -3,6 +3,21 @@
 [ext_resource type="Script" uid="uid://b4lw6kpyphp8r" path="res://MultiplayerStuff/network_director.gd" id="1_ubnqp"]
 [ext_resource type="PackedScene" uid="uid://dtib8ppqweogq" path="res://MultiplayerStuff/Server/Lobby/LobbyContainer.tscn" id="2_qpoo3"]
 [ext_resource type="Script" uid="uid://dhe8i5h6yjeyy" path="res://Misc/TransitionWorkDolley/lobby_changer_camera.gd" id="3_e1cqa"]
+[ext_resource type="FontFile" uid="uid://6v8rtjai6ol4" path="res://Misc/UI/fonts/GothicA1-Regular.ttf" id="4_doon7"]
+[ext_resource type="FontFile" uid="uid://dahun501afygc" path="res://Misc/UI/fonts/GothicA1-ExtraBold.ttf" id="5_11fy0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vwvvt"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(8.4830447e-07, 0.26743576, 0.061849646, 1)
+corner_detail = 1
 
 [node name="NetworkDirector" type="Node" unique_id=1806847710]
 script = ExtResource("1_ubnqp")
@@ -16,5 +31,96 @@ frame_progress = 1.0
 
 [node name="LobbyChangerCamera" type="Camera3D" parent="LobbyContainer" unique_id=154608724]
 script = ExtResource("3_e1cqa")
+
+[node name="JoinScreen" type="Control" parent="." unique_id=272740357]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="JoinScreen" unique_id=1051004220]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="JoinScreen/Panel" unique_id=458934527]
+layout_mode = 0
+offset_left = 557.0
+offset_top = 440.0
+offset_right = 765.0
+offset_bottom = 480.0
+text = "Join CSDEV03"
+
+[node name="Button2" type="Button" parent="JoinScreen/Panel" unique_id=1832555627]
+layout_mode = 0
+offset_left = 557.0
+offset_top = 499.0
+offset_right = 765.0
+offset_bottom = 539.0
+text = "Join LocalHost"
+
+[node name="Title" type="RichTextLabel" parent="JoinScreen/Panel" unique_id=1192964051]
+layout_mode = 0
+offset_left = 504.0
+offset_top = 311.0
+offset_right = 825.0
+offset_bottom = 388.0
+theme_override_colors/default_color = Color(0.5039348, 0.77575725, 0.6110267, 1)
+theme_override_fonts/normal_font = ExtResource("4_doon7")
+theme_override_fonts/bold_font = ExtResource("5_11fy0")
+theme_override_font_sizes/normal_font_size = 72
+text = "GD_CLUB"
+
+[node name="Title2" type="RichTextLabel" parent="JoinScreen/Panel" unique_id=1395634290]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 289.0
+offset_right = 457.0
+offset_bottom = 446.0
+theme_override_colors/default_color = Color(0.5039348, 0.77575725, 0.6110267, 1)
+theme_override_fonts/normal_font = ExtResource("4_doon7")
+theme_override_fonts/bold_font = ExtResource("5_11fy0")
+theme_override_styles/normal = SubResource("StyleBoxFlat_vwvvt")
+bbcode_enabled = true
+text = "Controls
+
+WASD to move
+Left click to interact at home
+Right click to wave
+~ to close the game
+Esc to open menu
+M to change your character(if gamemode permits)
+N to change your team(if gamemode permits)
+"
+
+[node name="Title3" type="RichTextLabel" parent="JoinScreen/Panel" unique_id=1159349746]
+layout_mode = 0
+offset_left = 867.0
+offset_top = 281.0
+offset_right = 1217.0
+offset_bottom = 448.0
+theme_override_colors/default_color = Color(0.5039348, 0.77575725, 0.6110267, 1)
+theme_override_fonts/normal_font = ExtResource("4_doon7")
+theme_override_fonts/bold_font = ExtResource("5_11fy0")
+theme_override_styles/normal = SubResource("StyleBoxFlat_vwvvt")
+bbcode_enabled = true
+text = "This game was made possible by:
+Ollie(Godot Guy)
+Hyde
+Ridgley
+Tyler
+Conner
+Aria
+Phoenix
+AJ
+Athish
+Aswath
+Alex the Slave
+"
 
 [editable path="LobbyContainer"]

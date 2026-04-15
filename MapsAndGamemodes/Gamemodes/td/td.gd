@@ -18,7 +18,8 @@ var match_started: bool = false
 var time_left: float = 0.0 # Track time for the UI
 var has_picked_team_locally := false 
 
-@export var spawn_points: Array[Node3D] = [] 
+@export var red_spawn_points: Array[Node3D] = []
+@export var blue_spawn_points: Array[Node3D] = []
 @export var respawn_delay: float = 5.0 
 @export var gamemode_length = 10.0
 
@@ -123,7 +124,7 @@ func _respawn_player(player_id: int):
 	# 1. MUST have BOTH a character and a team to spawn!
 	if chosen_merc == "" or chosen_team == "": 
 		return 
-		
+	
 	respawn_trackers[player_id]["is_dead"] = false
 	
 	if leaderboard:
@@ -131,8 +132,12 @@ func _respawn_player(player_id: int):
 	
 	if not has_node(str(player_id)):
 		var spawn_pos = Vector3.ZERO
-		if spawn_points.size() > 0:
-			var random_spawn = spawn_points.pick_random()
+		var random_spawn
+		if red_spawn_points.size() > 0 and blue_spawn_points.size() > 0:
+			if chosen_team == "red":
+				random_spawn = red_spawn_points.pick_random()
+			if chosen_team == 'blue':
+				random_spawn = blue_spawn_points.pick_random()
 			if random_spawn:
 				spawn_pos = random_spawn.position 
 				

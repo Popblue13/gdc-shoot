@@ -1,4 +1,4 @@
 extends Ability
 
-func activate(abilities : Array[Ability], merc : Merc):
+func activate():
 	merc.twerk()

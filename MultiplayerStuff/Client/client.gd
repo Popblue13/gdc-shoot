@@ -2,11 +2,17 @@ extends Node
 class_name ClientLogic
 
 var lobby_container : LobbyContainer = null
+
 func _ready() -> void:
 	name = "NetworkConnection"
 	var peer = ENetMultiplayerPeer.new()
 	
-	var error = peer.create_client(ServerDatabase.address, ServerDatabase.port)
+	# Look for the IP passed by NetworkDirector. 
+	# If it can't find one, it falls back to your ServerDatabase.address as a safety net!
+	var target_ip = get_meta("target_ip", ServerDatabase.address)
+	
+	var error = peer.create_client(target_ip, ServerDatabase.port)
+	
 	if error != OK:
 		print('error creating client with error code: ', error)
 		return

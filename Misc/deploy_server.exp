@@ -8,25 +8,33 @@ set host "csdev03"
 # 1. Start the SSH connection
 spawn ssh $user@$host
 
-
-# 3. Wait for the remote shell prompt (usually ends in $ or # or %)
+# 2. Wait for the remote shell prompt
 expect -re {[\$\%] }
 
-# 4. Resume the screen session
-send "screen -r\r"
+# 3. Forcefully resume the most recent screen session (or create one)
+send "screen -d -RR\r"
 sleep 2
 
-# 5. Send Ctrl+C to stop the current process in screen
-# \003 is the ASCII code for Ctrl+C
+# 4. Send Ctrl+C to stop the current running server
 send "\003"
 expect -re {[\$\%] }
 
-# 6. Run Git Pull
+# 5. Navigate to the project directory
+send "cd ~/gdcserver/gdc-shoot\r"
+expect -re {[\$\%] }
+
+# 6. Run Git Pull to update your raw project files
 send "git pull\r"
 expect -re {[\$\%] }
 
-# 7. Restart the server
-send "./GDCShoot.x86_64 --server --headless\r"
+# --- THE NEW STEP ---
+# 7. Force Godot to import assets and build the .godot/ cache
+send "~/gdcserver/godot_executable/Godot_v4.6.2-stable_linux.x86_64 --headless --editor --quit\r"
+expect -re {[\$\%] }
+# --------------------
 
-# 8. Give control back to you so you can see the server logs
+# 8. Restart the server now that the project is fully imported
+send "~/gdcserver/godot_executable/Godot_v4.6.2-stable_linux.x86_64 --headless --server\r"
+
+# 9. Give control back to you
 interact

@@ -25,8 +25,8 @@ var Mercs : Dictionary [String, PackedScene] = {
 	"homebody" = load("res://PlayerControllers/Mercs/HomeBody/HomeBody.tscn"),
 	"YAM" = load("res://PlayerControllers/Mercs/YetAnotherMerc/YetAnotherMerc.tscn"),
 	"Fiend" = load("res://PlayerControllers/Mercs/Fiend/Fiend.tscn"),
-	#"hyde" = load("res://PlayerControllers/Mercs/Hyde/Hyde.tscn"),`
 	"Jhomas" = load("res://PlayerControllers/Mercs/Jhomas/Jhomas.tscn"),
+	"hyde" = load("res://PlayerControllers/Mercs/Hyde/Hyde.tscn"),
 }
 
 var Characters : Dictionary [String, PackedScene] = {} 
@@ -34,8 +34,8 @@ var Players : Dictionary [int, Dictionary] #id, [gamertag, lobby]
 var Lobbies : Dictionary[String, Array] = {} #lobbyid = [player_id, ...]
 
 var port = 6789
-#var address = "localhost"
-var address = "csdev03.d.umn.edu"
+var address = "localhost"
+#var address = "csdev03.d.umn.edu"
 #endregion
 
 #region Manager

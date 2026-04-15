@@ -9,9 +9,9 @@ signal player_left_lobby(player_id: int)
 @onready var map_voting: Panel = $MapVoting
 
 var current_map : Map
-var next_map : String = "sb_lobby"
+var next_map : String = "none"
 var connected_players : Array[int] = [] # The Lobby's master list
-var starting_map = 'sb_lobby' #exits to fight race conditions
+var starting_map = 'none' #exits to fight race conditions
 var time_till_map_vote := 5.0
 var is_changing_map : bool = false
 var map_session_id : int = 0 #for voting
@@ -31,7 +31,8 @@ func register_spawnable_maps(): #<ALL>
 
 func change_map(map_name : String): 
 	if !multiplayer.is_server(): return
-	
+	if map_name == 'none':
+		map_name = ServerDatabase.Maps.keys().pick_random()
 	# Prevent double-calls from ruining the transition
 	if is_changing_map: return
 	is_changing_map = true
@@ -47,8 +48,6 @@ func change_map(map_name : String):
 		current_map.queue_free()
 		current_map = null # Explicitly nullify it so it instantly fails 'if current_map' checks
 	
-	print(map_name)
-	print(ServerDatabase.Maps[map_name])
 	
 	var new_map : Map = ServerDatabase.Maps[map_name].instantiate()
 	
@@ -88,6 +87,7 @@ func on_player_left(player_id: int) -> void:
 
 func game_end():
 	#animssss  and stuff
+
 	change_map(next_map)
 
 func _on_force_end_game(target_lobby_id: String) -> void:
