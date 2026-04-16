@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://27dxcrv3ostv"]
 
 [ext_resource type="Script" uid="uid://c8vcha0bpxltm" path="res://MapsAndGamemodes/Gamemodes/sb/sb.gd" id="1_5cp0e"]
+[ext_resource type="Environment" uid="uid://b0wv4lj6oo8v8" path="res://MapsAndGamemodes/Maps/dm_grahhh/grahh_enviornment.tres" id="2_4wfj7"]
 [ext_resource type="Texture2D" uid="uid://b7b8tego25aq3" path="res://PrototypeAssets/PrototypeMapAssets/Vector/texture_02.svg" id="2_wjog0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qt646"]
@@ -10,6 +11,7 @@ albedo_texture = ExtResource("2_wjog0")
 script = ExtResource("1_5cp0e")
 player_spawn = NodePath("PlayerSpawner")
 map_name = "sb_lobby"
+environment = ExtResource("2_4wfj7")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=409190496]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.7690873, 0)

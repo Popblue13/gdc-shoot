@@ -266,7 +266,7 @@ collision_layer = 3
 script = ExtResource("3_ox1it")
 
 [node name="CollisionShape3D" parent="HurtableProp" index="0" unique_id=404081774]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.219373, -5.5178046, 17.693186)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0323086, 0)
 shape = SubResource("CapsuleShape3D_gkqfs")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="HurtableProp" unique_id=1564769388]
@@ -283,7 +283,7 @@ collision_layer = 3
 script = ExtResource("3_ox1it")
 
 [node name="CollisionShape3D" parent="HurtableProp2" index="0" unique_id=404081774]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.219373, -5.5178046, 17.693186)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0402565, 0)
 shape = SubResource("CapsuleShape3D_gkqfs")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="HurtableProp2" unique_id=1966606701]
@@ -300,7 +300,7 @@ collision_layer = 3
 script = ExtResource("3_ox1it")
 
 [node name="CollisionShape3D" parent="HurtableProp3" index="0" unique_id=404081774]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.219373, -5.5178046, 17.693186)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0522747, 0)
 shape = SubResource("CapsuleShape3D_gkqfs")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="HurtableProp3" unique_id=1653840436]
@@ -317,7 +317,7 @@ collision_layer = 3
 script = ExtResource("3_ox1it")
 
 [node name="CollisionShape3D" parent="HurtableProp4" index="0" unique_id=404081774]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.219373, -5.5178046, 17.693186)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0260868, 0)
 shape = SubResource("CapsuleShape3D_gkqfs")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="HurtableProp4" unique_id=1237505935]
@@ -334,7 +334,6 @@ collision_layer = 3
 script = ExtResource("3_ox1it")
 
 [node name="CollisionShape3D" parent="HurtableProp5" index="0" unique_id=404081774]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.219373, -5.5178046, 17.693186)
 shape = SubResource("CapsuleShape3D_gkqfs")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="HurtableProp5" unique_id=309232103]

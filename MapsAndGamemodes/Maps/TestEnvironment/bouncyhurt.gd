@@ -16,5 +16,5 @@ func _process(delta):
 	if time_to_reset <= 0:
 		health = 100
 		label_3d.text = str(health)
+	rotation = rotation.normalized()
 	rotation = rotation.lerp(Vector3.ZERO, delta * 15)
-	

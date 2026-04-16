@@ -7,7 +7,7 @@ var player_spawner : MultiplayerSpawner
 var player_data_base : Dictionary[int, Dictionary]
 var is_map_ready : bool = false # Lobby checks this for mid-game joiners
 @export var map_name : String = 'default'
-@export var world_enviornment : Environment
+@export var environment : Environment
 
 func _enter_tree() -> void:
 	player_spawner = MultiplayerSpawner.new()

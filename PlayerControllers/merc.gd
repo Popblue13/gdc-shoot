@@ -13,7 +13,6 @@ const ABILITY_UI = preload("res://Misc/UI/ability_ui.tscn")
 const MERC_LABEL = preload("res://MultiplayerStuff/Client/MercLabel.tscn")
 const HEALTH_BAR = preload("res://Misc/UI/health_bar.tscn")
 var health_bar : ProgressBar
-var current_enviornment : Environment
 
 @export_category("REQUIRED OBJECTS")
 @export var camera : Camera3D
@@ -108,8 +107,7 @@ func _ready() -> void:
 	name_label_instance = MERC_LABEL.instantiate()
 	add_child(name_label_instance)
 	
-	if camera and current_enviornment:
-		camera.environment = current_enviornment
+
 	# Position it slightly above the player (Adjust the Y value based on your model height)
 	name_label_instance.position = Vector3(0, 1.6, 0) 
 	
@@ -117,6 +115,11 @@ func _ready() -> void:
 	name_label_instance.setup(name.to_int())
 	
 	if is_multiplayer_authority():
+		print("ENVIORNMENTHELLO?")
+		var map = get_parent()
+		if map is Map and camera and map.environment != null:
+			camera.environment = map.environment
+		
 		camera.make_current()
 		get_tree().physics_frame.connect(check_abilities)
 		custom_ready()
