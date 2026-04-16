@@ -3,6 +3,10 @@ class_name Merc extends CharacterBody3D
 signal died(_self) #Server will disable input on character
 signal took_damage
 
+# Debug test environment import
+const TEST_ENVIRONMENT = preload("res://MapsAndGamemodes/Maps/TestEnvironment/TestEnvironment.tscn")
+
+
 ## THIS THE BASE CLASS, DO NOT CHANGE AN OF THIS UNLESS ITS IN THE INSPECTOR
 const ABILITY_UI = preload("res://Misc/UI/ability_ui.tscn")
 const MERC_LABEL = preload("res://MultiplayerStuff/Client/MercLabel.tscn")
@@ -63,26 +67,31 @@ func _ready() -> void:
 		name = "1"
 		set_multiplayer_authority(1)
 		
-		# 2. Spawn a debug floor
-		var debug_floor = CSGBox3D.new()
-		debug_floor.size = Vector3(100, 1, 100) # Big platform
-		debug_floor.use_collision = true
-		debug_floor.top_level = true # Prevents the floor from moving WITH the player
-		debug_floor.global_position = global_position - Vector3(0, 1, 0)
 		
-		# Optional: Add a checkerboard or basic color so you can see movement
-		var mat = StandardMaterial3D.new()
-		mat.albedo_color = Color.DARK_GRAY
-		debug_floor.material = mat
+		var debug_environment : = TEST_ENVIRONMENT.instantiate()
+		add_child(debug_environment)
+		debug_environment.top_level = true
 		
-		add_child(debug_floor)
-		
-		# 3. Add a sun so the scene isn't pitch black
-		var debug_light = DirectionalLight3D.new()
-		debug_light.top_level = true
-		debug_light.rotation_degrees = Vector3(-45, 45, 0)
-		add_child(debug_light)
-		
+		## 2. Spawn a debug floor
+		#var debug_floor = CSGBox3D.new()
+		#debug_floor.size = Vector3(100, 1, 100) # Big platform
+		#debug_floor.use_collision = true
+		#debug_floor.top_level = true # Prevents the floor from moving WITH the player
+		#debug_floor.global_position = global_position - Vector3(0, 1, 0)
+		#
+		## Optional: Add a checkerboard or basic color so you can see movement
+		#var mat = StandardMaterial3D.new()
+		#mat.albedo_color = Color.DARK_GRAY
+		#debug_floor.material = mat
+		#
+		#add_child(debug_floor)
+		#
+		## 3. Add a sun so the scene isn't pitch black
+		#var debug_light = DirectionalLight3D.new()
+		#debug_light.top_level = true
+		#debug_light.rotation_degrees = Vector3(-45, 45, 0)
+		#add_child(debug_light)
+		#
 		print("--- DEBUG MODE ACTIVE: Local Server & Floor Generated ---")
 
 	# ==========================================
