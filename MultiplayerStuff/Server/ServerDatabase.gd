@@ -17,7 +17,7 @@ var Maps : Dictionary [String, PackedScene] = {
 	"hm_home" = load("res://MultiplayerStuff/home -._-/hm_home.tscn"),
 	"dm_dust2" = load("res://MapsAndGamemodes/Maps/dm_dust2/dm_dust2.tscn"),
 	"td_dust2" = load("res://MapsAndGamemodes/Maps/td_dust2/td_dust2.tscn"),
-	"dm_grahhh" = load("res://MapsAndGamemodes/Maps/dm_grahhh/dm_grahhh.tscn")
+	"td_grahhh" = load("res://MapsAndGamemodes/Maps/dm_grahhh/dm_grahhh.tscn")
 }
 
 var Mercs : Dictionary [String, PackedScene] = {

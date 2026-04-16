@@ -5,7 +5,6 @@ extends DestructibleProp
 @onready var mesh = $Eye
 
 signal eye_closed()
-var eye_health = 100.0
 
 
 func _ready():
@@ -33,16 +32,15 @@ func close():
 @rpc("any_peer", "call_local", "reliable")
 func take_damage(damage: float):
 	if dead:return
-	eye_health -= damage
-	print(eye_health, damage)
+	health -= damage
 	hurt.pitch_scale = randf_range(0.8, 1.2)
 	hurt.play()
-	if eye_health <= 0 and not dead:
+	if health <= 0 and not dead:
 		dead = true
 		close()
 
 
 func _on_timer_timeout() -> void:
 	mesh.material_override = load("res://MapsAndGamemodes/Maps/dm_grahhh/eyeopen.tres")
-	eye_health = 100
+	health = 100
 	dead = false
