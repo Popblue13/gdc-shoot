@@ -9,31 +9,47 @@
 [ext_resource type="Texture2D" uid="uid://fqudaqraiioo" path="res://PlayerControllers/Mercs/Halo/Hud.png" id="7_gthcp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_va2xk"]
+height = 1.8222656
 
-[node name="MC" type="CharacterBody3D" unique_id=1976584918 node_paths=PackedStringArray("camera", "abilities")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gthcp"]
+albedo_color = Color(0.4114326, 0.6912482, 0.57572174, 1)
+metallic = 1.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_gthcp"]
+material = SubResource("StandardMaterial3D_gthcp")
+
+[node name="MC" type="CharacterBody3D" unique_id=1976584918 node_paths=PackedStringArray("camera", "visual_body", "visual_hand", "abilities")]
 script = ExtResource("1_muwch")
 camera = NodePath("Camera3D")
+health = 150.0
+speed = 0.5
+visual_body = NodePath("Helmet")
+visual_hand = NodePath("HaloAR")
 debug_mode = true
 abilities = [NodePath("SprintAbility"), NodePath("JumpAbility"), NodePath("HaloAR")]
 metadata/_custom_type_script = "uid://2ip0lrtrrhsr"
 
 [node name="SprintAbility" parent="." unique_id=699710493 instance=ExtResource("2_h30se")]
+speed_multiplier = 2.0
 
 [node name="JumpAbility" parent="." unique_id=27473948 instance=ExtResource("3_010wl")]
 auto_bhop = true
 jump_cooldown = 0.063
-jump_strength = 5.0
+jump_strength = 6.0
 trigger_key = "Space"
 
 [node name="HaloAR" parent="." unique_id=1600695075 instance=ExtResource("4_euw0f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10683805, 1.7487231, 0.5263119)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=523479650]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1689423, 0.1863763)
+transform = Transform3D(0.5, 0, 0, 0, 0.8, 0, 0, 0, 0.5, 0, 1.0800751, 0.1863763)
 shape = SubResource("CapsuleShape3D_va2xk")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=807446980]
+mesh = SubResource("CapsuleMesh_gthcp")
+
 [node name="Camera3D" type="Camera3D" parent="." unique_id=735909127]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6547091, -0.34116477)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6547091, 0.043964207)
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=161209818]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3532925, 0)
