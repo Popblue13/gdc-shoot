@@ -10,7 +10,7 @@ func end_gamemode():
 	pass #not gonna happen -._-
 
 func player_died(merc : Merc, killer_id : int = 0):
-	pass #not gonna happen -_.-
+	pass
 
 func _on_player_joined(peer_id: int):
 	if !multiplayer.is_server(): return

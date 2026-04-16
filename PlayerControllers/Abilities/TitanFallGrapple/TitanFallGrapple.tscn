@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://dnxo7tnmmkhbh"]
+
+[ext_resource type="Script" uid="uid://cb010ml7ytck5" path="res://PlayerControllers/Abilities/TitanFallGrapple/titan_fall_grapple.gd" id="1_rxms7"]
+
+[sub_resource type="Curve" id="Curve_rxms7"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.4729412, 0.9883303), 0.0, 0.0, 0, 0, Vector2(0.72470593, 0.8891382), 0.0, 0.0, 0, 0, Vector2(1, 0.60323155), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yhmmg"]
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_n2nqu"]
+noise = SubResource("FastNoiseLite_yhmmg")
+
+[sub_resource type="SphereMesh" id="SphereMesh_n0kb8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rxms7"]
+albedo_color = Color(0.421637, 0, 0.129971, 1)
+
+[sub_resource type="Curve3D" id="Curve3D_yhmmg"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.00202859, 0.00708499, -0.000848591, 0, 0, 0, 0, 0, 0, 0.0685794, 0.731389, -0.980191, 0, 0, 0, 0, 0, 0, 0.323578, 0.716471, -2.18191, 0, 0, 0, 0, 0, 0, 0.472602, 1.18157, -2.97197, 0, 0, 0, 0, 0, 0, 0.710218, -0.480691, -4.13084, 0, 0, 0, 0, 0, 0, 0.93129, 1.08961, -5.1245, 0, 0, 0, 0, 0, 0, 1.2161, 1.41061, -6.694, 0, 0, 0, 0, 0, 0, 1.57858, 0.703644, -8.15047, 0, 0, 0, 0, 0, 0, 1.6093, 1.43466, -8.94993, 0, 0, 0, 0, 0, 0, 1.82806, 1.03186, -9.63244),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 10
+
+[sub_resource type="Gradient" id="Gradient_n2nqu"]
+offsets = PackedFloat32Array(0.529851, 0.992537)
+colors = PackedColorArray(0.154876, 0.154876, 0.154876, 1, 0.462291, 0.462291, 0.462291, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6fiap"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ov551"]
+noise = SubResource("FastNoiseLite_6fiap")
+color_ramp = SubResource("Gradient_n2nqu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tmcvt"]
+albedo_texture = SubResource("NoiseTexture2D_ov551")
+uv1_scale = Vector3(1, 18.425, 1)
+
+[node name="TitanFallGrapple" type="Node3D" unique_id=919763641]
+script = ExtResource("1_rxms7")
+rope_curve = SubResource("Curve_rxms7")
+noise_rope = SubResource("NoiseTexture3D_n2nqu")
+trigger_key = "Q"
+
+[node name="GrappleStart" type="MeshInstance3D" parent="." unique_id=1347304238]
+transform = Transform3D(0.217537, 0, 0, 0, 0.217537, 0, 0, 0, 0.217537, -0.548543, 0.441206, -0.037882)
+visible = false
+mesh = SubResource("SphereMesh_n0kb8")
+skeleton = NodePath("")
+
+[node name="GrappleEnd" type="MeshInstance3D" parent="." unique_id=1903139596]
+transform = Transform3D(0.228856, 0, 0, 0, 0.228856, 0, 0, 0, 0.228856, -0.628467, 0.441206, -0.787382)
+top_level = true
+mesh = SubResource("SphereMesh_n0kb8")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_rxms7")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="GrappleEnd" unique_id=1106188731]
+aabb = AABB(-3.27857, -3.89241, -3.02577, 6.55714, 7.78482, 6.05155)
+
+[node name="Line" type="Path3D" parent="." unique_id=1745389626]
+top_level = true
+curve = SubResource("Curve3D_yhmmg")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Line" unique_id=1622266182]
+polygon = PackedVector2Array(-0.000945842, 0.0290405, -0.0199928, 0.0196214, -0.0327328, 0.00141066, -0.0204179, -0.0171559, -0.00195675, -0.0300432, 0.0155773, -0.023012, 0.0297729, -0.000444204, 0.0257519, 0.012036)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 1
+path_interval = 0.21
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+smooth_faces = true
+material = SubResource("StandardMaterial3D_tmcvt")
+
+[node name="Time_To_Disconect" type="Timer" parent="." unique_id=1182618008]
+wait_time = 0.6
+one_shot = true
+
+[node name="LookRayCast" type="RayCast3D" parent="." unique_id=1329748200]
+target_position = Vector3(0, 0, -20)

@@ -16,6 +16,7 @@ var health_bar : ProgressBar
 @export_group("Universal Properties")
 @export var health :float = 100.0:
 	set(value):
+		health = value
 		if health_bar: health_bar.value = value
 
 @export var gravity := 9.8
@@ -345,9 +346,8 @@ func receive_pos_from_server(pos: Vector3, rot: Vector3):
 
 @rpc("any_peer", "call_remote", "reliable")
 func take_damage(damage: float):
-	# 1. Securely get the ID of the person who shot you
+	if !is_multiplayer_authority(): return
 	var attacker_id = multiplayer.get_remote_sender_id()
-	
 	# 2. Check the local database for their team
 	if player_teams.has(attacker_id):
 		var attacker_team = player_teams[attacker_id]
@@ -361,8 +361,9 @@ func take_damage(damage: float):
 	
 	# TELL EVERYONE TO FLASH THIS PLAYER YELLOW
 	_sync_flash_damage.rpc() 
-	
+	print(dead, health, is_multiplayer_authority())
 	if health <= 0 and not dead and is_multiplayer_authority():
+		print('DIED')
 		dead = true
 		death_effects.rpc()
 		die.rpc_id(1, attacker_id)

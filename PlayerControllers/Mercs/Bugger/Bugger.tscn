@@ -1,13 +1,18 @@
 [gd_scene format=3 uid="uid://wd6vfxg31gi"]
 
 [ext_resource type="Script" uid="uid://2ip0lrtrrhsr" path="res://PlayerControllers/merc.gd" id="1_1jx3u"]
+[ext_resource type="PackedScene" uid="uid://66huel0ka5n5" path="res://PlayerControllers/Mercs/Bugger/kutchykutchy.glb" id="2_8tpj0"]
+[ext_resource type="PackedScene" uid="uid://dnxo7tnmmkhbh" path="res://PlayerControllers/Abilities/TitanFallGrapple/TitanFallGrapple.tscn" id="3_o84fh"]
+[ext_resource type="PackedScene" uid="uid://dc5cl5hw0bwwg" path="res://PlayerControllers/Abilities/SwingingRopeGrapple/SwingingRopeGrapple.tscn" id="4_expgn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1jx3u"]
 height = 2.427246
 
-[node name="Bugger" type="CharacterBody3D" unique_id=1512466377 node_paths=PackedStringArray("camera")]
+[node name="Bugger" type="CharacterBody3D" unique_id=1512466377 node_paths=PackedStringArray("camera", "visual_body")]
 script = ExtResource("1_1jx3u")
 camera = NodePath("Camera3D")
+visual_body = NodePath(".")
+debug_mode = true
 metadata/_custom_type_script = "uid://2ip0lrtrrhsr"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=75012073]
@@ -16,3 +21,15 @@ shape = SubResource("CapsuleShape3D_1jx3u")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1607488851]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7303312, 0)
+
+[node name="kutchykutchy" parent="." unique_id=1473177636 instance=ExtResource("2_8tpj0")]
+transform = Transform3D(0.18030055, 0, 0.0016080585, 0, 0.1803077, 0, -0.0016080585, 0, 0.18030055, 0.024316072, -0.646659, 0.053982347)
+
+[node name="TitanFallGrapple" parent="." unique_id=919763641 instance=ExtResource("3_o84fh")]
+trigger_key = "E"
+
+[node name="SwingingRopeGrapple" parent="." unique_id=101568500 instance=ExtResource("4_expgn")]
+trigger_key = "Q"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=325162207]
+transform = Transform3D(0.9964914, 0.08369525, -3.7122196e-09, -0.048792154, 0.5809287, 0.81249076, 0.06800161, -0.8096401, 0.5829741, 0, 2.3219633, 1.5590405)
