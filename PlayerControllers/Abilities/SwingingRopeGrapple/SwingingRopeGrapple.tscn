@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://dc5cl5hw0bwwg"]
+
+[ext_resource type="Script" uid="uid://c5v68fvh7fbux" path="res://PlayerControllers/Abilities/SwingingRopeGrapple/swinging_rope_grapple.gd" id="1_6idbq"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_p0kw3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0sud3"]
+radius = 0.0763408
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8e0pl"]
+albedo_color = Color(1, 0.819608, 0.192157, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_5pxf5"]
+material = SubResource("StandardMaterial3D_8e0pl")
+radius = 0.0763408
+height = 0.0763408
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wv3ot"]
+size = Vector3(0.264229, 0.152588, 0.217766)
+
+[sub_resource type="Curve3D" id="Curve3D_pv73u"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.00202859, 0.00708499, -0.000848591, 0, 0, 0, 0, 0, 0, 0.0685794, 0.731389, -0.980191, 0, 0, 0, 0, 0, 0, 0.323578, 0.716471, -2.18191, 0, 0, 0, 0, 0, 0, 0.472602, 1.18157, -2.97197, 0, 0, 0, 0, 0, 0, 0.710218, -0.480691, -4.13084, 0, 0, 0, 0, 0, 0, 0.93129, 1.08961, -5.1245, 0, 0, 0, 0, 0, 0, 1.2161, 1.41061, -6.694, 0, 0, 0, 0, 0, 0, 1.57858, 0.703644, -8.15047, 0, 0, 0, 0, 0, 0, 1.6093, 1.43466, -8.94993, 0, 0, 0, 0, 0, 0, 1.82806, 1.03186, -9.63244),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 10
+
+[sub_resource type="Gradient" id="Gradient_bx2gf"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6tg2s"]
+gradient = SubResource("Gradient_bx2gf")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vkye8"]
+albedo_texture = SubResource("GradientTexture2D_6tg2s")
+
+[node name="SwingingRopeGrapple" type="Node3D" unique_id=101568500]
+script = ExtResource("1_6idbq")
+
+[node name="GrappleStart" type="MeshInstance3D" parent="." unique_id=1788553369]
+transform = Transform3D(0.120792, 0, 0, 0, 0.120792, 0, 0, 0, 0.120792, 0.246217, 0.453511, 0.0685481)
+mesh = SubResource("SphereMesh_p0kw3")
+skeleton = NodePath("")
+
+[node name="GrappleEnd" type="RigidBody3D" parent="." unique_id=1154662051]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.715537, 0.441206, -0.787382)
+top_level = true
+collision_layer = 0
+freeze = true
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="GrappleEnd" unique_id=403324132]
+aabb = AABB(-3.27857, -3.89241, -3.02577, 6.55714, 7.78482, 6.05155)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrappleEnd" unique_id=2120414769]
+shape = SubResource("SphereShape3D_0sud3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GrappleEnd/CollisionShape3D" unique_id=1253129970]
+transform = Transform3D(1, 0, 0, 0, 2.03869, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("SphereMesh_5pxf5")
+
+[node name="Area3D" type="Area3D" parent="GrappleEnd" unique_id=278342432]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrappleEnd/Area3D" unique_id=196204573]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00780106, 0.0367431, 0.0121346)
+shape = SubResource("BoxShape3D_wv3ot")
+
+[node name="Line" type="Path3D" parent="." unique_id=774560790]
+top_level = true
+curve = SubResource("Curve3D_pv73u")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Line" unique_id=2108793565]
+polygon = PackedVector2Array(-0.000945842, 0.0290405, -0.0199928, 0.0196214, -0.0327328, 0.00141066, -0.0204179, -0.0171559, -0.00195675, -0.0300432, 0.0155773, -0.023012, 0.0297729, -0.000444204, 0.0257519, 0.012036)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 1
+path_interval = 0.21
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+smooth_faces = true
+material = SubResource("StandardMaterial3D_vkye8")
+
+[node name="Time_To_Disconect" type="Timer" parent="." unique_id=1787927064]
+wait_time = 0.6
+one_shot = true
