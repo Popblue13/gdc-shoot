@@ -49,7 +49,7 @@ shape = SubResource("CapsuleShape3D_va2xk")
 mesh = SubResource("CapsuleMesh_gthcp")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=735909127]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6547091, -0.34116477)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6547091, -0.14121014)
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=161209818]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3532925, 0)
