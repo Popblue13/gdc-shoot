@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dkq1jrpgabpt7"]
+
+[ext_resource type="Texture2D" uid="uid://ct5unemo8yuf2" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/0406eb59-6cf1-4307-91f3-188044212708.png" id="1_20jep"]
+
+[resource]
+albedo_texture = ExtResource("1_20jep")
+uv1_scale = Vector3(2.19, 2.19, 2.19)
+uv1_offset = Vector3(-1.36, -0.095, 0)

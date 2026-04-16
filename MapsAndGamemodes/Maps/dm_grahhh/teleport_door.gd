@@ -6,6 +6,7 @@ extends StaticBody3D
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
+	
 	body.global_position = tp_marker.global_position
 	if makes_noise:
 		noise.play()

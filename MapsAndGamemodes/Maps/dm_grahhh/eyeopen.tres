@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bkaum2g1q8ewd"]
+
+[ext_resource type="Texture2D" uid="uid://lttfmcelvc2w" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/materials_nippertextures_blah_nmb_eye.png" id="1_7g55d"]
+
+[resource]
+albedo_texture = ExtResource("1_7g55d")
+uv1_scale = Vector3(1, 0.585, 1)
+uv1_offset = Vector3(0.5, 0.585, 0)
+uv1_triplanar = true
