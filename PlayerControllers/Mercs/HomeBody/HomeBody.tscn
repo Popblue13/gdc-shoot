@@ -13,7 +13,8 @@ script = ExtResource("1_c4nve")
 camera = NodePath("Camera3D")
 visual_body = NodePath("MeshInstance3D")
 visual_hand = NodePath("CSGSphere3D4")
-abilities = [NodePath("HomeBodyHand"), null]
+debug_mode = true
+abilities = [NodePath("HomeBodyHand")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1977683154]
 shape = SubResource("CapsuleShape3D_lwjk5")
