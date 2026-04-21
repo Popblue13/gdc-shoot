@@ -64,7 +64,7 @@ func explode():
 	# Only the authority should calculate and send damage
 	if is_multiplayer_authority():
 		for i in explosion_radius.get_overlapping_bodies():
-			if i != null and i is Merc:
+			if i != null and i != self and i is Merc:
 				i.take_damage.rpc_id(i.name.to_int(), damage) 
 	
 	# Everything below this runs locally for all clients (Visuals/Cleanup)

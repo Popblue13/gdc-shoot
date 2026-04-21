@@ -1405,7 +1405,7 @@ transform = Transform3D(0.76582, -0.17333014, 0.6192548, -1.4901161e-07, 0.96298
 shape = SubResource("BoxShape3D_r51g3")
 
 [node name="Doohicky" type="Node3D" parent="C4" unique_id=1747705607]
-transform = Transform3D(-0.46004668, 0.093597576, -0.8829474, 0.1993679, 0.9799247, 0, 0.8652219, -0.17603143, -0.46947148, 0.54, -0.33, -0.85)
+transform = Transform3D(-0.46004662, 0.093597576, -0.8829473, 0.19936787, 0.9799247, 0, 0.86522186, -0.17603143, -0.46947145, 0.54, -0.33, -0.85)
 visible = false
 
 [node name="Body" type="MeshInstance3D" parent="C4/Doohicky" unique_id=1592089141]

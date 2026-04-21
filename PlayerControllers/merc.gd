@@ -22,7 +22,7 @@ var health_bar : ProgressBar
 @export_group("Universal Properties")
 @export var health :float = 100.0:
 	set(value):
-		if health_bar: health_bar.value = value
+		if health_bar: health_bar.value = clamp(value, 0, max_health)
 		if value != health:
 			var old := health
 			health = value
@@ -61,6 +61,8 @@ var target_rotation: Vector3
 var can_move:bool = true
 var dead = false
 var ability_ui 
+var max_health : float
+
 var team: String = "default":
 	set(value):
 		team = value
@@ -77,7 +79,7 @@ const TEAM_COLORS = {
 }
 
 func _ready() -> void:
-	
+	max_health = health
 	# ==========================================
 	# DEBUG MODE SETUP
 	# ==========================================

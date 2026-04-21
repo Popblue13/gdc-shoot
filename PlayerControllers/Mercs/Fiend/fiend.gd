@@ -12,13 +12,14 @@ const MAX_SPEED_THRESHOLD : float = 20.0
 var distance : float
 
 func custom_ready():
-	visual_body_mesh.visible = false
+	visual_body_mesh.hide()
 	animation_player.play("walk")
 
 func custom_process(delta : float):
 	# manually loop bc im too lazy to change it in the imported scene :)
 	if !animation_player.is_playing():
 		animation_player.play("walk")
+		
 	
 	# calculating delta to get my own jacked-up velocity val, div by delta to ensure speed scale
 	# scales properly with ppls computer speed

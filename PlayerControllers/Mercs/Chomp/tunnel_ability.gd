@@ -6,6 +6,7 @@ extends Ability
 @export var transition_speed: float = 10.0 # Higher = faster snap, Lower = smoother glide
 @export var damage : float = 70.0
 @export var cooldown : float = 5
+@export var slowdown : float = 4
 
 # Internal state tracking
 var _is_sprinting: bool = false
@@ -21,6 +22,9 @@ var _merc_ref: Merc = null
 @onready var explosion_radius: Area3D = $ExplosionRadius
 @onready var cooldown_timer: Timer = $CooldownTimer
 @onready var tornado_dash_ability: Node3D = $"../TornadoDashAbility"
+@onready var air_accel = get_parent().air_acceleration
+@onready var friction = get_parent().friction
+
 var on_cooldown : bool = false
 
 func _physics_process(delta: float) -> void:
@@ -101,6 +105,8 @@ func _stop_sprint() -> void:
 	# cause damage after release
 	explode()
 	cooldown_timer.start(cooldown)
+	get_parent().friction = friction*4
+	get_parent().air_acceleration = air_accel/4
 	on_cooldown = true
 
 @rpc("any_peer", "call_local", "reliable")
@@ -114,3 +120,5 @@ func explode():
 
 func _on_cooldown_timer_timeout() -> void:
 	on_cooldown = false
+	get_parent().friction = friction
+	get_parent().air_acceleration = air_accel

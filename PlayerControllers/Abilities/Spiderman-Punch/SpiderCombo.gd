@@ -28,7 +28,7 @@ func do_damage(damage: int, area: Area3D) -> void:
 		# Only the authority should calculate and send damage
 	if is_multiplayer_authority():
 		for i in area.get_overlapping_bodies():
-			if i != null and i is Merc:
+			if i != null and i != self and i is Merc:
 				i.take_damage.rpc_id(i.name.to_int(), damage) 
 func shoot():
 	pass

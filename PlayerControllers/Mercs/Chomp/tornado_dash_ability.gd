@@ -20,11 +20,9 @@ var _merc_ref: Merc = null
 @onready var explosion_radius: Area3D = $ExplosionRadius
 @onready var tunnel_ability: Node3D = $"../TunnelAbility"
 var chomp_og_pos
-var gravity
 
 func _ready() -> void:
 	chomp_og_pos = chomper.position
-	gravity = get_parent_node_3d().gravity
 
 
 func _physics_process(delta: float) -> void:
@@ -39,13 +37,13 @@ func _physics_process(delta: float) -> void:
 
 	# 2. --- THE LERPING MAGIC ---
 	if _is_sprinting:
+		explode(delta)
+		
 		# fix clipping into floor
 		if chomp_og_pos and chomper.position == chomp_og_pos:
 			chomper.rotate_x(-PI/2)
 			chomper.position = chomp_og_pos * 0.4
 			
-			
-			get_parent_node_3d().gravity = 0
 		
 		# make funky rotation apply
 		chomper.rotate_z(PI/12)
@@ -69,7 +67,7 @@ func _physics_process(delta: float) -> void:
 			_merc_ref.camera_fov = _original_fov
 			_is_recovering = false
 	
-	explode(delta)
+	
 	
 	# Riley shenanigans
 	if not _is_sprinting:
@@ -84,10 +82,6 @@ func _physics_process(delta: float) -> void:
 		if chomper.rotation.y != 0:
 			chomper.rotation.y = PI
 			
-		if gravity:
-			get_parent_node_3d().gravity = gravity
-		else:
-			get_parent_node_3d().gravity = 9.8
 
 # This is called by Merc every single frame the key is held down
 func activate() -> void:
