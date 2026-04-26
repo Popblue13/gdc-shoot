@@ -27,7 +27,6 @@ var defuse_ui_scene = preload("res://MapsAndGamemodes/Gamemodes/de/DefuseUI.tscn
 var char_select_scene = preload("res://MapsAndGamemodes/Gamemodes/PresetGamemodeWidgets/CharacterSelect/CharacterSelect.tscn")
 var team_select_scene = preload("res://MapsAndGamemodes/Gamemodes/dm/deathmatch side choice button.tscn")
 const ABILITY_PICKUP = preload("res://MapsAndGamemodes/Gamemodes/PresetGamemodeWidgets/AbilityPickup/ability_pickup.tscn")
-const BOMB = preload("res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/Bomb.tscn")
 
 var defuser_node_scene = "res://PlayerControllers/Abilities/DEAbilities/Defuser/Defuser.tscn"
 var defuse_ui: DEUI
@@ -286,35 +285,13 @@ func spawn_bomb_pickup(drop_spot: Vector3) -> void:
 	}
 	
 	# This automatically triggers _spawn_pickup_bomb_item on ALL clients
-	_spawn_orb_network
-
-
-# --- SPAWNER FUNCTION ---
-# Automatically executes on Server and Clients to build the physical node
-func _spawn_pickup_bomb_item(data: Variant) -> Node:
-	
-	var spawn_data = data as Dictionary
-	
-	# 1. Instantiate the generic Ability Pickup area
-	var pickup_instance = ABILITY_PICKUP.instantiate()
-	
-	# 2. Tell the pickup that it holds the BOMB ability
-	pickup_instance.ability_scene = BOMB
-	pickup_instance.consumable = true
-	
-	# 3. Set its position in the world
-	pickup_instance.position = spawn_data["pos"]
-	
-	# 4. Return the configured node so the spawner can add it to the tree
-	return pickup_instance
-
+	spawn_dropped_orb("res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/Bomb.tscn", bomb_spawn_point.global_position, true)
 # Automatically executes on Server and Clients to build the physical node
 func _spawn_planted_bomb(data: Variant) -> Node:
 	var spawn_data = data as Dictionary
 	var bomb_instance = planted_bomb_scene.instantiate() as PlantedBomb
-	
-	# Set the height offset so it doesn't sink into the floor (Adjust '1.0' as needed!)
-	var height_offset: float = 1.0 
+
+	bomb_instance.top_level = true
 	bomb_instance.position = spawn_data["pos"]
 	
 	# Align the rotation to the slope

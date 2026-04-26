@@ -42,7 +42,10 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if !is_multiplayer_authority(): return
-	if !currently_active: return
+	if !currently_active: 
+		if !animation_player.is_playing(): hide()
+		return
+	else: show()
 	
 	crosshair_002.visible = visible
 	global_transform = merc.camera.global_transform

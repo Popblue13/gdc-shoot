@@ -26,13 +26,14 @@ func activate():
 	
 	var hit_object = ray_cast_3d.get_collider()
 	# If we hit the StaticBody3D child, grab its owner to access the DEBOMB script
-	var bomb_target = hit_object if hit_object is DEBOMB else hit_object.owner as DEBOMB
+	var bomb_target = hit_object if hit_object is PlantedBomb else hit_object.owner as PlantedBomb
+	
 	
 	if bomb_target and bomb_target.planted:
 		is_defusing = true
 		# Use physics delta to ensure the math is accurate to the frame rate
 		cur_defuse_level -= get_physics_process_delta_time()
-		
+		print(cur_defuse_level)
 		if cur_defuse_level <= 0.0:
 			# Defuse complete! Prevent spamming and tell the server.
 			cur_defuse_level = defuse_time 
@@ -44,7 +45,7 @@ func _request_defuse(bomb_path: NodePath):
 	
 	# On a headless server, this will ALWAYS be the correct player ID
 	var defuser_id = multiplayer.get_remote_sender_id() 
-		
+	
 	var bomb_node = get_node_or_null(bomb_path)
 	if bomb_node and bomb_node.defuse_gamemode:
-		bomb_node.defuse_gamemode.on_bomb_defused(defuser_id)
+		bomb_node.defuse_gamemode.on_bomb_defused()

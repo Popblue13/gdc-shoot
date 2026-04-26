@@ -1,13 +1,12 @@
 [gd_scene format=4 uid="uid://nhp4lghbjo31"]
 
 [ext_resource type="Script" uid="uid://co4gkxh1je7gk" path="res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/bomb.gd" id="1_r4gtw"]
-[ext_resource type="Texture2D" uid="uid://7t25cg31su6k" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/blahhh_0.png" id="2_8foco"]
 [ext_resource type="Material" uid="uid://uiq7fijwx2od" path="res://PlayerControllers/Abilities/Turret/turretpreview.tres" id="3_o1hlm"]
 [ext_resource type="Material" uid="uid://ej07qv6yq17u" path="res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/explosivematerial.tres" id="3_qqgut"]
 [ext_resource type="Material" uid="uid://bj31ogvo4qulj" path="res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/bombmaterial.tres" id="3_r4gtw"]
 [ext_resource type="FontFile" uid="uid://bxfv5oguicmee" path="res://Misc/UI/fonts/GothicA1-Light.ttf" id="4_r4gtw"]
-[ext_resource type="AudioStream" uid="uid://4xah06aixdq5" path="res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/plant.mp3" id="5_qqgut"]
-[ext_resource type="Texture2D" uid="uid://brupuhk60x54r" path="res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/image-removebg-preview(10).png" id="5_t045v"]
+[ext_resource type="AudioStream" uid="uid://bpb8bmowhnkgd" path="res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/plant.mp3" id="5_qqgut"]
+[ext_resource type="Texture2D" uid="uid://dgk8egylyylkq" path="res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/image-removebg-preview(10).png" id="5_t045v"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_xlgcv"]
 _surfaces = [{
@@ -626,20 +625,6 @@ trigger_key = "5"
 
 [node name="bomb" type="StaticBody3D" parent="." unique_id=1844621931]
 transform = Transform3D(0.9999993, 0, 0, 0, 0.57489115, -0.8182298, 0, 0.81823015, 0.5748909, 0, -0.35789844, -1.3540034)
-
-[node name="Decal" type="Decal" parent="bomb" unique_id=837029761]
-transform = Transform3D(1, 0, 0, 0, -8.940697e-08, 1, 0, -1, -8.940697e-08, -0.20732254, 0.6980908, 0.31367236)
-size = Vector3(1.3105469, 1, 1)
-texture_albedo = ExtResource("2_8foco")
-albedo_mix = 0.54
-upper_fade = 1.3784376
-
-[node name="Decal2" type="Decal" parent="bomb" unique_id=210202081]
-transform = Transform3D(1, 0, 0, 0, -8.940697e-08, 1, 0, -1, -8.940697e-08, -0.02589789, -0.4948982, -0.049595594)
-size = Vector3(2.2873535, 1.810791, 1)
-texture_albedo = ExtResource("2_8foco")
-albedo_mix = 0.54
-upper_fade = 1.3784376
 
 [node name="fingers" type="Node3D" parent="bomb" unique_id=1183131638]
 

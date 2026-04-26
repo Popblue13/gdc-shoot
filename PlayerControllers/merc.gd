@@ -421,8 +421,8 @@ func drop_ability(ability: Ability) -> void:
 	
 	# 3. Tell the Map to spawn the physical orb in the world
 	var current_map = get_parent()
-	if current_map and current_map.has_method("spawn_dropped_orb"):
-		current_map.spawn_dropped_orb(ability_path_to_drop, drop_pos)
+	if current_map and current_map.has_method("spawn_dropped_orb") and current_map is Map:
+		current_map.spawn_dropped_orb(ability_path_to_drop, drop_pos, true)
 		
 	# 4. Strip the ability from the player using the function we already wrote
 	remove_ability(ability)
