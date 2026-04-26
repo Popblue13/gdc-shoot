@@ -1458,7 +1458,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.04814, -1.0077102, 3.84792
 curve = SubResource("Curve3D_jma86")
 
 [node name="PathFollow3D" parent="TransOutPath" index="0" unique_id=1301980135]
-transform = Transform3D(0.001448987, -0.07825765, -0.9968834, 0, 0.9968844, -0.07825774, 0.9999459, 0.000113400456, 0.0014445492, 0.26595688, 2.4640374, -0.26728296)
+transform = Transform3D(0.0014489866, -0.07825765, -0.9968834, 0, 0.9968844, -0.07825774, 0.9999456, 0.000113400456, 0.0014445492, 0.26595688, 2.4640374, -0.26728296)
 
 [node name="TESTCAM" type="Camera3D" parent="TransOutPath/PathFollow3D" index="0" unique_id=344265971]
 transform = Transform3D(0.9983976, 0, -0.056588236, 0, 1, 0, 0.056588236, 0, 0.9983976, 0, 0, 0)
@@ -1472,7 +1472,7 @@ curve = SubResource("Curve3D_cisks")
 dur = 2.0
 
 [node name="PathFollow3D" parent="TransMiddle" index="0" unique_id=1301980135]
-transform = Transform3D(-0.0048909676, 0.02402893, -0.99968266, -1.8626091e-09, 0.99969804, 0.024029138, 0.99996865, 0.00011753027, -0.0048895683, 0.039081573, 0.07580018, -0.010753155)
+transform = Transform3D(-0.0048909658, 0.02402893, -0.99968266, -1.8626085e-09, 0.99969804, 0.024029138, 0.99996835, 0.00011753027, -0.0048895683, 0.039081573, 0.07580018, -0.010753155)
 
 [node name="TESTCAM" type="Camera3D" parent="TransMiddle/PathFollow3D" index="0" unique_id=1110072097]
 transform = Transform3D(0.9983976, 0, -0.056588236, 0, 1, 0, 0.056588236, 0, 0.9983976, 0, 0, 0)
@@ -1512,11 +1512,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6128268, -1.726413, 0)
 light_color = Color(0.8923333, 0.62, 1, 1)
 omni_range = 12.039668
 
-[node name="AbilityPickup" parent="." unique_id=167658854 instance=ExtResource("7_blu8w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.975441)
-ability_scene = ExtResource("8_yr5t0")
-consumable = true
-
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1314712841]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.64850974, -2.3899896)
 collision_layer = 32768
@@ -1530,6 +1525,10 @@ shape = SubResource("BoxShape3D_blu8w")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7059493, -11.472117, -5.4563103)
 AbilityDescription = "no description"
 trigger_key = "7"
+
+[node name="AbilityPickup" parent="." unique_id=167658854 instance=ExtResource("7_blu8w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.2080426)
+ability_scene = ExtResource("8_yr5t0")
 
 [editable path="TransOutPath"]
 [editable path="TransMiddle"]

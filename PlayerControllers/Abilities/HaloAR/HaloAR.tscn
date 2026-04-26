@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://by2qbhuc53ljj" path="res://PlayerControllers/Abilities/EvilGun/evil_gun_ability.gd" id="1_pjumj"]
 [ext_resource type="PackedScene" uid="uid://chc6mck8aov7f" path="res://PlayerControllers/Abilities/EvilGun/tracer_effect.tscn" id="2_6jj7q"]
-[ext_resource type="PackedScene" uid="uid://dnkdri266n07p" path="res://PlayerControllers/Mercs/Halo/halo_ce_ma5b_hd_2022/finished.glb" id="2_sso2o"]
+[ext_resource type="PackedScene" uid="uid://3pyi1ntntch0" path="res://PlayerControllers/Mercs/Halo/halo_ce_ma5b_hd_2022/finished.glb" id="2_sso2o"]
 [ext_resource type="Script" uid="uid://cdj48p1ymi673" path="res://PlayerControllers/Abilities/EvilGun/tracer_effect.gd" id="3_jjbvb"]
 [ext_resource type="Texture2D" uid="uid://b65fa3kdr05md" path="res://PrototypeAssets/PrototypeCrosshairsAssets/PNG/White/crosshair002.png" id="4_bswyj"]
 
@@ -43,19 +43,20 @@ bind/3/name = &"Bone"
 bind/3/bone = -1
 bind/3/pose = Transform3D(1.0627444, 0, 0, 0, 1.0627444, 0, 0, 0, 1.0627444, -7.6502905, -2.0862973, -0.20386086)
 
-[node name="HaloAR" type="Node3D" unique_id=1600695075 node_paths=PackedStringArray("raycasts")]
+[node name="HaloAR" type="Node3D" unique_id=1600695075 node_paths=PackedStringArray("weapon_mesh", "raycasts")]
 script = ExtResource("1_pjumj")
 is_auto = true
 max_ammo = 60
 damage = 7.0
 fire_speed = 0.05
+weapon_mesh = NodePath("firstanimation")
 raycasts = [NodePath("BulletRayCast")]
 trigger_key = "1"
 
 [node name="firstanimation" parent="." unique_id=1530598151 instance=ExtResource("2_sso2o")]
 transform = Transform3D(0.99861616, 0.039417807, -0.03481448, -0.041773647, 0.996689, -0.06975646, 0.031949565, 0.071114264, 0.99695635, 0, 0.01, 0.04)
 
-[node name="Skeleton3D" parent="firstanimation/Armature" parent_id_path=PackedInt32Array(1530598151, 883647944) index="0" unique_id=1590358848]
+[node name="Skeleton3D" parent="firstanimation/Armature" parent_id_path=PackedInt32Array(1530598151, 580154163) index="0" unique_id=594746678]
 bones/0/position = Vector3(0.9950988, -1.5230107, -1.696843)
 bones/0/rotation = Quaternion(0.022812806, -0.99799955, 0.0075339125, 0.058480125)
 bones/1/position = Vector3(0.19593775, 0.8946943, 0.1554953)

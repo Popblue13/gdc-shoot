@@ -40,7 +40,7 @@ func take_damage(damage: float):
 		# This protects the DM.gd leaderboard from registering a kill.
 
 
-
+@rpc("any_peer", "call_local", "reliable")
 func destroy_prop():
 	# Spawn debris, play a sound, then remove
 	destroy_effect()

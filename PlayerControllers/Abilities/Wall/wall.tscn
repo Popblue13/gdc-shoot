@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://bc5cko3p5pxud"]
+
+[ext_resource type="Script" uid="uid://6meqiongi1nd" path="res://PlayerControllers/Abilities/Wall/turret.gd" id="1_td2s0"]
+[ext_resource type="Material" uid="uid://cdik257qeli6x" path="res://MapsAndGamemodes/Maps/dm_grahhh/galleryplanks.tres" id="2_lvg2w"]
+[ext_resource type="AudioStream" uid="uid://b2odbnm6ygrb3" path="res://PlayerControllers/Abilities/WallBuilder/wallbuild.mp3" id="3_lvg2w"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_sbo6q"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w4i0o"]
+size = Vector3(1.888916, 2.0644531, 1)
+
+[node name="Wall" type="CharacterBody3D" unique_id=694480831 node_paths=PackedStringArray("camera") groups=["turret"]]
+top_level = true
+script = ExtResource("1_td2s0")
+damage = 4
+invulnerable = false
+camera = NodePath("Camera3D")
+health = 380.0
+air_acceleration = 0.0
+speed = 0.0
+metadata/_custom_type_script = "uid://d3q8pm6yvsw8h"
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=721254396]
+
+[node name="turret" type="Node3D" parent="." unique_id=1845483529]
+transform = Transform3D(0.37198967, 0, 0, 0, 0.41280022, 0, 0, 0, 0.2, 0, 0.8441438, -0.10528037)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="turret" unique_id=72366709]
+transform = Transform3D(11.922139, 0, 0, 0, 8.230802, 0, 0, 0, 1, 0, 1.5680742, 0)
+mesh = SubResource("BoxMesh_sbo6q")
+surface_material_override/0 = ExtResource("2_lvg2w")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=2123939602]
+transform = Transform3D(2.3844278, 0, 0, 0, 1.6461604, 0, 0, 0, 0.2, 0, 1.5527004, -0.10528037)
+shape = SubResource("BoxShape3D_w4i0o")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=906874851]
+stream = ExtResource("3_lvg2w")
+volume_db = -14.537
+autoplay = true
+max_distance = 45.01

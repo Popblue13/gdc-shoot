@@ -149,6 +149,7 @@ collision_mask = 3
 [node name="FireAttackSpeed" type="Timer" parent="." unique_id=1953361202]
 
 [node name="Crosshair002" type="Sprite2D" parent="." unique_id=771991382]
+visible = false
 modulate = Color(0.24650003, 0.85, 0.25655833, 1)
 position = Vector2(640, 360)
 scale = Vector2(1.255, 1.255)

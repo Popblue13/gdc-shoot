@@ -2,6 +2,12 @@
 
 [ext_resource type="Script" uid="uid://bd1ilun1055ko" path="res://MapsAndGamemodes/Gamemodes/de/defuse_ui.gd" id="1_il0pd"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_il0pd"]
+font_size = 17
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 1)
+
 [node name="DefuseUi" type="Control" unique_id=665496908 node_paths=PackedStringArray("timer_label", "state_label", "attackers_score_label", "defenders_score_label")]
 layout_mode = 3
 anchors_preset = 15
@@ -23,6 +29,7 @@ offset_top = 4.0
 offset_right = 278.0
 offset_bottom = 21.0
 text = "TIMER"
+label_settings = SubResource("LabelSettings_il0pd")
 
 [node name="state" type="Label" parent="." unique_id=756958084]
 layout_mode = 0
@@ -31,6 +38,7 @@ offset_top = 37.0
 offset_right = 292.0
 offset_bottom = 54.0
 text = "STATE"
+label_settings = SubResource("LabelSettings_il0pd")
 
 [node name="attacker" type="Label" parent="." unique_id=650075467]
 layout_mode = 0
@@ -39,6 +47,7 @@ offset_top = 72.0
 offset_right = 287.0
 offset_bottom = 89.0
 text = "ATTACKER"
+label_settings = SubResource("LabelSettings_il0pd")
 
 [node name="defender" type="Label" parent="." unique_id=2124431975]
 layout_mode = 0
@@ -47,3 +56,4 @@ offset_top = 97.0
 offset_right = 287.0
 offset_bottom = 114.0
 text = "DEFENDER"
+label_settings = SubResource("LabelSettings_il0pd")

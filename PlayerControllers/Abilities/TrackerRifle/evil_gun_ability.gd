@@ -83,7 +83,7 @@ func shoot():
 	# Consume 1 ammo per trigger pull (even if it's a shotgun firing 8 pellets)
 	ammo = clamp(ammo - 1, 0, max_ammo)
 	
-	$AudioStreamPlayer3D.play()
+	play_gunshot.rpc()
 	# Restart animation and start the cooldown timer
 	animation_player.stop() 
 	animation_player.play("shoot")
@@ -116,6 +116,10 @@ func equip():
 	equipped = true
 	show()
 	show_visual_hand.rpc(true)
+
+@rpc("any_peer","call_local","reliable")
+func play_gunshot():
+	$AudioStreamPlayer3D.play()
 
 @rpc("any_peer","call_remote","reliable")
 func show_visual_hand(vis : bool):

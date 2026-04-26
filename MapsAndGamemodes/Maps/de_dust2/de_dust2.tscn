@@ -1444,12 +1444,13 @@ size = Vector3(24.866455, 11.58136, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_cyfk8"]
 size = Vector3(7.3466797, 1, 14.713928)
 
-[node name="dm_dust2" type="Node3D" unique_id=1186981559 node_paths=PackedStringArray("attacker_spawn_points", "defender_spawn_points", "before_round_start_barriers")]
+[node name="de_dust2" type="Node3D" unique_id=1186981559 node_paths=PackedStringArray("attacker_spawn_points", "defender_spawn_points", "before_round_start_barriers", "bomb_spawn_point")]
 script = ExtResource("1_w4oxy")
 attacker_spawn_points = [NodePath("TSPAWN"), NodePath("TSPAWN2"), NodePath("TSPAWN3"), NodePath("TSPAWN4"), NodePath("TSPAWN5")]
 defender_spawn_points = [NodePath("CTSPAWN"), NodePath("CTSPAWN2"), NodePath("CTSPAWN3"), NodePath("CTSPAWN4"), NodePath("CTSPAWN5")]
 before_round_start_barriers = NodePath("StaticBody3D")
-map_name = "de_dust"
+bomb_spawn_point = NodePath("bomb_spawn_point")
+map_name = "de_dust2"
 metadata/_custom_type_script = "uid://bbpag3rbeurnu"
 
 [node name="Sketchfab_model" type="Node3D" parent="." unique_id=316304161]
@@ -1832,12 +1833,6 @@ shape = SubResource("BoxShape3D_leh0y")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D5" unique_id=1973816652]
 mesh = SubResource("BoxMesh_kvxdb")
 
-[node name="AbilityPickup" parent="." unique_id=167658854 instance=ExtResource("36_leh0y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.891344, 4.8322783, 17.798828)
-collision_mask = 3
-ability_scene = ExtResource("37_6574f")
-consumable = true
-
 [node name="PlantableSpot" parent="." unique_id=619903485 instance=ExtResource("38_kvxdb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.155804, 3.0019455, 18.409452)
 
@@ -1845,3 +1840,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.155804, 3.0019455, 18.4094
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1733398, 0, -0.36660767)
 shape = SubResource("BoxShape3D_cyfk8")
 debug_color = Color(0.67058825, 0, 0.25490198, 1)
+
+[node name="bomb_spawn_point" type="Marker3D" parent="." unique_id=157151399]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.959604, 4.8657055, 17.627922)
+
+[node name="AbilityPickup" parent="bomb_spawn_point" unique_id=167658854 instance=ExtResource("36_leh0y")]
+ability_scene = ExtResource("37_6574f")

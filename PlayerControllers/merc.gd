@@ -13,6 +13,8 @@ const TEST_ENVIRONMENT := preload("res://MapsAndGamemodes/Maps/TestEnvironment/T
 const ABILITY_UI = preload("res://Misc/UI/ability_ui.tscn")
 const MERC_LABEL = preload("res://MultiplayerStuff/Client/MercLabel.tscn")
 const HEALTH_BAR = preload("res://Misc/UI/health_bar.tscn")
+const FOOTSTEPS = preload("res://PlayerControllers/Abilities/Footsteps/footsteps.tscn")
+
 var health_bar: ProgressBar
 
 @export var debug_mode : bool = false
@@ -59,6 +61,7 @@ var name_label_instance
 var target_position: Vector3 #what other people see
 var target_rotation: Vector3
 
+var mouse_sensitivity: float = 0.005
 var can_move: bool = true
 var dead: bool = false
 var ability_ui 
@@ -96,6 +99,10 @@ func _ready() -> void:
 	initiate_abilities() #HACK
 	max_health = health
 	set_collision_layer_value(2, true)
+	
+	var footsteps = FOOTSTEPS.instantiate()
+	add_child(footsteps)
+	
 	# ==========================================
 	# DEBUG MODE SETUP
 	# ==========================================
@@ -114,7 +121,7 @@ func _ready() -> void:
 		debug_environment.top_level = true
 		
 		print("--- DEBUG MODE ACTIVE: Local Server & Floor Generated ---")
-
+	
 	# ==========================================
 	# STANDARD SETUP
 	# ==========================================
@@ -140,6 +147,7 @@ func _ready() -> void:
 		var map = get_parent()
 		if map is Map and camera and map.environment != null:
 			camera.environment = map.environment
+		
 		
 		camera.make_current()
 		if camera: camera.fov = camera_fov
@@ -301,8 +309,8 @@ func _input(event: InputEvent) -> void:
 	if ClientUI.menu.visible: return
 	if dead: return
 	if event is InputEventMouseMotion:
-		rotate_y(-event.relative.x * 0.005)
-		camera.rotate_x(-event.relative.y * .005)
+		rotate_y(-event.relative.x * mouse_sensitivity)
+		camera.rotate_x(-event.relative.y * mouse_sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
 
 #merc

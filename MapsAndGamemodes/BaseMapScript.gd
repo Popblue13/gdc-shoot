@@ -122,13 +122,14 @@ func kill_confirmed(merc: Merc, killer_id: int = 0):
 
 
 # Called by Merc.gd when dropping an item
-func spawn_dropped_orb(ability_resource_path: String, drop_position: Vector3) -> void:
+func spawn_dropped_orb(ability_resource_path: String, drop_position: Vector3, consumable : bool) -> void:
 	if not multiplayer.is_server(): return
 	
 	# Package the data to send to the spawner
 	var spawn_data = {
 		"path": ability_resource_path,
-		"pos": drop_position
+		"pos": drop_position,
+		'consumable': consumable,
 	}
 	orb_spawner.spawn(spawn_data)
 
@@ -136,6 +137,8 @@ func spawn_dropped_orb(ability_resource_path: String, drop_position: Vector3) ->
 func _spawn_orb_network(data: Variant) -> Node:
 	var spawn_data = data as Dictionary
 	var orb_instance = pickup_orb_scene.instantiate()
+	orb_instance.top_level = true
+	orb_instance.consumable = spawn_data['consumable']
 	
 	# Inject the specific ability scene so the orb knows what it holds
 	orb_instance.ability_scene = load(spawn_data["path"])

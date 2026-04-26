@@ -1173,6 +1173,11 @@ uv1_world_triplanar = true
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_lsuuj"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_3ssqk"]
+properties/0/path = NodePath(".:uses")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7qksq"]
 albedo_texture = ExtResource("39_n5ope")
 uv1_scale = Vector3(0.23, 0.23, 1.126)
@@ -9870,6 +9875,9 @@ stream = ExtResource("40_xc31k")
 volume_db = -7.273
 max_distance = 39.8
 
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="dm_grahhh/Meat" unique_id=803432754]
+replication_config = SubResource("SceneReplicationConfig_3ssqk")
+
 [node name="CSGMesh3D81" type="StaticBody3D" parent="dm_grahhh" unique_id=265569317]
 transform = Transform3D(1.2047492, 0, 0, 0, 0.33801472, 0, 0, 0, 16.841623, 3.5654616, 1.186408, 18.141365)
 
@@ -10063,6 +10071,7 @@ material_override = SubResource("StandardMaterial3D_5usqo")
 mesh = SubResource("ArrayMesh_qn6k6")
 
 [node name="Brain" type="CharacterBody3D" parent="dm_grahhh" unique_id=1335134573 node_paths=PackedStringArray("hand")]
+collision_layer = 32769
 script = ExtResource("54_8fgbp")
 hand = NodePath("../GrahhhHand")
 health = 330.0

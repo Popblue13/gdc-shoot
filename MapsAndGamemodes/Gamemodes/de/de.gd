@@ -15,6 +15,7 @@ var round_timer: float = 0.0
 @export var attacker_spawn_points: Array[Node3D] = []
 @export var defender_spawn_points: Array[Node3D] = []
 @export var before_round_start_barriers : StaticBody3D
+@export var bomb_spawn_point : Node3D
 
 var attackers_score: int = 0
 var defenders_score: int = 0
@@ -25,6 +26,9 @@ var players_alive_this_round: Array[int] = []
 var defuse_ui_scene = preload("res://MapsAndGamemodes/Gamemodes/de/DefuseUI.tscn")
 var char_select_scene = preload("res://MapsAndGamemodes/Gamemodes/PresetGamemodeWidgets/CharacterSelect/CharacterSelect.tscn")
 var team_select_scene = preload("res://MapsAndGamemodes/Gamemodes/dm/deathmatch side choice button.tscn")
+const ABILITY_PICKUP = preload("res://MapsAndGamemodes/Gamemodes/PresetGamemodeWidgets/AbilityPickup/ability_pickup.tscn")
+const BOMB = preload("res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/Bomb.tscn")
+
 var defuser_node_scene = "res://PlayerControllers/Abilities/DEAbilities/Defuser/Defuser.tscn"
 var defuse_ui: DEUI
 var char_select_ui
@@ -104,6 +108,7 @@ func _advance_state() -> void:
 		RoundState.FREEZE:
 			# Freeze time is over, begin the round!
 			_set_state(RoundState.ACTION, action_duration)
+			_toggle_barriers.rpc(false)
 			
 		RoundState.ACTION:
 			# Time ran out before the bomb was planted/defused.
@@ -135,13 +140,23 @@ func _sync_state(new_state: int, new_time: float) -> void:
 	if defuse_ui:
 		defuse_ui.update_timer(max(round_timer, 0.0), current_state)
 
+@rpc("authority", "call_local", "reliable")
+func _toggle_barriers(is_on: bool):
+	if is_on:
+		before_round_start_barriers.process_mode = Node.PROCESS_MODE_INHERIT
+		before_round_start_barriers.show()
+	else:
+		before_round_start_barriers.process_mode = Node.PROCESS_MODE_DISABLED
+		before_round_start_barriers.hide()
+	
 func reset_round() -> void:
 	if not multiplayer.is_server(): return
+	spawn_bomb_pickup(bomb_spawn_point.global_position)
 	
 	if is_instance_valid(active_bomb):
 		active_bomb.queue_free()
 	active_bomb = null
-	
+	_toggle_barriers.rpc(true)
 	# 1. Clear any surviving players or leftover bodies from the previous round
 	for child in get_children():
 		if child is Merc:
@@ -195,8 +210,6 @@ func player_died(merc: Merc, killer_id: int = 0) -> void:
 	merc.queue_free()
 	
 	check_win_conditions()
-
-# --- PHASE 1: SPAWN LOGIC ---
 
 func spawn_teams_for_new_round() -> void:
 	if not multiplayer.is_server(): return
@@ -263,6 +276,38 @@ func spawn_real_bomb(planter_id: int, plant_spot: Vector3, surface_normal: Vecto
 	# Trigger the gamemode state shift!
 	on_bomb_planted(planter_id, real_bomb)
 
+# --- SERVER FUNCTION ---
+func spawn_bomb_pickup(drop_spot: Vector3) -> void:
+	if not multiplayer.is_server(): return
+	return
+	# Package the spawn location data
+	var spawn_data = {
+		"pos": bomb_spawn_point
+	}
+	
+	# This automatically triggers _spawn_pickup_bomb_item on ALL clients
+	_spawn_orb_network
+
+
+# --- SPAWNER FUNCTION ---
+# Automatically executes on Server and Clients to build the physical node
+func _spawn_pickup_bomb_item(data: Variant) -> Node:
+	
+	var spawn_data = data as Dictionary
+	
+	# 1. Instantiate the generic Ability Pickup area
+	var pickup_instance = ABILITY_PICKUP.instantiate()
+	
+	# 2. Tell the pickup that it holds the BOMB ability
+	pickup_instance.ability_scene = BOMB
+	pickup_instance.consumable = true
+	
+	# 3. Set its position in the world
+	pickup_instance.position = spawn_data["pos"]
+	
+	# 4. Return the configured node so the spawner can add it to the tree
+	return pickup_instance
+
 # Automatically executes on Server and Clients to build the physical node
 func _spawn_planted_bomb(data: Variant) -> Node:
 	var spawn_data = data as Dictionary
@@ -270,7 +315,7 @@ func _spawn_planted_bomb(data: Variant) -> Node:
 	
 	# Set the height offset so it doesn't sink into the floor (Adjust '1.0' as needed!)
 	var height_offset: float = 1.0 
-	bomb_instance.position = spawn_data["pos"] + (spawn_data["normal"] * height_offset)
+	bomb_instance.position = spawn_data["pos"]
 	
 	# Align the rotation to the slope
 	var align_quat = Quaternion(Vector3.UP, spawn_data["normal"])
@@ -312,7 +357,7 @@ func check_win_conditions() -> void:
 	# Only check elimination wins during the Action or Bomb Planted phases
 	if current_state != RoundState.ACTION and current_state != RoundState.BOMB_PLANTED:
 		return
-		
+	
 	var alive_attackers = 0
 	var alive_defenders = 0
 	
@@ -363,8 +408,6 @@ func _sync_scores(a_score: int, d_score: int) -> void:
 	defenders_score = d_score
 	if defuse_ui:
 		defuse_ui.update_scores(attackers_score, defenders_score)
-
-# --- PHASE 5: CLIENT UI & SELECTION LOGIC ---
 
 func _on_local_character_locked_in(chosen_merc: String):
 	char_select_ui.hide()

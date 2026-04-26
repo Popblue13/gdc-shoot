@@ -69,8 +69,7 @@ func rehost_server(new_port: int) -> void:
 	
 	# 3. Create the new server
 	var peer = ENetMultiplayerPeer.new()
-	# Note: ENet doesn't strictly bind to an IP when hosting unless you specify it in bind_ip
-	# peer.bind_ip = ServerDatabase.address 
+
 	var error = peer.create_server(ServerDatabase.port)
 	
 	if error == OK:

@@ -1,0 +1,157 @@
+[gd_scene format=3 uid="uid://dk1uiyodtwjio"]
+
+[ext_resource type="Script" uid="uid://c42u7jawtr13h" path="res://PlayerControllers/Abilities/WallBuilder/wallbuilder.gd" id="1_1a8wg"]
+[ext_resource type="Texture2D" uid="uid://rvpv4bbuep0t" path="res://PrototypeAssets/PrototypeCrosshairsAssets/PNG/White/crosshair025.png" id="2_7g66n"]
+[ext_resource type="PackedScene" uid="uid://ctd4n4abi7l0u" path="res://PlayerControllers/Abilities/WallBuilder/toolbox.fbx" id="3_fuwo0"]
+[ext_resource type="Material" uid="uid://c5mu0n3hqliyq" path="res://PlayerControllers/Abilities/Wall/turretpreview.tres" id="4_7g66n"]
+
+[sub_resource type="Animation" id="Animation_17jwy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("toolbox:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.2231904, 0, -0.24050847)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("toolbox:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.2124279, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_sjws2"]
+resource_name = "dequip"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("toolbox:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03333334, 0.2),
+"transitions": PackedFloat32Array(0.3660217, 1.93187, 0.5),
+"update": 0,
+"values": [Vector3(-0.2231904, 0, -0.24050847), Vector3(-0.223, 0.015, -0.241), Vector3(-0.2231904, -0.35466826, -0.24050847)]
+}
+
+[sub_resource type="Animation" id="Animation_06rn6"]
+resource_name = "equip"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("toolbox:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.2),
+"transitions": PackedFloat32Array(0.5, 1, 1),
+"update": 0,
+"values": [Vector3(-0.2231904, -0.35466826, -0.24050847), Vector3(-0.223, 0.015, -0.241), Vector3(-0.2231904, 0, -0.24050847)]
+}
+
+[sub_resource type="Animation" id="Animation_pjifs"]
+resource_name = "shoot"
+length = 0.637
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("toolbox:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.24818844, 0.6333333),
+"transitions": PackedFloat32Array(1, 3.0314324, 1),
+"update": 0,
+"values": [Vector3(-0.2231904, 0, -0.24050847), Vector3(-0.2231904, -0.36102253, -0.24050847), Vector3(-0.2231904, 0, -0.24050847)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("toolbox:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.4),
+"transitions": PackedFloat32Array(0.36602145, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.2124279, 0), Vector3(-0.17802358, -0.17278759, -0.49916416), Vector3(0, 1.2124279, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sjws2"]
+_data = {
+&"RESET": SubResource("Animation_17jwy"),
+&"dequip": SubResource("Animation_sjws2"),
+&"equip": SubResource("Animation_06rn6"),
+&"shoot": SubResource("Animation_pjifs")
+}
+
+[sub_resource type="BoxMesh" id="BoxMesh_fuwo0"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5bkxe"]
+radius = 8.231259
+
+[node name="wallplacer" type="Node3D" unique_id=1600695075]
+script = ExtResource("1_1a8wg")
+
+[node name="PlacementRay" type="RayCast3D" parent="." unique_id=1097835970]
+transform = Transform3D(1, 0, 0, 0, 0.9762015, 0.2168656, 0, -0.2168656, 0.9762015, 0, -0.20553493, 0.39827168)
+target_position = Vector3(0, 0, -5.115)
+debug_shape_custom_color = Color(0.15679999, 0.56, 0.21056002, 1)
+
+[node name="FireAttackSpeed" type="Timer" parent="." unique_id=1953361202]
+
+[node name="Crosshair002" type="Sprite2D" parent="." unique_id=771991382]
+position = Vector2(640, 360)
+scale = Vector2(1, 0.992936)
+texture = ExtResource("2_7g66n")
+
+[node name="Label" type="Label" parent="Crosshair002" unique_id=1523280272]
+offset_left = -627.0
+offset_top = 321.26944
+offset_right = -535.0
+offset_bottom = 368.26944
+scale = Vector2(0.5173408, 0.5173408)
+theme_override_font_sizes/font_size = 46
+
+[node name="VisualHand" type="Marker3D" parent="." unique_id=295525846]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)
+
+[node name="toolbox" parent="." unique_id=696046754 instance=ExtResource("3_fuwo0")]
+transform = Transform3D(0.10171659, 0, 0.2715764, 0, 0.29, 0, -0.27157643, 0, 0.101716585, -0.2231904, 0, -0.24050847)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1681624854]
+libraries/ = SubResource("AnimationLibrary_sjws2")
+
+[node name="turretpreview" type="Node3D" parent="." unique_id=2130939621]
+top_level = true
+
+[node name="turret2" type="Node3D" parent="turretpreview" unique_id=2034468475]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="turretpreview/turret2" unique_id=962060994]
+transform = Transform3D(4.329, 0, 0, 0, 2.989, 0, 0, 0, 0.363, 0, 1.5680742, 0)
+mesh = SubResource("BoxMesh_fuwo0")
+skeleton = NodePath("../../turret2")
+surface_material_override/0 = ExtResource("4_7g66n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="turretpreview" unique_id=1153316134]
+shape = SubResource("SphereShape3D_5bkxe")
+debug_color = Color(0.5817794, 9.62615e-08, 0.2923747, 0.41960785)
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=440214905]
+_spawnable_scenes = PackedStringArray("uid://bc5cko3p5pxud")
+spawn_path = NodePath("..")

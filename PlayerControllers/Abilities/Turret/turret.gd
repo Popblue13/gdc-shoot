@@ -14,10 +14,17 @@ func hit_effect(damage):
 func destory_effect():
 	get_parent().bandages +=1
 
-func _ready():
-	$Area3D.set_deferred("monitoring", true)
-	health = 70
-	dada = get_parent()
+@rpc("any_peer", "call_local", "reliable")
+func take_damage(damage: float):
+	dada.turret_take_damage(name, damage)
+
+@rpc("any_peer", "call_local", "reliable")
+func take_real_damage(damage):
+	print(multiplayer.get_unique_id())
+	health -= damage
+	if health <= 0 and not dead:
+		dead = true
+		destroy_prop.rpc()
 
 func _physics_process(delta):
 	if is_in_group("insmoke"):return
@@ -39,7 +46,6 @@ func _physics_process(delta):
 			shoot()
 
 func shoot():
-	
 	$ShootTimer.start()
 	$turret/turrethead/AudioStreamPlayer3D.play()
 	$turret/turrethead/AudioStreamPlayer3D/OmniLight3D.visible = true
@@ -62,7 +68,6 @@ func test_cast(body):
 		return true
 	else:
 		return false
-
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if targets.has(body):

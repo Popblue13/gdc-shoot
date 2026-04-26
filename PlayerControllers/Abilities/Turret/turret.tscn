@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c3j336qdd1ylu" path="res://PlayerControllers/Abilities/Turret/turret.gd" id="1_q0cjq"]
 [ext_resource type="Material" uid="uid://bj31ogvo4qulj" path="res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/bombmaterial.tres" id="2_8e6j0"]
 [ext_resource type="AudioStream" uid="uid://da8a61gmx8n8s" path="res://PlayerControllers/Abilities/Turret/turretshot.mp3" id="3_8e6j0"]
-[ext_resource type="AudioStream" uid="uid://chek2v50yrpay" path="res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/bombplanted.mp3" id="4_0n1m3"]
+[ext_resource type="AudioStream" uid="uid://dwghdiey65eg5" path="res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/bombplanted.mp3" id="4_0n1m3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_47kkg"]
 resource_name = "metal.001"
@@ -210,15 +210,13 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_12jqa")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0n1m3"]
-radius = 0.12207031
-height = 0.75
+radius = 0.14697266
+height = 0.7758789
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cb38g"]
 radius = 8.231259
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8e6j0"]
-
-[node name="Turret" type="CharacterBody3D" unique_id=694480831 node_paths=PackedStringArray("camera")]
+[node name="Turret" type="CharacterBody3D" unique_id=694480831 node_paths=PackedStringArray("camera") groups=["turret"]]
 top_level = true
 script = ExtResource("1_q0cjq")
 damage = 4
@@ -245,6 +243,12 @@ mesh = SubResource("ArrayMesh_ea3aa")
 skeleton = NodePath("")
 surface_material_override/2 = ExtResource("2_8e6j0")
 
+[node name="TestCast" type="RayCast3D" parent="turret/turrethead" unique_id=2115676562]
+transform = Transform3D(0.25651512, 0.7070904, 0, -0.7024562, 0.25651512, 0, 0, 0, 0.7500002, -0.0061380565, -0.0023753494, -0.004810211)
+target_position = Vector3(0, 0, 1.965)
+collision_mask = 3
+debug_shape_custom_color = Color(0.23152772, 0.4131005, 0.37275234, 0.34509805)
+
 [node name="BulletCast" type="RayCast3D" parent="turret/turrethead" unique_id=791503265]
 target_position = Vector3(0, 0, 1.965)
 collision_mask = 2
@@ -265,7 +269,7 @@ light_size = 0.08
 shadow_enabled = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1583859313]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3798828, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39282227, 0)
 shape = SubResource("CapsuleShape3D_0n1m3")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1558449328]
@@ -281,17 +285,8 @@ wait_time = 0.439
 one_shot = true
 autostart = true
 
-[node name="TestCast" type="RayCast3D" parent="." unique_id=2115676562]
-transform = Transform3D(1.6120601, 0, 0, 0, 1.6173689, 0, 0, 0, 4.760846, -0.00090344425, 0.4478619, -0.013677709)
-target_position = Vector3(0, 0, 1.965)
-collision_mask = 3
-debug_shape_custom_color = Color(0.71, 0, 0, 0.34509805)
-
 [node name="LockonTimer" type="Timer" parent="." unique_id=1556296218]
 one_shot = true
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=804594555]
-replication_config = SubResource("SceneReplicationConfig_8e6j0")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=906874851]
 stream = ExtResource("4_0n1m3")

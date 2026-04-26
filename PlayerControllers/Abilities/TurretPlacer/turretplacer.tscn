@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ca0y4uoljvp0i"]
 
-[ext_resource type="Script" uid="uid://dwjks6jlx48u" path="res://PlayerControllers/Abilities/TurretPlacer/evil_gun_ability.gd" id="1_06rn6"]
+[ext_resource type="Script" uid="uid://blr3kyoel830j" path="res://PlayerControllers/Abilities/TurretPlacer/evil_gun_ability.gd" id="1_06rn6"]
 [ext_resource type="PackedScene" uid="uid://6x6gu77dqv6t" path="res://PlayerControllers/Abilities/Turret/turretpreview.tscn" id="4_56wcs"]
 [ext_resource type="Texture2D" uid="uid://rvpv4bbuep0t" path="res://PrototypeAssets/PrototypeCrosshairsAssets/PNG/White/crosshair025.png" id="4_pjifs"]
 [ext_resource type="PackedScene" uid="uid://dnbjfsltlnp1h" path="res://PlayerControllers/Abilities/TurretPlacer/toolbox.fbx" id="5_sjws2"]
@@ -140,3 +140,7 @@ libraries/ = SubResource("AnimationLibrary_sjws2")
 
 [node name="turretpreview" parent="." unique_id=2130939621 instance=ExtResource("4_56wcs")]
 top_level = true
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=440214905]
+_spawnable_scenes = PackedStringArray("uid://mrurkq3nymy")
+spawn_path = NodePath("..")

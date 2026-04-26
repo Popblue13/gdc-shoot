@@ -1,6 +1,6 @@
 extends Merc
 
-@onready var UI = $TrackerUI
+@onready var UI = $UI
 @onready var boltgun = $BoltGun
 
 var bolts = 0 : set = set_bolt

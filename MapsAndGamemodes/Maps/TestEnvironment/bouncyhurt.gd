@@ -2,10 +2,12 @@ extends DestructibleProp
 @onready var label_3d: Label3D = $Label3D
 
 var time_to_reset = .5
-@rpc("any_peer", "call_local", "reliable")
 
+@export var fake_team:String = "red"
+
+@rpc("any_peer", "call_local", "reliable")
 func _ready():
-	team = "red"
+	team = fake_team
 
 func take_damage(damage: float):
 	# We still accept the RPC call from the raycast, but we completely ignore 

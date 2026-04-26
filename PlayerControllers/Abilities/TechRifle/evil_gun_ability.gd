@@ -85,7 +85,7 @@ func shoot():
 	# Consume 1 ammo per trigger pull (even if it's a shotgun firing 8 pellets)
 	ammo = clamp(ammo - 1, 0, max_ammo)
 	
-	$buffer/AudioStreamPlayer3D.play()
+	play_gunshot.rpc()
 	# Restart animation and start the cooldown timer
 	animation_player.stop() 
 	animation_player.play("shoot")
@@ -93,6 +93,10 @@ func shoot():
 	label.text = str(ammo) + "/" + str(max_ammo)
 	# 4. Fire every raycast in the array (1 for Pistol, Many for Shotgun)
 	_do_raycasts()
+
+@rpc("any_peer","call_local","reliable")
+func play_gunshot():
+	$buffer/AudioStreamPlayer3D.play()
 
 func _do_raycasts() -> void:
 	for rc in raycasts:

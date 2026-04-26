@@ -32,7 +32,7 @@ func _ready() -> void:
 	fire_attack_speed.wait_time = fire_speed
 	fire_attack_speed.one_shot = true
 	hide()
-	
+	crosshair_002.hide()
 	# --- NEW: Save the resting position of the visual mesh ---
 	if weapon_mesh:
 		_initial_mesh_position = weapon_mesh.position
@@ -119,6 +119,7 @@ func equip():
 	equipped = true
 	show()
 	show_visual_hand.rpc(true)
+	crosshair_002.show()
 
 @rpc("any_peer","call_remote","reliable")
 func show_visual_hand(vis : bool):
