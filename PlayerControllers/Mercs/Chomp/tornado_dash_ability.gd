@@ -16,7 +16,7 @@ var _target_fov: float = 0.0
 var _merc_ref: Merc = null
 
 # Riley's stuff
-@onready var chomper: Node3D = $"../chomper_bodybrandc"
+@onready var chomper: Node3D = $"../lowreschomp"
 @onready var explosion_radius: Area3D = $ExplosionRadius
 @onready var tunnel_ability: Node3D = $"../TunnelAbility"
 var chomp_og_pos

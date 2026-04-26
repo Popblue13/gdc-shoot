@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://c8pw3g5ebw8a7"]
+
+[ext_resource type="Script" uid="uid://2ip0lrtrrhsr" path="res://PlayerControllers/merc.gd" id="1_4ft2a"]
+[ext_resource type="PackedScene" uid="uid://b3pep67aww7w6" path="res://PlayerControllers/Mercs/Chomp/Chester Chomper/lowreschomp.fbx" id="2_dfsv6"]
+[ext_resource type="PackedScene" uid="uid://b36uuh56645j5" path="res://PlayerControllers/Abilities/Jump/JumpAbility.tscn" id="3_ih6i3"]
+[ext_resource type="Script" uid="uid://cak6iylpqv5v0" path="res://PlayerControllers/Mercs/Chomp/tornado_dash_ability.gd" id="4_n07ey"]
+[ext_resource type="Script" uid="uid://64ya1kgkqc3y" path="res://PlayerControllers/Mercs/Chomp/tunnel_ability.gd" id="5_mv8cc"]
+[ext_resource type="Script" uid="uid://crgo3vu87eqt6" path="res://PlayerControllers/Mercs/Chomp/spit_ability.gd" id="6_7rij6"]
+[ext_resource type="Texture2D" uid="uid://bdhgxbg1g5bmb" path="res://PlayerControllers/Mercs/BoomerShooter/Assets/crossHairs/crosshair066.png" id="7_peie1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ih6i3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gtajd"]
+
+[node name="Chomp2" type="CharacterBody3D" unique_id=729117306 node_paths=PackedStringArray("camera", "abilities")]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_4ft2a")
+debug_mode = true
+camera = NodePath("Camera3D")
+health = 200.0
+friction = 0.09
+air_acceleration = 0.6
+speed = 2.0
+abilities = [NodePath("JumpAbility"), NodePath("TornadoDashAbility"), NodePath("TunnelAbility"), NodePath("SpitAbility")]
+metadata/_custom_type_script = "uid://2ip0lrtrrhsr"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1438498373]
+shape = SubResource("CapsuleShape3D_ih6i3")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1196225101]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.70336914, 1.5494385, 2.5041504)
+
+[node name="lowreschomp" parent="." unique_id=1962279659 instance=ExtResource("2_dfsv6")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.892395, 0)
+
+[node name="JumpAbility" parent="." unique_id=27473948 instance=ExtResource("3_ih6i3")]
+auto_bhop = true
+jump_strength = 6.5
+AbilityDescription = "JUMP"
+trigger_key = "Space"
+
+[node name="TornadoDashAbility" type="Node3D" parent="." unique_id=2005580396]
+script = ExtResource("4_n07ey")
+speed_multiplier = 3.0
+AbilityDescription = "TORNADO"
+trigger_key = "Shift"
+
+[node name="ExplosionRadius" type="Area3D" parent="TornadoDashAbility" unique_id=1587217250]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, -1.1130371)
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TornadoDashAbility/ExplosionRadius" unique_id=1724447475]
+shape = SubResource("SphereShape3D_gtajd")
+
+[node name="TunnelAbility" type="Node3D" parent="." unique_id=1210614259]
+script = ExtResource("5_mv8cc")
+speed_multiplier = 1.7
+AbilityDescription = "DIG CHOMP"
+trigger_key = "2"
+
+[node name="CooldownTimer" type="Timer" parent="TunnelAbility" unique_id=2027465173]
+
+[node name="ExplosionRadius" type="Area3D" parent="TunnelAbility" unique_id=931694868]
+transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, 0, 0, 0)
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TunnelAbility/ExplosionRadius" unique_id=819048494]
+shape = SubResource("SphereShape3D_gtajd")
+
+[node name="SpitAbility" type="Node3D" parent="." unique_id=934750461]
+script = ExtResource("6_7rij6")
+AbilityDescription = "GLOOP"
+trigger_key = "1"
+
+[node name="Timer" type="Timer" parent="SpitAbility" unique_id=2022094418]
+
+[node name="Crosshair" type="Sprite2D" parent="." unique_id=1013772823]
+position = Vector2(640, 360)
+texture = ExtResource("7_peie1")
+
+[connection signal="timeout" from="TunnelAbility/CooldownTimer" to="TunnelAbility" method="_on_cooldown_timer_timeout"]
+[connection signal="timeout" from="SpitAbility/Timer" to="SpitAbility" method="_on_timer_timeout"]

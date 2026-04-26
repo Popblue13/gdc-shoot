@@ -4,7 +4,6 @@ extends Ability
 @export var speed_multiplier: float = 1.5
 @export var fov_multiplier: float = 1.2
 @export var transition_speed: float = 10.0 # Higher = faster snap, Lower = smoother glide
-@export var damage : float = 70.0
 @export var cooldown : float = 5
 @export var slowdown : float = 4
 
@@ -18,7 +17,7 @@ var _target_fov: float = 0.0
 var _merc_ref: Merc = null
 
 # Riley's stuff
-@onready var chomper: Node3D = $"../chomper_bodybrandc"
+@onready var chomper: Node3D = $"../lowreschomp"
 @onready var explosion_radius: Area3D = $ExplosionRadius
 @onready var cooldown_timer: Timer = $CooldownTimer
 @onready var tornado_dash_ability: Node3D = $"../TornadoDashAbility"

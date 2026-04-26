@@ -8,11 +8,14 @@ var showing :bool = false
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("right_click"):
+		$AudioStreamPlayer3D.play.rpc()
+		if !is_multiplayer_authority(): return
 		_on_activate_just_pressed()
+		
 
+#@rpc("any_peer", "call_remote", "reliable")
 func _on_activate_just_pressed():
 	$AudioStreamPlayer3D.play()
-	if !is_multiplayer_authority(): return
 	showing = !showing
 	
 	match showing:

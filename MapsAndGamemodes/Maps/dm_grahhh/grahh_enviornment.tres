@@ -11,7 +11,9 @@ sky_material = SubResource("PanoramaSkyMaterial_fkvb0")
 [resource]
 background_mode = 2
 sky = SubResource("Sky_1gm5m")
-ambient_light_source = 1
+ambient_light_source = 2
+ambient_light_color = Color(0.23, 0.23, 0.23, 1)
+ambient_light_energy = 0.15
 tonemap_exposure = 1.3
 glow_normalized = true
 volumetric_fog_enabled = true

@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://ca0y4uoljvp0i"]
+
+[ext_resource type="Script" uid="uid://dwjks6jlx48u" path="res://PlayerControllers/Abilities/TurretPlacer/evil_gun_ability.gd" id="1_06rn6"]
+[ext_resource type="PackedScene" uid="uid://6x6gu77dqv6t" path="res://PlayerControllers/Abilities/Turret/turretpreview.tscn" id="4_56wcs"]
+[ext_resource type="Texture2D" uid="uid://rvpv4bbuep0t" path="res://PrototypeAssets/PrototypeCrosshairsAssets/PNG/White/crosshair025.png" id="4_pjifs"]
+[ext_resource type="PackedScene" uid="uid://dnbjfsltlnp1h" path="res://PlayerControllers/Abilities/TurretPlacer/toolbox.fbx" id="5_sjws2"]
+
+[sub_resource type="Animation" id="Animation_17jwy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("toolbox:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.2231904, 0, -0.24050847)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("toolbox:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.2124279, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_sjws2"]
+resource_name = "dequip"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("toolbox:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03333334, 0.2),
+"transitions": PackedFloat32Array(0.3660217, 1.93187, 0.5),
+"update": 0,
+"values": [Vector3(-0.2231904, 0, -0.24050847), Vector3(-0.223, 0.015, -0.241), Vector3(-0.2231904, -0.35466826, -0.24050847)]
+}
+
+[sub_resource type="Animation" id="Animation_06rn6"]
+resource_name = "equip"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("toolbox:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.2),
+"transitions": PackedFloat32Array(0.5, 1, 1),
+"update": 0,
+"values": [Vector3(-0.2231904, -0.35466826, -0.24050847), Vector3(-0.223, 0.015, -0.241), Vector3(-0.2231904, 0, -0.24050847)]
+}
+
+[sub_resource type="Animation" id="Animation_pjifs"]
+resource_name = "shoot"
+length = 0.637
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("toolbox:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.24818844, 0.6333333),
+"transitions": PackedFloat32Array(1, 3.0314324, 1),
+"update": 0,
+"values": [Vector3(-0.2231904, 0, -0.24050847), Vector3(-0.2231904, -0.36102253, -0.24050847), Vector3(-0.2231904, 0, -0.24050847)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("toolbox:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.4),
+"transitions": PackedFloat32Array(0.36602145, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.2124279, 0), Vector3(-0.17802358, -0.17278759, -0.49916416), Vector3(0, 1.2124279, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sjws2"]
+_data = {
+&"RESET": SubResource("Animation_17jwy"),
+&"dequip": SubResource("Animation_sjws2"),
+&"equip": SubResource("Animation_06rn6"),
+&"shoot": SubResource("Animation_pjifs")
+}
+
+[node name="turretplacer" type="Node3D" unique_id=1600695075 node_paths=PackedStringArray("weapon_mesh", "raycasts", "visual_hand")]
+script = ExtResource("1_06rn6")
+fire_speed = 0.5
+weapon_mesh = NodePath("toolbox")
+raycasts = [NodePath("PlacementRay")]
+AbilityDescription = "blam r to reload left click to shoot"
+visual_hand = NodePath("VisualHand")
+trigger_key = "2"
+
+[node name="PlacementRay" type="RayCast3D" parent="." unique_id=1097835970]
+transform = Transform3D(1, 0, 0, 0, 0.9762015, 0.2168656, 0, -0.2168656, 0.9762015, 0, -0.20553493, 0.39827168)
+target_position = Vector3(0, 0, -5.115)
+debug_shape_custom_color = Color(0.15679999, 0.56, 0.21056002, 1)
+
+[node name="FireAttackSpeed" type="Timer" parent="." unique_id=1953361202]
+
+[node name="Crosshair002" type="Sprite2D" parent="." unique_id=771991382]
+position = Vector2(640, 360)
+scale = Vector2(1, 0.992936)
+texture = ExtResource("4_pjifs")
+
+[node name="Label" type="Label" parent="Crosshair002" unique_id=1523280272]
+offset_left = -627.0
+offset_top = 321.26944
+offset_right = -535.0
+offset_bottom = 368.26944
+scale = Vector2(0.5173408, 0.5173408)
+theme_override_font_sizes/font_size = 46
+
+[node name="VisualHand" type="Marker3D" parent="." unique_id=295525846]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)
+
+[node name="toolbox" parent="." unique_id=696046754 instance=ExtResource("5_sjws2")]
+transform = Transform3D(0.10171659, 0, 0.2715764, 0, 0.29, 0, -0.27157643, 0, 0.101716585, -0.2231904, 0, -0.24050847)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1681624854]
+libraries/ = SubResource("AnimationLibrary_sjws2")
+
+[node name="turretpreview" parent="." unique_id=2130939621 instance=ExtResource("4_56wcs")]
+top_level = true

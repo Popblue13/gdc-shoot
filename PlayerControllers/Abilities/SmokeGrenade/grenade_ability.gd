@@ -94,8 +94,10 @@ func _on_detection_radius_body_entered(body: Node3D) -> void:
 		tracker_bolt.bleed_damage = 0
 		tracker_bolt.tracker = get_parent()
 		body.add_child(tracker_bolt)
-		
-		var max_speed = 4
-		clamp(body.velocity.x, 0, max_speed)
-		clamp(body.velocity.y, 0, max_speed)
-		clamp(body.velocity.z, 0, max_speed)
+		body.add_to_group("insmoke")
+		print(body, "is in smoke")
+
+
+func _on_detection_radius_body_exited(body: Node3D) -> void:
+	if body.is_in_group("insmoke"):
+		body.remove_from_group("insmoke")

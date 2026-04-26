@@ -2,9 +2,9 @@ extends Ability
 
 var is_activated : bool = false
 var on_cooldown : bool = false
-const GLOOP = preload("uid://d0fhprspiggrl")
+const GLOOP = preload("res://PlayerControllers/Mercs/Chomp/gloop.tscn")
 @onready var camera_3d: Camera3D = $"../Camera3D"
-@onready var crosshair_002: Sprite2D = $"../Crosshair002"
+@onready var crosshair_002: Sprite2D = $"../Crosshair"
 @onready var timer: Timer = $Timer
 
 @export var size : int = 2

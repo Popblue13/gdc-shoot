@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cuqfn6bvsi10e"]
+
+[ext_resource type="Script" uid="uid://cjxk41stbe6f" path="res://PlayerControllers/Abilities/PassiveHeal/passive_heal.gd" id="1_u053p"]
+
+[node name="Passive Heal" type="Node3D" unique_id=971415938]
+script = ExtResource("1_u053p")
+AbilityDescription = "Passively heals health."
+trigger_key = "Passive"

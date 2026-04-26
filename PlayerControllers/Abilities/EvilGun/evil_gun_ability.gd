@@ -100,7 +100,7 @@ func _do_raycasts() -> void:
 
 		if rc.is_colliding():
 			var person_hit = rc.get_collider()
-			if person_hit != self and person_hit != null and person_hit is Merc:
+			if person_hit != null and person_hit is Merc:
 				person_hit.take_damage.rpc_id(int(person_hit.name), damage)
 				
 			# Spawn tracer at hit point

@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://d0ni7exfawe58"]
+
+[node name="PlantableSpot" type="StaticBody3D" unique_id=619903485]
+collision_layer = 32768
+collision_mask = 0

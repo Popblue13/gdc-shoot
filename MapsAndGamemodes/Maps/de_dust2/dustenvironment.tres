@@ -1,0 +1,13 @@
+[gd_resource type="Environment" format=3 uid="uid://caerixqxp3p4j"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gtoa2"]
+
+[sub_resource type="Sky" id="Sky_tcchj"]
+sky_material = SubResource("ProceduralSkyMaterial_gtoa2")
+
+[resource]
+background_mode = 2
+background_energy_multiplier = 1.92
+sky = SubResource("Sky_tcchj")
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0

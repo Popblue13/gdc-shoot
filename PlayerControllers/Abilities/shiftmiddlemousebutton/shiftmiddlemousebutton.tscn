@@ -5,6 +5,15 @@
 [ext_resource type="PackedScene" uid="uid://chc6mck8aov7f" path="res://PlayerControllers/Abilities/EvilGun/tracer_effect.tscn" id="3_vdm6q"]
 [ext_resource type="Script" uid="uid://cdj48p1ymi673" path="res://PlayerControllers/Abilities/EvilGun/tracer_effect.gd" id="4_iiymh"]
 
+[sub_resource type="Curve" id="Curve_j8xjd"]
+_data = [Vector2(0, 0.0022441149), 0.0, 0.0, 0, 0, Vector2(0.5105883, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.5915619), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_af5o0"]
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_vdm6q"]
+noise = SubResource("FastNoiseLite_af5o0")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5j0fm"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_dg3ch"]
@@ -206,10 +215,44 @@ _data = {
 &"reload": SubResource("Animation_6s1p4")
 }
 
-[node name="Shiftmiddlemousebutton" type="Node3D" unique_id=153145727 node_paths=PackedStringArray("weapon_mesh", "raycasts")]
+[sub_resource type="SphereMesh" id="SphereMesh_j8xjd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_af5o0"]
+albedo_color = Color(0.421637, 0, 0.129971, 1)
+
+[sub_resource type="Curve3D" id="Curve3D_vdm6q"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.00202859, 0.00708499, -0.000848591, 0, 0, 0, 0, 0, 0, 0.0685794, 0.731389, -0.980191, 0, 0, 0, 0, 0, 0, 0.323578, 0.716471, -2.18191, 0, 0, 0, 0, 0, 0, 0.472602, 1.18157, -2.97197, 0, 0, 0, 0, 0, 0, 0.710218, -0.480691, -4.13084, 0, 0, 0, 0, 0, 0, 0.93129, 1.08961, -5.1245, 0, 0, 0, 0, 0, 0, 1.2161, 1.41061, -6.694, 0, 0, 0, 0, 0, 0, 1.57858, 0.703644, -8.15047, 0, 0, 0, 0, 0, 0, 1.6093, 1.43466, -8.94993, 0, 0, 0, 0, 0, 0, 1.82806, 1.03186, -9.63244),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 10
+
+[sub_resource type="Gradient" id="Gradient_iiymh"]
+offsets = PackedFloat32Array(0.529851, 0.992537)
+colors = PackedColorArray(0.154876, 0.154876, 0.154876, 1, 0.462291, 0.462291, 0.462291, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dg3ch"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fh2pk"]
+noise = SubResource("FastNoiseLite_dg3ch")
+color_ramp = SubResource("Gradient_iiymh")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gq0h0"]
+albedo_texture = SubResource("NoiseTexture2D_fh2pk")
+uv1_scale = Vector3(1, 18.425, 1)
+
+[node name="Shiftmiddlemousebutton" type="Node3D" unique_id=153145727 node_paths=PackedStringArray("weapon_mesh", "raycasts", "look_ray_cast", "grapple_start", "grapple_end", "line")]
 script = ExtResource("1_j8xjd")
 weapon_mesh = NodePath("firstanimation")
-raycasts = [NodePath("BulletRayCast")]
+raycasts = [NodePath("")]
+rope_curve = SubResource("Curve_j8xjd")
+noise_rope = SubResource("NoiseTexture3D_vdm6q")
+look_ray_cast = NodePath("LookRayCast")
+grapple_start = NodePath("GrappleStart")
+grapple_end = NodePath("GrappleEnd")
+line = NodePath("Line")
+trigger_key = "1"
 
 [node name="Crosshair002" type="Sprite2D" parent="." unique_id=1407128125]
 visible = false
@@ -237,22 +280,22 @@ bones/0/name = "base"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
 bones/0/enabled = true
-bones/0/position = Vector3(6.0834007, 0.1328843, 0.8187318)
-bones/0/rotation = Quaternion(0.021230225, 0.01821004, -0.009326542, 0.99956524)
+bones/0/position = Vector3(6.1347804, 0.15413839, 0.81903267)
+bones/0/rotation = Quaternion(0.016358888, 0.01820131, -0.01284889, 0.99961793)
 bones/0/scale = Vector3(1.0000001, 1.0000001, 1.0000001)
 bones/1/name = "slide"
 bones/1/parent = 0
 bones/1/rest = Transform3D(0, -1.0000001, 3.552714e-15, 1.0000001, 3.2398078e-22, 9.119248e-08, -9.119248e-08, 3.552714e-15, 1.0000001, 0.3393612, 1.5768955, 0.23214626)
 bones/1/enabled = true
-bones/1/position = Vector3(0.30517885, 1.5603468, 0.20145948)
+bones/1/position = Vector3(0.3393611, 1.5768957, 0.23214552)
 bones/1/rotation = Quaternion(-3.2241402e-08, 3.224141e-08, 0.70710677, 0.70710677)
 bones/1/scale = Vector3(1.0000001, 1.0000001, 1.0000001)
 bones/2/name = "mag_2"
 bones/2/parent = -1
 bones/2/rest = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0.19617796, -0.07514942, 0)
 bones/2/enabled = true
-bones/2/position = Vector3(6.2779555, 0.054309607, 0.8083483)
-bones/2/rotation = Quaternion(0.021230225, 0.018210037, -0.009326542, 0.99956524)
+bones/2/position = Vector3(6.3287888, 0.0741314, 0.80938864)
+bones/2/rotation = Quaternion(0.016358888, 0.018201312, -0.012848892, 0.99961793)
 bones/2/scale = Vector3(1.0000001, 1.0000001, 1.0000001)
 bones/3/name = "Bone"
 bones/3/parent = -1
@@ -273,6 +316,48 @@ libraries/ = SubResource("AnimationLibrary_gq0h0")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.59079814, -0.1720166, -1.8837852)
 script = ExtResource("4_iiymh")
 
-[node name="BulletRayCast" type="RayCast3D" parent="." unique_id=1193336605]
-target_position = Vector3(0, 0, -15)
-collision_mask = 3
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=990319757]
+_spawnable_scenes = PackedStringArray("uid://bbb2vwwv5j86a")
+spawn_path = NodePath(".")
+
+[node name="GrappleStart" type="MeshInstance3D" parent="." unique_id=1859323046]
+transform = Transform3D(0.217537, 0, 0, 0, 0.217537, 0, 0, 0, 0.217537, 0.62698966, -0.1587282, -2.0451722)
+mesh = SubResource("SphereMesh_j8xjd")
+skeleton = NodePath("")
+
+[node name="GrappleEnd" type="MeshInstance3D" parent="." unique_id=52687475]
+transform = Transform3D(0.228856, 0, 0, 0, 0.228856, 0, 0, 0, 0.228856, 0.90603966, 0.27721432, -1.312153)
+top_level = true
+mesh = SubResource("SphereMesh_j8xjd")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_af5o0")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="GrappleEnd" unique_id=425728646]
+aabb = AABB(-3.27857, -3.89241, -3.02577, 6.55714, 7.78482, 6.05155)
+
+[node name="Line" type="Path3D" parent="." unique_id=1484263541]
+top_level = true
+curve = SubResource("Curve3D_vdm6q")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Line" unique_id=1131019716]
+polygon = PackedVector2Array(-0.000945842, 0.0290405, -0.0199928, 0.0196214, -0.0327328, 0.00141066, -0.0204179, -0.0171559, -0.00195675, -0.0300432, 0.0155773, -0.023012, 0.0297729, -0.000444204, 0.0257519, 0.012036)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 1
+path_interval = 0.21
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+smooth_faces = true
+material = SubResource("StandardMaterial3D_gq0h0")
+
+[node name="LookRayCast" type="RayCast3D" parent="." unique_id=439834323]
+target_position = Vector3(0, 0, -20)
+
+[node name="FireAttackSpeed" type="Timer" parent="." unique_id=1050957362]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1311579698]

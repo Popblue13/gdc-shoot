@@ -376,7 +376,7 @@ _data = {
 [node name="TrackerRifle" type="Node3D" unique_id=1600695075 node_paths=PackedStringArray("weapon_mesh", "raycasts", "visual_hand")]
 script = ExtResource("1_fwtrk")
 max_ammo = 5
-damage = 75.0
+damage = 62.0
 fire_speed = 1.0
 weapon_mesh = NodePath("trackerrifle")
 raycasts = [NodePath("BulletRayCast")]

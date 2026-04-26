@@ -15,8 +15,12 @@
 [ext_resource type="Script" uid="uid://c3xib2wiq032w" path="res://PlayerControllers/Abilities/MoneyBased/money_jump.gd" id="11_hid7e"]
 [ext_resource type="Script" uid="uid://jw4xg8xmvwg0" path="res://PlayerControllers/Abilities/MoneyBased/money_sprint.gd" id="13_f2hxi"]
 [ext_resource type="Script" uid="uid://cpmibxxp622lk" path="res://PlayerControllers/Abilities/MoneyBased/supply_and_demand.gd" id="14_0oa5j"]
+[ext_resource type="Script" path="res://PlayerControllers/Mercs/YetAnotherMerc/ui.gd" id="16_4v6uc"]
+[ext_resource type="FontFile" uid="uid://blatm825mdsk8" path="res://PlayerControllers/Mercs/YetAnotherMerc/TF2Build_centered.ttf" id="17_2ktc3"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_0oa5j"]
+radius = 0.25
+height = 1.0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vid3w"]
 
@@ -29,11 +33,14 @@ shader = ExtResource("2_vid3w")
 shader_parameter/noise = SubResource("NoiseTexture2D_4v6uc")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8ppig"]
+radius = 0.25
+height = 1.0
 
 [node name="YetAnotherMerc" type="CharacterBody3D" unique_id=1806716565 node_paths=PackedStringArray("camera", "visual_body", "abilities")]
 script = ExtResource("1_mpngw")
 debug_mode = true
 camera = NodePath("Camera3D")
+air_acceleration = 0.01
 visual_body = NodePath("MeshInstance3D")
 merc_UI_color = Color(0.21284103, 0.4399235, 1, 1)
 abilities = [NodePath("MoneyGun"), NodePath("MoneyShotgun"), NodePath("MoneyMachineGun"), NodePath("MoneyGrenade"), NodePath("MoneyJump"), NodePath("MoneySprint"), NodePath("SupplyAndDemand")]
@@ -59,6 +66,7 @@ script = ExtResource("4_vid3w")
 is_auto = true
 damage = 10.0
 AbilityDescription = "Cheapo (FREE!) Gun. Does not cost money to fire, rewards most on kill, poor damage"
+metadata/_edit_lock_ = true
 
 [node name="MoneyShotgun" parent="." unique_id=542276656 instance=ExtResource("2_nltnw")]
 script = ExtResource("5_ernmp")
@@ -67,12 +75,14 @@ max_ammo = 12
 damage = 20.0
 fire_speed = 0.3
 AbilityDescription = "The Moneymaker. Costs money to shoot, but more powerful than the cheapo pistol"
+metadata/_edit_lock_ = true
 
 [node name="MoneyMachineGun" parent="." unique_id=1590380665 instance=ExtResource("4_l55cr")]
 script = ExtResource("7_ernmp")
 max_ammo = 12
 damage = 15.0
 AbilityDescription = "The Chaingegun. Fast, powerful, expensive"
+metadata/_edit_lock_ = true
 
 [node name="MoneyGrenade" parent="." unique_id=342502116 instance=ExtResource("9_vid3w")]
 script = ExtResource("10_4v6uc")
@@ -81,17 +91,61 @@ fuse_time = 2.0
 throw_strength = 24.0
 damage = 100.0
 AbilityDescription = "Golden Grenade"
+metadata/_edit_lock_ = true
 
 [node name="MoneyJump" parent="." unique_id=27473948 instance=ExtResource("6_ernmp")]
 script = ExtResource("11_hid7e")
 auto_bhop = true
+jump_strength = 3.5
 AbilityDescription = "Jump using money-powered boots"
 trigger_key = "Space"
+metadata/_edit_lock_ = true
 
 [node name="MoneySprint" parent="." unique_id=699710493 instance=ExtResource("7_qh8cp")]
 script = ExtResource("13_f2hxi")
 AbilityDescription = "Sprint using money-powered socks"
+metadata/_edit_lock_ = true
 
 [node name="SupplyAndDemand" type="Node3D" parent="." unique_id=1466372349]
 script = ExtResource("14_0oa5j")
 AbilityDescription = "Let the Invisible Hand of the Market guide your weapon selection"
+metadata/_edit_lock_ = true
+
+[node name="UI" type="Control" parent="." unique_id=568140501]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("16_4v6uc")
+metadata/_edit_lock_ = true
+
+[node name="Remaining Money" type="RichTextLabel" parent="UI" unique_id=417289782]
+layout_mode = 0
+offset_left = 1200.0
+offset_top = 679.0
+offset_right = 1240.0
+offset_bottom = 696.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 1, 0, 1)
+theme_override_fonts/normal_font = ExtResource("17_2ktc3")
+theme_override_font_sizes/normal_font_size = 22
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+horizontal_alignment = 2
+
+[node name="Ammo" type="RichTextLabel" parent="UI" unique_id=1262421603]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 679.0
+offset_right = 80.0
+offset_bottom = 696.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 1, 0, 1)
+theme_override_fonts/normal_font = ExtResource("17_2ktc3")
+theme_override_font_sizes/normal_font_size = 22
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false

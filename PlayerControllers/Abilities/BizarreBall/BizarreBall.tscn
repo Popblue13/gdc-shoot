@@ -1,0 +1,273 @@
+[gd_scene format=3 uid="uid://yuahk6dfdyco"]
+
+[ext_resource type="Script" uid="uid://cs37a2opk3fm7" path="res://PlayerControllers/Abilities/BizarreBall/bizarre_ball.gd" id="1_82hwi"]
+[ext_resource type="Shader" uid="uid://ddw5owloc7h0j" path="res://PlayerControllers/Abilities/BizarreBall/BizarreBall.gdshader" id="2_5gtqm"]
+[ext_resource type="Shader" uid="uid://cdlqvxsd75l0j" path="res://PlayerControllers/Abilities/BizarreBall/BizarreBallExplosion.gdshader" id="3_6wvgu"]
+[ext_resource type="Texture2D" uid="uid://b65fa3kdr05md" path="res://PrototypeAssets/PrototypeCrosshairsAssets/PNG/White/crosshair002.png" id="4_a1cf6"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tmm1g"]
+radius = 0.18295527
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6wvgu"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_5gtqm")
+
+[sub_resource type="SphereMesh" id="SphereMesh_82hwi"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_6wvgu")
+radius = 1.5
+height = 3.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_82hwi"]
+radius = 1.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5gtqm"]
+radius = 7.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6wvgu"]
+radius = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a1cf6"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_6wvgu")
+
+[sub_resource type="SphereMesh" id="SphereMesh_3uq8b"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_a1cf6")
+radius = 0.2
+height = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6wvgu"]
+albedo_color = Color(0, 0, 0, 1)
+metallic_specular = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_6wvgu"]
+material = SubResource("StandardMaterial3D_6wvgu")
+radius = 1.5
+height = 3.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_a1cf6"]
+radius = 1.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_6wvgu"]
+resource_local_to_scene = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a1cf6"]
+
+[sub_resource type="Animation" id="Animation_6wvgu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.7853982, 0.7853982, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_a1cf6"]
+resource_name = "spin"
+length = 8.0
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6, 7, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.5, 0), Vector3(0, 0.5, 0), Vector3(0, -0.5, 0), Vector3(0, 0.5, 0), Vector3(0, -0.5, 0), Vector3(0, 0.5, 0), Vector3(0, -0.5, 0), Vector3(0, 0.5, 0), Vector3(0, -0.5, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(6.2831855, 6.2831855, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3uq8b"]
+_data = {
+&"RESET": SubResource("Animation_6wvgu"),
+&"spin": SubResource("Animation_a1cf6")
+}
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_tmm1g"]
+properties/0/path = NodePath("Ball:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="BizarreBall" type="Node3D" unique_id=336212865]
+script = ExtResource("1_82hwi")
+AbilityDescription = "Left-click to shoot a green ball. Ball explodes on contact or when you left-click again. If the ball hits the ground, it creates a green black hole that teleports a target to a green crystal. Right-click to throw green crystal."
+trigger_key = "1"
+
+[node name="Ball" type="RigidBody3D" parent="." unique_id=1089096127]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+top_level = true
+visible = false
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball" unique_id=1178111445]
+shape = SubResource("SphereShape3D_tmm1g")
+debug_color = Color(0.972549, 0, 0.44705883, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ball" unique_id=144209500]
+mesh = SubResource("SphereMesh_82hwi")
+
+[node name="ExplosionDetection" type="Area3D" parent="Ball" unique_id=436291628]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball/ExplosionDetection" unique_id=209282075]
+shape = SubResource("SphereShape3D_82hwi")
+disabled = true
+debug_color = Color(0.972549, 0, 0.44705883, 1)
+
+[node name="FarExplosion" type="Area3D" parent="Ball" unique_id=2066639897]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball/FarExplosion" unique_id=964890581]
+shape = SubResource("SphereShape3D_5gtqm")
+
+[node name="CloseExplosion" type="Area3D" parent="Ball" unique_id=1067673573]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball/CloseExplosion" unique_id=85725485]
+shape = SubResource("SphereShape3D_6wvgu")
+
+[node name="ExplosiveParticles" type="CPUParticles3D" parent="Ball" unique_id=1124259951]
+emitting = false
+amount = 30
+lifetime = 2.0
+one_shot = true
+speed_scale = 6.0
+explosiveness = 1.0
+mesh = SubResource("SphereMesh_3uq8b")
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+
+[node name="PassiveParticles" type="CPUParticles3D" parent="Ball" unique_id=1119806301]
+amount = 10
+lifetime = 2.0
+speed_scale = 1.5
+mesh = SubResource("SphereMesh_3uq8b")
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+
+[node name="Black Hole" type="Node3D" parent="." unique_id=1613471418]
+top_level = true
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Black Hole" unique_id=1188231628]
+mesh = SubResource("SphereMesh_6wvgu")
+skeleton = NodePath("")
+
+[node name="PassiveParticles" type="CPUParticles3D" parent="Black Hole" unique_id=3575843]
+amount = 20
+lifetime = 2.0
+speed_scale = 1.5
+mesh = SubResource("SphereMesh_3uq8b")
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+radial_accel_min = -10.0
+radial_accel_max = -10.0
+
+[node name="Area3D" type="Area3D" parent="Black Hole" unique_id=1438850991]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Black Hole/Area3D" unique_id=37478636]
+shape = SubResource("SphereShape3D_a1cf6")
+disabled = true
+
+[node name="Curious Crystal" type="RigidBody3D" parent="." unique_id=964268792]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+top_level = true
+collision_layer = 0
+gravity_scale = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Curious Crystal" unique_id=433431790]
+transform = Transform3D(0.7071067, 0.4999999, 0.4999999, 0, 0.7071067, -0.7071067, -0.7071067, 0.4999999, 0.4999999, 0, 0, 0)
+mesh = SubResource("BoxMesh_6wvgu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Curious Crystal" unique_id=2018205729]
+shape = SubResource("BoxShape3D_a1cf6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Curious Crystal" unique_id=199989731]
+libraries/ = SubResource("AnimationLibrary_3uq8b")
+
+[node name="Hand" type="RemoteTransform3D" parent="." unique_id=903432749]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+remote_path = NodePath("../Ball")
+
+[node name="Crosshair" type="Sprite2D" parent="." unique_id=1200008259]
+visible = false
+modulate = Color(0.16790572, 0.76293087, 0, 1)
+position = Vector2(640, 360)
+texture = ExtResource("4_a1cf6")
+
+[node name="Label" type="Label" parent="Crosshair" unique_id=1456737101]
+offset_left = -627.0
+offset_top = 321.26944
+offset_right = -535.0
+offset_bottom = 368.26944
+scale = Vector2(0.5173408, 0.5173408)
+theme_override_font_sizes/font_size = 46
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=16250559]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2098028304]
+replication_config = SubResource("SceneReplicationConfig_tmm1g")
+
+[node name="Explosion Timeout" type="Timer" parent="." unique_id=1276982459]
+wait_time = 3.0
+one_shot = true
+
+[node name="Spam Timeout" type="Timer" parent="." unique_id=654898778]
+wait_time = 0.5
+one_shot = true
+
+[node name="Crystal Timer" type="Timer" parent="." unique_id=213388944]
+one_shot = true
+
+[connection signal="body_entered" from="Ball/ExplosionDetection" to="." method="_on_explosion_detection_body_entered"]
+[connection signal="body_entered" from="Black Hole/Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="timeout" from="Explosion Timeout" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Spam Timeout" to="." method="_on_spam_timeout_timeout"]
+[connection signal="timeout" from="Crystal Timer" to="." method="_on_crystal_timer_timeout"]

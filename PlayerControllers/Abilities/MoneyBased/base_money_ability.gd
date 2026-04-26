@@ -18,8 +18,10 @@ signal reward_updated(old: float, new: float)	## Emitted when the cost per kill 
 signal mult_updated(old: float, new: float)		## Emitted when the cost multiplier of ability activation changes
 signal activations_updated(old: int, new: int)	## Emitted when the total number of activations changes
 
-@warning_ignore("unused_signal")
+@warning_ignore_start("unused_signal")
 signal fired(cost: float) ## Emitted by extending ability when a behavior is successful. Should emit the amount of money to subtract from the player
+signal equipped(this: Ability)
+@warning_ignore_restore("unused_signal")
 
 ## Number of times this ability has been activated. Used to determine cost multiplier
 var activations: int = 0:
@@ -65,6 +67,7 @@ var net_activation_cost: float:
 	set(n): assert(false, "<BaseMoneyAbility::set(net_activation_cost, %f)> Error: This is a virtual property, it can not be set" % n)
 
 var connected: bool = false	## Whether the ability has been connected to a player or not. 
+var m: Merc = null
 
 ## Connects the ability's `cash_storage` to a player's actual `cash_updated` signal
 func connect_player_cash(player: Merc) -> void:
@@ -73,9 +76,15 @@ func connect_player_cash(player: Merc) -> void:
 	player.cash_updated.connect(func(_old: float, new: float) -> void: cash_storage = new)
 	cash_storage = player.cash
 	connected = true
+	m = player
 	
 	return
 
 ## Adds any instantiated nodes to the money ability group. Call super() in your extending classes if you want them to be properly included
 func _ready() -> void:
 	add_to_group(GROUP_NAME)
+
+func equip_ability(ab: Array[Ability]) -> void:
+	super(ab)
+	equipped.emit(self)
+	

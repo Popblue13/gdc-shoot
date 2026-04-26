@@ -1,0 +1,22 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bj31ogvo4qulj"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_p1o0t"]
+seed = 7
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_angkb"]
+noise = SubResource("FastNoiseLite_p1o0t")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_m5ulp"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8foco"]
+noise = SubResource("FastNoiseLite_m5ulp")
+
+[resource]
+albedo_color = Color(0.63, 0.63, 0.63, 1)
+metallic = 0.48
+roughness_texture = SubResource("NoiseTexture2D_8foco")
+emission_enabled = true
+bent_normal_enabled = true
+bent_normal_texture = SubResource("NoiseTexture2D_angkb")
+subsurf_scatter_enabled = true
+subsurf_scatter_strength = 0.18

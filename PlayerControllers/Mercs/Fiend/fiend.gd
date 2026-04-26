@@ -20,7 +20,6 @@ func custom_process(delta : float):
 	if !animation_player.is_playing():
 		animation_player.play("walk")
 		
-	
 	# calculating delta to get my own jacked-up velocity val, div by delta to ensure speed scale
 	# scales properly with ppls computer speed
 	distance = prev_location.distance_to(self.global_position) / delta

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://btge38lo8isyd"]
+
+[ext_resource type="Script" uid="uid://c2uxkyr8bx4fr" path="res://PlayerControllers/Abilities/Footsteps/footsteps.gd" id="1_t5p42"]
+[ext_resource type="AudioStream" uid="uid://bwbn2jf2x1rbq" path="res://PlayerControllers/Abilities/Footsteps/tile1.wav" id="2_u8uha"]
+[ext_resource type="AudioStream" uid="uid://c2tj5eyrxyrb2" path="res://PlayerControllers/Abilities/Footsteps/tile2.wav" id="3_e14ie"]
+[ext_resource type="AudioStream" uid="uid://cmvgo45a25lrj" path="res://PlayerControllers/Abilities/Footsteps/tile3.wav" id="4_gpwiw"]
+[ext_resource type="AudioStream" uid="uid://cdbi30muyvsun" path="res://PlayerControllers/Abilities/Footsteps/tile4.wav" id="5_nktrj"]
+
+[node name="Footsteps" type="Node3D" unique_id=1784459721]
+script = ExtResource("1_t5p42")
+steps = [ExtResource("2_u8uha"), ExtResource("3_e14ie"), ExtResource("4_gpwiw"), ExtResource("5_nktrj")]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=2123849355]
+stream = ExtResource("2_u8uha")
+volume_db = -50.11
+autoplay = true
+max_distance = 27.31
+panning_strength = 1.49
+
+[connection signal="finished" from="AudioStreamPlayer3D" to="." method="_on_audio_stream_player_3d_finished"]

@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c4kg4o6mwrs2m" path="res://PlayerControllers/Abilities/TrackerRifle/TrackerRifle.tscn" id="7_gbrgr"]
 [ext_resource type="PackedScene" uid="uid://qbndxwane47x" path="res://PlayerControllers/Abilities/TrackerBoltGun/boltgun.tscn" id="8_biies"]
 [ext_resource type="PackedScene" uid="uid://dvr218k27n36v" path="res://PlayerControllers/Abilities/SmokeGrenade/SmokeGrenadeAbility.tscn" id="9_t8r43"]
-[ext_resource type="Script" uid="uid://ctmrjhkh8lita" path="res://PlayerControllers/Mercs/Tracker/trackerui.gd" id="10_d1ri8"]
+[ext_resource type="Script" uid="uid://cuwv6563upnct" path="res://PlayerControllers/Mercs/Tech/ui.gd" id="10_afaet"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lwjk5"]
 
@@ -23,6 +23,7 @@ size = Vector3(1.615, 0.27, 1.42)
 [node name="Tracker" type="CharacterBody3D" unique_id=728258314 node_paths=PackedStringArray("camera", "visual_body", "visual_hand", "abilities")]
 collision_layer = 2
 script = ExtResource("1_afaet")
+debug_mode = true
 camera = NodePath("Camera3D")
 health = 88.0
 gravity = 11.0
@@ -31,8 +32,7 @@ speed = 1.1
 visual_body = NodePath("MeshInstance3D2")
 visual_hand = NodePath("Hand")
 merc_UI_color = Color(0.76, 0.10639999, 0.10639999, 1)
-debug_mode = true
-abilities = [NodePath("JumpAbility"), NodePath("Smoke"), NodePath("SprintAbility"), NodePath("BoltGun"), NodePath("TrackerRifle")]
+abilities = [NodePath("JumpAbility"), NodePath("SprintAbility"), NodePath("Smoke"), NodePath("BoltGun"), NodePath("TrackerRifle")]
 
 [node name="SprintAbility" parent="." unique_id=699710493 instance=ExtResource("2_2wf3y")]
 speed_multiplier = 1.2
@@ -85,14 +85,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49049026, -0.06305982, -0.4
 radius = 0.195
 material = ExtResource("5_amjnl")
 
-[node name="TrackerUI" type="Control" parent="." unique_id=1747036020]
+[node name="UI" type="Control" parent="." unique_id=1747036020]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("10_d1ri8")
+script = ExtResource("10_afaet")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TrackerUI" unique_id=947402587]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI" unique_id=947402587]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 5.0

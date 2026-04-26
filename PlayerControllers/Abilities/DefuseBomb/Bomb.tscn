@@ -1,7 +1,12 @@
-[gd_scene format=4 uid="uid://nhp4lghbjo31"]
+[gd_scene format=4 uid="uid://c0ayi8bmjtkef"]
 
 [ext_resource type="Script" uid="uid://by2qbhuc53ljj" path="res://PlayerControllers/Abilities/EvilGun/evil_gun_ability.gd" id="1_p1o0t"]
-[ext_resource type="FontFile" uid="uid://b1ohfsj2areyx" path="res://Misc/UI/fonts/GothicA1-Medium.ttf" id="2_angkb"]
+[ext_resource type="Texture2D" uid="uid://7t25cg31su6k" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/blahhh_0.png" id="2_8foco"]
+[ext_resource type="Material" uid="uid://cvb22fneqgci8" path="res://PlayerControllers/Abilities/DefuseBomb/explosivematerial.tres" id="3_qqgut"]
+[ext_resource type="Material" uid="uid://b1fqsvj0l56cx" path="res://PlayerControllers/Abilities/DefuseBomb/bombmaterial.tres" id="3_r4gtw"]
+[ext_resource type="FontFile" uid="uid://bxfv5oguicmee" path="res://Misc/UI/fonts/GothicA1-Light.ttf" id="4_r4gtw"]
+[ext_resource type="AudioStream" uid="uid://4xah06aixdq5" path="res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/plant.mp3" id="5_qqgut"]
+[ext_resource type="Texture2D" uid="uid://brupuhk60x54r" path="res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/image-removebg-preview(10).png" id="6_qqgut"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n6e4m"]
 
@@ -199,48 +204,196 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_mqoow")
 
+[sub_resource type="Animation" id="Animation_angkb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bomb/palm/spinningpalm/Label3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bomb/palm/spinningpalm:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5707964, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("bomb/fingers:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("bomb/palm/palm/SpotLight3D:light_energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="Animation" id="Animation_p1o0t"]
 resource_name = "equip"
 
+[sub_resource type="Animation" id="Animation_m5ulp"]
+resource_name = "plant"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bomb/palm/spinningpalm/Label3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.0333333),
+"transitions": PackedFloat32Array(1.5157166, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bomb/palm/spinningpalm:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8666667),
+"transitions": PackedFloat32Array(-3.3635862, 1),
+"update": 0,
+"values": [Vector3(-1.5707964, 0, -1.5707964), Vector3(-1.5707964, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("bomb/fingers:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.21, 2.5),
+"transitions": PackedFloat32Array(1, -0.25881627, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, -0.33, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("bomb/palm/palm/SpotLight3D:light_energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.4666667),
+"transitions": PackedFloat32Array(1, 4.2870936),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(-0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_angkb"]
 _data = {
-&"equip": SubResource("Animation_p1o0t")
+&"RESET": SubResource("Animation_angkb"),
+&"equip": SubResource("Animation_p1o0t"),
+&"plant": SubResource("Animation_m5ulp")
 }
 
 [node name="Bomb" type="Node3D" unique_id=1600695075 node_paths=PackedStringArray("weapon_mesh", "raycasts", "visual_hand")]
 script = ExtResource("1_p1o0t")
-damage = 40.0
-fire_speed = 0.5
-weapon_mesh = NodePath("")
-raycasts = [NodePath("")]
-AbilityDescription = "blam r to reload left click to shoot"
+max_ammo = 1
+damage = 0.0
+fire_speed = 0.0
+weapon_mesh = NodePath("bomb")
+raycasts = [null]
+AbilityDescription = "Plant the Bomb"
 visual_hand = NodePath("VisualHand")
 trigger_key = "1"
 
 [node name="bomb" type="Node3D" parent="." unique_id=1341440860]
 transform = Transform3D(1, 0, 0, 0, 0.57489103, -0.81823, 0, 0.81823, 0.57489103, 0, -0.35789844, -1.3540034)
 
+[node name="Decal" type="Decal" parent="bomb" unique_id=837029761]
+transform = Transform3D(1, 0, 0, 0, -8.940697e-08, 1, 0, -1, -8.940697e-08, -0.20732254, 0.6980908, 0.31367236)
+size = Vector3(1.3105469, 1, 1)
+texture_albedo = ExtResource("2_8foco")
+albedo_mix = 0.54
+upper_fade = 1.3784376
+
+[node name="Decal2" type="Decal" parent="bomb" unique_id=210202081]
+transform = Transform3D(1, 0, 0, 0, -8.940697e-08, 1, 0, -1, -8.940697e-08, -0.02589789, -0.4948982, -0.049595594)
+size = Vector3(2.2873535, 1.810791, 1)
+texture_albedo = ExtResource("2_8foco")
+albedo_mix = 0.54
+upper_fade = 1.3784376
+
 [node name="fingers" type="Node3D" parent="bomb" unique_id=1183131638]
 
 [node name="finger" type="MeshInstance3D" parent="bomb/fingers" unique_id=1700901070]
-transform = Transform3D(20.684164, 0, 0, 0, -2.4657445e-06, 20.684162, 0, -20.684162, -2.4657445e-06, -0.39444578, 0.33035251, 0.3937012)
+transform = Transform3D(20.684164, 0, 0, 0, -1.9073486e-06, 20.684162, 0, -20.684162, -1.9073486e-06, -0.39386034, 0.33035254, 0.39370117)
 mesh = SubResource("ArrayMesh_h24ky")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("3_qqgut")
 
 [node name="finger_001" type="MeshInstance3D" parent="bomb/fingers" unique_id=1246743809]
 transform = Transform3D(20.684164, 0, 0, 0, -2.4657445e-06, 20.684162, 0, -20.684162, -2.4657445e-06, -0.39444578, 0.33035251, -0.40294564)
 mesh = SubResource("ArrayMesh_jfad8")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("3_qqgut")
 
 [node name="finger_002" type="MeshInstance3D" parent="bomb/fingers" unique_id=1886500280]
 transform = Transform3D(20.684164, 0, 0, 0, -2.4657445e-06, 20.684162, 0, -20.684162, -2.4657445e-06, 0.39608184, 0.33035251, -0.40294564)
 mesh = SubResource("ArrayMesh_n4nhb")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("3_qqgut")
 
 [node name="finger_003" type="MeshInstance3D" parent="bomb/fingers" unique_id=649337528]
 transform = Transform3D(20.684164, 0, 0, 0, -2.4657445e-06, 20.684162, 0, -20.684162, -2.4657445e-06, 0.39608184, 0.33035251, 0.3937012)
 mesh = SubResource("ArrayMesh_3q66f")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("3_qqgut")
 
 [node name="palm" type="Node3D" parent="bomb" unique_id=354404539]
 
@@ -248,21 +401,49 @@ skeleton = NodePath("")
 transform = Transform3D(58.009216, 0, 0, 0, -1.8053703e-06, 297.93698, 0, -41.30206, -1.3023239e-05, 0, 0, 0)
 mesh = SubResource("ArrayMesh_wcy81")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("3_r4gtw")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="bomb/palm/palm" unique_id=2127056367]
+transform = Transform3D(-4.371139e-08, -8.742278e-08, -1, 0, -1, 8.742278e-08, -1, 3.821371e-15, 4.371139e-08, 0, 0, 0.001)
+light_color = Color(1, 0, 0, 1)
+light_indirect_energy = 3.553
+light_volumetric_fog_energy = 2.872
+shadow_enabled = true
+shadow_opacity = 0.32
+shadow_blur = 3.766
+spot_range = 6.130899
+spot_angle = 21.704535
 
 [node name="spinningpalm" type="MeshInstance3D" parent="bomb/palm" unique_id=1198912050]
-transform = Transform3D(58.00922, 0, 0, 0, 2.4617948e-06, 297.93698, 0, -41.302063, 1.7758428e-05, 0, 0, 0)
+transform = Transform3D(58.00922, 0, 0, 0, -1.8053705e-06, 297.93698, 0, -41.302063, -1.3023239e-05, 0, 0, 0)
 mesh = SubResource("ArrayMesh_qcq4n")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("3_r4gtw")
 
 [node name="Label3D" type="Label3D" parent="bomb/palm/spinningpalm" unique_id=486757335]
 transform = Transform3D(0.017238637, 0, 0, 0, 0.024211865, 3.7252903e-09, 0, -2.3283064e-10, 0.0033564141, 0.00012390503, 0.002327418, 0.0025939578)
+visible = false
 modulate = Color(1, 0, 0, 1)
 text = "0:45"
-font = ExtResource("2_angkb")
+font = ExtResource("4_r4gtw")
 outline_size = 8
+
+[node name="Sprite3D" type="Sprite3D" parent="bomb/palm/spinningpalm" unique_id=1722352821]
+transform = Transform3D(0.001330341, -0.000698017, -0.0004853012, 0.00086965214, 0.0020935256, -0.0015187664, 1.4889523e-05, 1.4412988e-05, 0.0033484711, -0.0040406357, -0.005320834, 0.0025390123)
+modulate = Color(1, 1, 1, 0.45490196)
+pixel_size = 0.009427
+shaded = true
+alpha_antialiasing_mode = 1
+texture_filter = 1
+texture = ExtResource("6_qqgut")
 
 [node name="VisualHand" type="Marker3D" parent="." unique_id=295525846]
 transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=168165693]
 libraries/ = SubResource("AnimationLibrary_angkb")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1838415867]
+stream = ExtResource("5_qqgut")
+volume_db = -4.8
+max_db = -10.5

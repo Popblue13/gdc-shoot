@@ -11,11 +11,16 @@ signal character_locked_in(merc_name: String)
 
 var selected_merc_name: String = ""
 var current_preview_model: Node3D = null
+var char_options = []
 
 func _ready() -> void:
 	# Disable the lock-in button until a character is picked
 	lock_in_button.disabled = true
 	lock_in_button.pressed.connect(_on_lock_in_pressed)
+	
+	var map_parant = get_parent()
+	if map_parant is Map:
+		char_options = map_parant.characters_allowed
 	
 	register_mercs()
 	
@@ -40,8 +45,12 @@ func register_mercs() -> void:
 	for child in merc_select_buttons.get_children():
 		child.queue_free()
 		
-	# 2. Loop through the database and generate buttons
+	var data_base_to_fill = char_options
+	if data_base_to_fill == []:
+		data_base_to_fill = ServerDatabase.Mercs
+	
 	for merc_name in ServerDatabase.Mercs:
+		
 		var btn = Button.new()
 		btn.text = merc_name.capitalize() # Makes "default" look like "Default"
 		

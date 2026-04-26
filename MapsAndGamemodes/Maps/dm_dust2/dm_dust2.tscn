@@ -1,7 +1,6 @@
 [gd_scene format=4 uid="uid://cc8om6l1phx4e"]
 
-[ext_resource type="Script" uid="uid://b24qokmut6wdc" path="res://MapsAndGamemodes/Maps/dm_dust2/dm_dust_2.gd" id="1_rx525"]
-[ext_resource type="Environment" uid="uid://q5lesd1nn6vf" path="res://MapsAndGamemodes/Maps/dm_dust2/dustenvironment.tres" id="2_6cpfp"]
+[ext_resource type="Script" uid="uid://dogm3cno1tnmx" path="res://MapsAndGamemodes/Gamemodes/dm/dm.gd" id="1_urotk"]
 [ext_resource type="Texture2D" uid="uid://yogffj6l10bv" path="res://MapsAndGamemodes/Maps/dm_dust2/de_dust2_-_cs_map_0.png" id="2_urotk"]
 [ext_resource type="Texture2D" uid="uid://xog1pmxtfod4" path="res://MapsAndGamemodes/Maps/dm_dust2/de_dust2_-_cs_map_2.png" id="3_6cpfp"]
 [ext_resource type="Texture2D" uid="uid://cirrcyjqdn5kx" path="res://MapsAndGamemodes/Maps/dm_dust2/de_dust2_-_cs_map_3.png" id="4_5dfh1"]
@@ -1428,12 +1427,10 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_xruax")
 
-[node name="dm_dust2" type="Node3D" unique_id=448037285 node_paths=PackedStringArray("spawn_points")]
-script = ExtResource("1_rx525")
+[node name="dm_dust2" type="Node3D" unique_id=2143498629 node_paths=PackedStringArray("spawn_points")]
+script = ExtResource("1_urotk")
 spawn_points = [NodePath("Marker3D"), NodePath("Marker3D2"), NodePath("Marker3D3"), NodePath("Marker3D4"), NodePath("Marker3D5"), NodePath("Marker3D6"), NodePath("Marker3D7"), NodePath("Marker3D8"), NodePath("Marker3D9"), NodePath("Marker3D10")]
-gamemode_length = 450.0
-map_name = "dm_dust2"
-environment = ExtResource("2_6cpfp")
+metadata/_custom_type_script = "uid://dogm3cno1tnmx"
 
 [node name="Sketchfab_model" type="Node3D" parent="." unique_id=316304161]
 transform = Transform3D(0.025, 0, 0, 0, -0.025, -2.1855695e-09, 0, 2.1855695e-09, -0.025, 0, 0, 0)

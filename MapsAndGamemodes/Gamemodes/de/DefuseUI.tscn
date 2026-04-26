@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://d3u6kbgjud08k"]
+
+[ext_resource type="Script" uid="uid://bd1ilun1055ko" path="res://MapsAndGamemodes/Gamemodes/de/defuse_ui.gd" id="1_il0pd"]
+
+[node name="DefuseUi" type="Control" unique_id=665496908 node_paths=PackedStringArray("timer_label", "state_label", "attackers_score_label", "defenders_score_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_il0pd")
+timer_label = NodePath("Timer")
+state_label = NodePath("state")
+attackers_score_label = NodePath("attacker")
+defenders_score_label = NodePath("defender")
+
+[node name="Timer" type="Label" parent="." unique_id=1035768671]
+layout_mode = 0
+offset_left = 238.0
+offset_top = 4.0
+offset_right = 278.0
+offset_bottom = 21.0
+text = "TIMER"
+
+[node name="state" type="Label" parent="." unique_id=756958084]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 37.0
+offset_right = 292.0
+offset_bottom = 54.0
+text = "STATE"
+
+[node name="attacker" type="Label" parent="." unique_id=650075467]
+layout_mode = 0
+offset_left = 247.0
+offset_top = 72.0
+offset_right = 287.0
+offset_bottom = 89.0
+text = "ATTACKER"
+
+[node name="defender" type="Label" parent="." unique_id=2124431975]
+layout_mode = 0
+offset_left = 247.0
+offset_top = 97.0
+offset_right = 287.0
+offset_bottom = 114.0
+text = "DEFENDER"

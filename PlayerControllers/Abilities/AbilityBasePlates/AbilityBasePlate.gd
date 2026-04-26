@@ -46,9 +46,10 @@ func equip_ability(abilities: Array[Ability]) -> void:
 	# 1. Gather all keys currently in use by OTHER abilities
 	for ability in abilities:
 		# Skip checking against ourselves if we are already in the array
-		if ability == self:
+		if ability == self or ability == null:
 			continue
-			
+
+		
 		used_keys.append(ability.trigger_key)
 		
 		# Check if our current key is already taken

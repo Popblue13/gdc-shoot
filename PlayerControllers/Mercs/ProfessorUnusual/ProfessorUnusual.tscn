@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://didtl5dfs4s7m"]
+
+[ext_resource type="Script" uid="uid://2ip0lrtrrhsr" path="res://PlayerControllers/merc.gd" id="1_d756x"]
+[ext_resource type="PackedScene" uid="uid://b36uuh56645j5" path="res://PlayerControllers/Abilities/Jump/JumpAbility.tscn" id="2_pq84y"]
+[ext_resource type="PackedScene" uid="uid://yuahk6dfdyco" path="res://PlayerControllers/Abilities/BizarreBall/BizarreBall.tscn" id="3_evfwp"]
+[ext_resource type="PackedScene" uid="uid://cuqfn6bvsi10e" path="res://PlayerControllers/Abilities/PassiveHeal/passive_heal.tscn" id="5_bj8yd"]
+[ext_resource type="PackedScene" uid="uid://kbomaf1gn3mo" path="res://PlayerControllers/Mercs/ProfessorUnusual/professor_unusual_modified.glb" id="5_tkugj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_evfwp"]
+
+[node name="ProfessorUnusual" type="CharacterBody3D" unique_id=1649692842 node_paths=PackedStringArray("camera", "visual_body", "abilities")]
+script = ExtResource("1_d756x")
+debug_mode = true
+camera = NodePath("Camera3D")
+health = 137.0
+speed = 1.1
+visual_body = NodePath("professor_unusual_modified")
+abilities = [NodePath("JumpAbility"), NodePath("BizarreBall Strong"), NodePath("BizarreBall"), NodePath("BizarreBall Far"), NodePath("Passive Heal")]
+metadata/_custom_type_script = "uid://2ip0lrtrrhsr"
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2006820359]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.976, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1943348285]
+shape = SubResource("CapsuleShape3D_evfwp")
+
+[node name="JumpAbility" parent="." unique_id=27473948 instance=ExtResource("2_pq84y")]
+auto_bhop = true
+jump_strength = 8.0
+AbilityDescription = "Rise into the air in a peculiar way."
+trigger_key = "Space"
+
+[node name="BizarreBall Strong" parent="." unique_id=1448995663 instance=ExtResource("3_evfwp")]
+throw_strength = 19.0
+close_damage = 50.0
+far_damage = 23.0
+color = "remarkable_red"
+AbilityDescription = "Like the green ball, but red. Deals more damage, but travels slower."
+
+[node name="BizarreBall" parent="." unique_id=336212865 instance=ExtResource("3_evfwp")]
+trigger_key = "2"
+
+[node name="BizarreBall Far" parent="." unique_id=519684265 instance=ExtResource("3_evfwp")]
+throw_strength = 67.0
+close_damage = 18.0
+far_damage = 5.0
+color = "peculiar_purple"
+AbilityDescription = "Like the green ball, but purple. Deals less damage, but travels faster."
+trigger_key = "3"
+
+[node name="Passive Heal" parent="." unique_id=971415938 instance=ExtResource("5_bj8yd")]
+health_per_second = 7.0
+AbilityDescription = "Passively heals 7 health per second."
+
+[node name="professor_unusual_modified" parent="." unique_id=328319826 instance=ExtResource("5_tkugj")]
+transform = Transform3D(-0.01, 0, -8.7422775e-10, 0, 0.01, 0, 8.7422775e-10, 0, -0.01, 0, -0.8617443, 0)

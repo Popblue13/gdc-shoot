@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b65fa3kdr05md" path="res://PrototypeAssets/PrototypeCrosshairsAssets/PNG/White/crosshair002.png" id="6_r51g3"]
 [ext_resource type="Script" uid="uid://obx2ld1ir2qw" path="res://PlayerControllers/Abilities/Remote C4/remote_c4.gd" id="7_8qkhc"]
 [ext_resource type="PackedScene" uid="uid://bl7devu4xl58p" path="res://PlayerControllers/Abilities/Remote C4/C4.glb" id="8_uvt7h"]
+[ext_resource type="Script" uid="uid://hx31xruason3" path="res://PlayerControllers/Abilities/Remote C4/destructible_c4.gd" id="9_r51g3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_amc3o"]
 resource_name = "Material.001"
@@ -596,7 +597,7 @@ bind/3/bone = -1
 bind/3/pose = Transform3D(1.0627444, 0, 0, 0, 1.0627444, 0, 0, 0, 1.0627444, -7.6502905, -2.0862973, -0.20386086)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ypg12"]
-radius = 2.5
+radius = 1.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_26k3f"]
 vertex_color_use_as_albedo = true
@@ -1230,6 +1231,7 @@ _data = {
 
 [node name="CherryBomber" type="CharacterBody3D" unique_id=979811932 node_paths=PackedStringArray("camera", "visual_body", "abilities")]
 script = ExtResource("1_uvt7h")
+debug_mode = true
 camera = NodePath("Camera3D")
 visual_body = NodePath("CherryBomberModel")
 merc_UI_color = Color(0.75686276, 0, 0, 1)
@@ -1371,7 +1373,6 @@ trigger_key = "1"
 [node name="Grenade" type="RigidBody3D" parent="C4" unique_id=2084771126]
 top_level = true
 collision_layer = 0
-collision_mask = 3
 freeze = true
 
 [node name="ExplosionRadius" type="Area3D" parent="C4/Grenade" unique_id=83263472]
@@ -1404,8 +1405,20 @@ transform = Transform3D(-1.5481368, 0.4333256, -1.9145504, -0.6738546, -2.407472
 transform = Transform3D(0.76582, -0.17333014, 0.6192548, -1.4901161e-07, 0.9629885, 0.2695419, -0.643055, -0.2064206, 0.7374761, -1.3715519, -0.13086332, 0)
 shape = SubResource("BoxShape3D_r51g3")
 
+[node name="DestructibleProp" type="CharacterBody3D" parent="C4/Grenade" unique_id=460440000]
+unique_name_in_owner = true
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("9_r51g3")
+metadata/_custom_type_script = "uid://d3q8pm6yvsw8h"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="C4/Grenade/DestructibleProp" unique_id=282040146]
+transform = Transform3D(0.76582, -0.17333014, 0.6192548, -1.4901161e-07, 0.9629885, 0.2695419, -0.643055, -0.2064206, 0.7374761, -1.3715519, -0.13086332, 0)
+visible = false
+shape = SubResource("BoxShape3D_r51g3")
+
 [node name="Doohicky" type="Node3D" parent="C4" unique_id=1747705607]
-transform = Transform3D(-0.46004662, 0.093597576, -0.8829473, 0.19936787, 0.9799247, 0, 0.86522186, -0.17603143, -0.46947145, 0.54, -0.33, -0.85)
+transform = Transform3D(-0.4600466, 0.093597576, -0.8829473, 0.19936785, 0.9799247, 0, 0.8652218, -0.17603143, -0.46947142, 0.54, -0.33, -0.85)
 visible = false
 
 [node name="Body" type="MeshInstance3D" parent="C4/Doohicky" unique_id=1592089141]

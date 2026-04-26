@@ -98,6 +98,7 @@ bind/16/bone = -1
 bind/16/pose = Transform3D(-0.010000001, 1.00825e-09, 2.0677149e-09, 3.1902295e-10, -0.009000393, 0.0043580844, 4.0677417e-09, 0.004358083, 0.009000389, 0.005614224, 0.015423208, 0.015721116)
 
 [node name="Fiend" type="CharacterBody3D" unique_id=1377816512 node_paths=PackedStringArray("camera", "visual_body", "abilities")]
+collision_layer = 3
 script = ExtResource("1_4n0xw")
 debug_mode = true
 camera = NodePath("Camera3D")

@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://btlwdjdeg8xyw"]
+
+[ext_resource type="Script" uid="uid://br8qxi03sjcru" path="res://PlayerControllers/Abilities/DEAbilities/Defuser/defuser.gd" id="1_cnii5"]
+
+[node name="Defuser" type="Node3D" unique_id=370528440]
+script = ExtResource("1_cnii5")
+trigger_key = "E"
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=231115893]
+target_position = Vector3(0, 0, -5)

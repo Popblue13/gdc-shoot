@@ -15,7 +15,7 @@ albedo_texture = ExtResource("3_g264t")
 texture_filter = 0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ypg12"]
-radius = 1.790106
+radius = 5.446646
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_6cyax"]
 
@@ -228,7 +228,8 @@ surface_material_override/0 = SubResource("StandardMaterial3D_n46b5")
 
 [node name="DetectionRadius" type="Area3D" parent="Grenade" unique_id=83263472]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 3
+monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Grenade/DetectionRadius" unique_id=1608404638]
 transform = Transform3D(1.4343741, -5.9604645e-08, 2.9802322e-08, 0, 1.4343741, 0, -1.4901161e-08, 1.4901161e-08, 1.4343741, 0, 0, 0)
@@ -271,4 +272,5 @@ pitch_scale = 0.75
 max_distance = 34.75
 
 [connection signal="body_entered" from="Grenade/DetectionRadius" to="." method="_on_detection_radius_body_entered"]
+[connection signal="body_exited" from="Grenade/DetectionRadius" to="." method="_on_detection_radius_body_exited"]
 [connection signal="timeout" from="FuseTimer" to="." method="_on_fuse_timer_timeout"]

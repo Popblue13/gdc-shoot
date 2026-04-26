@@ -7,6 +7,7 @@ extends WeaponAbility
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 @onready var c_4: Node3D = $Grenade/C4
 @onready var doohicky: Node3D = $Doohicky
+@onready var destructible_prop: DestructibleProp = %DestructibleProp as DestructibleProp
 
 @export var throw_strength = 5.0
 @export var damage = 70.0
@@ -14,6 +15,11 @@ extends WeaponAbility
 var holding_about_to_throw : bool = false
 var thrown : bool = false
 
+
+
+func _ready() -> void:
+	destructible_prop.reset_c4.connect(reset_grenade)
+	destructible_prop.reset_c4.connect(c_4.hide)
 
 
 func _process(_delta: float) -> void:
@@ -38,6 +44,11 @@ func shoot():
 	anim_player.play("throw")
 	await anim_player.animation_finished
 	hand.set_deferred("remote_path", null)
+	#Kill leftover momentum so it doesn't fly off when un-frozen later
+	grenade.linear_velocity = Vector3.ZERO
+	grenade.angular_velocity = Vector3.ZERO
+	
+	grenade.global_transform = hand.global_transform
 	grenade.freeze = false
 	grenade.apply_central_impulse(-merc.camera.global_basis.z * throw_strength)
 
@@ -48,6 +59,8 @@ func equip():
 
 
 func det_equip() -> void:
+	c_4.show()
+	doohicky.show()
 	show()
 	anim_player.play("det_equip")
 	anim_player.queue("idle")
@@ -56,7 +69,10 @@ func det_equip() -> void:
 func dequip():
 	anim_player.play("dequip")
 	await anim_player.animation_finished
-	hide()
+	if thrown:
+		doohicky.hide()
+	else:
+		hide()
 	return
 
 @rpc("any_peer", "call_local", "reliable")

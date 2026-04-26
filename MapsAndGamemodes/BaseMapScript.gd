@@ -8,6 +8,12 @@ var player_data_base : Dictionary[int, Dictionary]
 var is_map_ready : bool = false # Lobby checks this for mid-game joiners
 @export var map_name : String = 'default'
 @export var environment : Environment
+@export var characters_allowed : Array[String]
+var orb_container: Node3D
+var orb_spawner: MultiplayerSpawner
+
+# You will need to put the path to your generic AbilityPickup.tscn here!
+var pickup_orb_scene = preload("res://MapsAndGamemodes/Gamemodes/PresetGamemodeWidgets/AbilityPickup/ability_pickup.tscn") 
 
 func _enter_tree() -> void:
 	player_spawner = MultiplayerSpawner.new()
@@ -19,6 +25,16 @@ func _enter_tree() -> void:
 	
 	player_spawner.spawn_function = _spawn_player
 	register_players()
+	
+	orb_container = Node3D.new()
+	orb_container.name = "DroppedOrbs"
+	add_child(orb_container)
+	
+	orb_spawner = MultiplayerSpawner.new()
+	orb_spawner.name = "OrbSpawner"
+	add_child(orb_spawner)
+	orb_spawner.spawn_path = ".."
+	orb_spawner.spawn_function = _spawn_orb_network
 	
 	var parent_lobby = get_parent()
 	if parent_lobby is Lobby:
@@ -104,6 +120,28 @@ func kill_confirmed(merc: Merc, killer_id: int = 0):
 		if killer_node and killer_node.has_method("notify_kill_confirmed"):
 			killer_node.notify_kill_confirmed.rpc_id(killer_id, victim_id)
 
+
+# Called by Merc.gd when dropping an item
+func spawn_dropped_orb(ability_resource_path: String, drop_position: Vector3) -> void:
+	if not multiplayer.is_server(): return
+	
+	# Package the data to send to the spawner
+	var spawn_data = {
+		"path": ability_resource_path,
+		"pos": drop_position
+	}
+	orb_spawner.spawn(spawn_data)
+
+# The network spawner function
+func _spawn_orb_network(data: Variant) -> Node:
+	var spawn_data = data as Dictionary
+	var orb_instance = pickup_orb_scene.instantiate()
+	
+	# Inject the specific ability scene so the orb knows what it holds
+	orb_instance.ability_scene = load(spawn_data["path"])
+	orb_instance.position = spawn_data["pos"]
+	
+	return orb_instance
 @abstract func start_gamemode()
 @abstract func player_died(merc : Merc, killer_id: int = 0)
 @abstract func _on_player_joined(player_id: int)

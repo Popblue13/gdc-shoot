@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bn3dvdymcsy6p"]
+
+[ext_resource type="Texture2D" uid="uid://bbd23ljl7etmf" path="res://PlayerControllers/Mercs/Tech/Default/image-removebg-preview(11).png" id="1_3onrh"]
+
+[node name="MedicalSyringeCloseupOnWhite260Nw2740721803RemovebgPreview(1)" type="TextureRect" unique_id=1404427957]
+offset_right = 445.315
+offset_bottom = 483.0
+scale = Vector2(0.165, 0.165)
+texture = ExtResource("1_3onrh")
+flip_h = true

@@ -3,6 +3,10 @@ extends DestructibleProp
 
 var time_to_reset = .5
 @rpc("any_peer", "call_local", "reliable")
+
+func _ready():
+	team = "red"
+
 func take_damage(damage: float):
 	# We still accept the RPC call from the raycast, but we completely ignore 
 	# the attacker_id because this is just a prop.

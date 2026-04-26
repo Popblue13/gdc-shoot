@@ -46,7 +46,7 @@ func _ready() -> void:
 	fire_attack_speed.wait_time = fire_speed
 	fire_attack_speed.one_shot = true
 	hide()
-	
+	$boltgun/Cube_002.hide()
 	# --- NEW: Save the resting position of the visual mesh ---
 	if weapon_mesh:
 		_initial_mesh_position = weapon_mesh.position

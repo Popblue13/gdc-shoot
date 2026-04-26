@@ -27,14 +27,14 @@ var cash: float = DEFAULT_CASH:
 func custom_ready() -> void:
 	add_to_group(GROUP_NAME)
 	for ability in abilities:
-		if ability.is_in_group(MoneyAbility.GROUP_NAME):
-			ability.connect_player_cash(self)
-			ability.fired.connect(
-				func(cost: float) -> void: 
-					cash -= cost
-					if ability.can_kill: 
-						last_used_ability = ability
-			)
+		if !ability.is_in_group(MoneyAbility.GROUP_NAME): continue
+		ability.connect_player_cash(self)
+		ability.fired.connect(
+			func(cost: float) -> void: 
+				cash -= cost
+				if ability.can_kill: 
+					last_used_ability = ability
+		)
 
 	kill_confirmed.connect(
 		func(_killed_id: int) -> void:
