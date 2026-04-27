@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://bd7hbekylwds8"]
+
+[ext_resource type="Script" uid="uid://q2xc06wi6w3l" path="res://PlayerControllers/Abilities/ArsonIncendiary/Supplemental/fire_point.gd" id="1_21a7j"]
+[ext_resource type="Texture2D" uid="uid://rfojkpxv7ix8" path="res://PlayerControllers/Mercs/Arson/Textures/FiresparkSpritesheet.png" id="1_ba5ro"]
+[ext_resource type="Shader" uid="uid://dbwoxlidb5kdn" path="res://PlayerControllers/Abilities/ArsonIncendiary/Supplemental/FirePoint.gdshader" id="1_bqsa4"]
+[ext_resource type="Texture2D" uid="uid://xeehti66dc1x" path="res://PlayerControllers/Abilities/ArsonIncendiary/Textures/CharredGround.png" id="2_o7tpd"]
+
+[sub_resource type="Gradient" id="Gradient_bqsa4"]
+offsets = PackedFloat32Array(0, 0.18467337, 0.75753766, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.9137255, 0.34117648, 0, 1, 0.6951037, 0, 0.06566384, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rdxi0"]
+gradient = SubResource("Gradient_bqsa4")
+
+[sub_resource type="Curve" id="Curve_o7tpd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rdxi0"]
+curve = SubResource("Curve_o7tpd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_21a7j"]
+emission_shape_offset = Vector3(0, 0, -0.21)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.3
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 10, 0)
+spread = 180.0
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+gravity = Vector3(0, -2, 0)
+damping_min = 0.1
+damping_max = 0.1
+scale_curve = SubResource("CurveTexture_rdxi0")
+color_ramp = SubResource("GradientTexture1D_rdxi0")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_21a7j"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_bqsa4")
+shader_parameter/texture_albedo = ExtResource("1_ba5ro")
+shader_parameter/emission_intensity = 1.200000057
+shader_parameter/particles_anim_h_frames = 10
+shader_parameter/particles_anim_v_frames = 6
+
+[sub_resource type="QuadMesh" id="QuadMesh_yhiuw"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_21a7j")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ba5ro"]
+height = 0.76851225
+radius = 1.0283203
+
+[node name="FirePoint" type="Node3D" unique_id=504964259]
+script = ExtResource("1_21a7j")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1366282731]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+layers = 8
+amount = 50
+visibility_aabb = AABB(-2.084703, -2.1036813, -1.4761477, 4.330955, 4.356965, 4.45368)
+process_material = SubResource("ParticleProcessMaterial_21a7j")
+draw_pass_1 = SubResource("QuadMesh_yhiuw")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1905117960]
+collision_layer = 0
+collision_mask = 4294967295
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1446306994]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38088334, 0)
+shape = SubResource("CylinderShape3D_ba5ro")
+
+[node name="TickTimer" type="Timer" parent="." unique_id=1578616500]
+wait_time = 0.2
+autostart = true
+
+[node name="Decal" type="Decal" parent="." unique_id=1787507271]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.015100718, 0)
+size = Vector3(2, 1.3014951, 2)
+texture_albedo = ExtResource("2_o7tpd")
+upper_fade = 0.011148742
+lower_fade = 0.024740757
+distance_fade_enabled = true
+cull_mask = 1
+
+[connection signal="timeout" from="TickTimer" to="." method="_on_tick_timer_timeout"]

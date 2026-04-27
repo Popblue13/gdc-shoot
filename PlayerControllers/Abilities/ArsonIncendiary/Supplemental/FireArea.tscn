@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://vclidtpa20iw"]
+
+[ext_resource type="Script" uid="uid://b7yr8y6clgsk5" path="res://PlayerControllers/Abilities/ArsonIncendiary/Supplemental/fire_area.gd" id="1_l26d4"]
+[ext_resource type="Texture2D" uid="uid://rfojkpxv7ix8" path="res://PlayerControllers/Mercs/Arson/Textures/FiresparkSpritesheet.png" id="2_rdxi0"]
+
+[sub_resource type="Gradient" id="Gradient_l26d4"]
+offsets = PackedFloat32Array(0, 0.18467337, 0.75753766, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.9137255, 0.34117648, 0, 1, 0.6951037, 0, 0.06566384, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rdxi0"]
+gradient = SubResource("Gradient_l26d4")
+
+[sub_resource type="Curve" id="Curve_l26d4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rdxi0"]
+curve = SubResource("Curve_l26d4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fb4er"]
+direction = Vector3(0, 2, 0)
+spread = 180.0
+initial_velocity_min = 2.0
+initial_velocity_max = 2.0
+gravity = Vector3(0, -2, 0)
+damping_min = 0.1
+damping_max = 0.1
+scale_curve = SubResource("CurveTexture_rdxi0")
+color_ramp = SubResource("GradientTexture1D_rdxi0")
+anim_speed_min = 10.0
+anim_speed_max = 10.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nlk65"]
+transparency = 1
+blend_mode = 1
+depth_draw_mode = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_rdxi0")
+billboard_mode = 3
+particles_anim_h_frames = 10
+particles_anim_v_frames = 6
+particles_anim_loop = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_8pt8e"]
+material = SubResource("StandardMaterial3D_nlk65")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2cgt0"]
+radius = 1.5577731
+
+[node name="FireArea" type="Area3D" unique_id=1255836387]
+script = ExtResource("1_l26d4")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=599846254]
+amount = 100
+lifetime = 15.0
+explosiveness = 0.95
+process_material = SubResource("ParticleProcessMaterial_fb4er")
+draw_pass_1 = SubResource("QuadMesh_8pt8e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=399886992]
+shape = SubResource("SphereShape3D_2cgt0")
+
+[node name="DamageTicktimer" type="Timer" parent="." unique_id=1835654728]
+
+[node name="Decal" type="Decal" parent="." unique_id=1218632281]
+size = Vector3(2, 1.5, 2)

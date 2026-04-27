@@ -83,6 +83,9 @@ func _spawn_player(spawn_data:Dictionary):
 	merc_real.set_multiplayer_authority(int(spawn_data["peer_id"]))
 	merc_real.position = spawn_data["position"]
 	
+	if spawn_data.has('team'):
+		merc_real.team = spawn_data["team"]
+	
 	merc_real.died.connect(player_died)
 	merc_real.died.connect(kill_confirmed)
 	return merc_real #DONT FOGET THIS BASTAD

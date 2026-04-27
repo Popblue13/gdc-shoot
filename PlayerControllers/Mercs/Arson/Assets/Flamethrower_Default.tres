@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b8fd6bqjsi3la"]
+
+[resource]
+resource_name = "Flamethrower_Default"
+cull_mode = 2
+albedo_color = Color(0.41703677, 0.40965152, 0.39957872, 1)

@@ -32,10 +32,12 @@ func take_damage(damage: float):
 	hit_effect(damage)
 	
 	health -= damage
-	print('hurt')
+	#print('hurt')
+	#print(health)
 	if health <= 0 and not dead:
 		dead = true
-		destroy_prop()
+		#print("Destroying Prop Call")
+		destroy_prop.rpc()
 		# We do NOT call die.rpc_id(1, attacker_id) here!
 		# This protects the DM.gd leaderboard from registering a kill.
 

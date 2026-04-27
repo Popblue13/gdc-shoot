@@ -13,13 +13,16 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("right_click"):
 		if !is_multiplayer_authority(): return
 		_on_activate_just_pressed()
-		
+
+@rpc("any_peer", "call_local", "reliable")
+func sound_play():
+	$AudioStreamPlayer3D.play()
 
 @rpc("any_peer", "call_remote", "reliable")
 func _on_activate_just_pressed():
 	showing = !showing
-	$AudioStreamPlayer3D.play()
-	$AudioStreamPlayer3D.play.rpc()
+	sound_play.rpc()
+	
 	if !is_multiplayer_authority(): return
 	match showing:
 		true:

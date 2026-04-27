@@ -7,7 +7,6 @@
 [ext_resource type="Material" uid="uid://b1fqsvj0l56cx" path="res://PlayerControllers/Abilities/DefuseBomb/bombmaterial.tres" id="5_uv011"]
 [ext_resource type="PackedScene" uid="uid://b36uuh56645j5" path="res://PlayerControllers/Abilities/Jump/JumpAbility.tscn" id="6_1ljai"]
 [ext_resource type="Script" uid="uid://cuwv6563upnct" path="res://PlayerControllers/Mercs/Tech/ui.gd" id="6_j1smo"]
-[ext_resource type="PackedScene" uid="uid://btge38lo8isyd" path="res://PlayerControllers/Abilities/Footsteps/footsteps.tscn" id="9_crk8k"]
 [ext_resource type="PackedScene" uid="uid://ba65rnglgfi41" path="res://PlayerControllers/Abilities/TechBandage/boltgun.tscn" id="9_joyth"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lwjk5"]
@@ -166,7 +165,7 @@ speed = 0.685
 visual_body = NodePath("MeshInstance3D")
 visual_hand = NodePath("Hand")
 merc_UI_color = Color(0.25355646, 0.42044947, 0.109449945, 1)
-abilities = [NodePath("JumpAbility"), NodePath("SprintAbility"), NodePath("turretpreview"), NodePath("techrifle"), NodePath("bandage"), null]
+abilities = [NodePath("JumpAbility"), NodePath("SprintAbility"), NodePath("turretpreview"), NodePath("techrifle"), NodePath("bandage")]
 
 [node name="SprintAbility" parent="." unique_id=699710493 instance=ExtResource("2_dmx7s")]
 speed_multiplier = 1.2
@@ -252,8 +251,6 @@ radius = 0.07272343
 damage = 65.0
 AbilityDescription = "heal a teammate"
 trigger_key = "3"
-
-[node name="Footsteps" parent="." unique_id=1784459721 instance=ExtResource("9_crk8k")]
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1240430921]
 replication_config = SubResource("SceneReplicationConfig_j1smo")

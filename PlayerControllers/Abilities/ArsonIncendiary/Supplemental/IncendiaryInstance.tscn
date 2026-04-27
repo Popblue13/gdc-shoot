@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cs48kw4fn3gnt"]
+
+[ext_resource type="Script" uid="uid://c7vkyhxe2elm5" path="res://PlayerControllers/Abilities/ArsonIncendiary/Supplemental/incendiary_instance.gd" id="1_w8lmh"]
+[ext_resource type="PackedScene" uid="uid://ira31rxsm7x1" path="res://PlayerControllers/Mercs/Arson/Assets/Incendiary.glb" id="2_dm6hp"]
+[ext_resource type="Material" uid="uid://rq7cqlljrpwr" path="res://PlayerControllers/Mercs/Arson/Assets/Flamethrower_Primary.tres" id="3_ex7v6"]
+[ext_resource type="Material" uid="uid://drorms66sqkvs" path="res://PlayerControllers/Mercs/Arson/Assets/Flamethrower_Metal.tres" id="4_iynjq"]
+[ext_resource type="Material" uid="uid://cms8odrf8y27v" path="res://PlayerControllers/Mercs/Arson/Assets/Flamethrower_Undermetal.tres" id="5_q4bds"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lg28j"]
+radius = 0.09082031
+height = 0.4013672
+
+[node name="IncendiaryInstance" type="RigidBody3D" unique_id=1495288775]
+collision_layer = 67108865
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_w8lmh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1015682497]
+transform = Transform3D(1, -1.1920929e-07, 1.4901161e-08, 0, 1, -1.4901161e-08, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_lg28j")
+
+[node name="Incendiary2" parent="CollisionShape3D" unique_id=1440469924 instance=ExtResource("2_dm6hp")]
+transform = Transform3D(-0.064691305, -0.00085947354, -0.006268321, -0.0002704938, 0.06471433, -0.0060816305, 0.006321179, -0.006026666, -0.0644106, -0.004298568, -0.03716053, -0.00364542)
+
+[node name="Incendiary" parent="CollisionShape3D/Incendiary2" index="0" unique_id=98659808]
+surface_material_override/0 = ExtResource("3_ex7v6")
+surface_material_override/1 = ExtResource("4_iynjq")
+surface_material_override/2 = ExtResource("5_q4bds")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+
+[editable path="CollisionShape3D/Incendiary2"]

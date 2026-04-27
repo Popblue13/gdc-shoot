@@ -28,15 +28,16 @@ radial_segments = 7
 script = ExtResource("1_muwch")
 debug_mode = true
 camera = NodePath("Camera3D")
-air_acceleration = 0.08
-speed = 0.8
+health = 110.0
+air_acceleration = 0.04
+speed = 0.4
 visual_body = NodePath("MeshInstance3D")
 abilities = [NodePath("SprintAbility"), NodePath("JumpAbility"), NodePath("HaloAR")]
 metadata/_custom_type_script = "uid://2ip0lrtrrhsr"
 
 [node name="SprintAbility" parent="." unique_id=699710493 instance=ExtResource("2_h30se")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1300366, -0.15780115)
-speed_multiplier = 2.0
+speed_multiplier = 1.7
 
 [node name="JumpAbility" parent="." unique_id=27473948 instance=ExtResource("3_010wl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1300366, -0.15780115)
@@ -47,9 +48,9 @@ trigger_key = "Space"
 
 [node name="HaloAR" parent="." unique_id=1600695075 instance=ExtResource("4_euw0f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10683805, 0.61868656, -0.23055923)
-max_ammo = 32
-damage = 3.0
-fire_speed = 0.07
+max_ammo = 35
+damage = 2.5
+fire_speed = 0.06
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=423280127]
 shape = SubResource("CapsuleShape3D_aj355")

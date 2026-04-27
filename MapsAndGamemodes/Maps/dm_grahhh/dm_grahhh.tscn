@@ -23,7 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://qgtm5p7ufr6t" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/materials_nippertextures_blah_nmb_trees1.png" id="12_du516"]
 [ext_resource type="Material" uid="uid://d3m1nthxd0np3" path="res://MapsAndGamemodes/Maps/dm_grahhh/grating.tres" id="12_lqcwy"]
 [ext_resource type="Texture2D" uid="uid://l7gmgtyykbnc" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/CSS-cs_havana-pipemetal003a.png" id="13_gh607"]
-[ext_resource type="AudioStream" uid="uid://dc1iuihsc7vlr" path="res://MapsAndGamemodes/Maps/dm_grahhh/grahhh_puddingguyalert.wav" id="13_vt8bc"]
+[ext_resource type="AudioStream" uid="uid://85c4raiv32b8" path="res://MapsAndGamemodes/Maps/dm_grahhh/grahhh_puddingguyalert.wav" id="13_vt8bc"]
 [ext_resource type="Material" uid="uid://bm5npalrr2vm4" path="res://MapsAndGamemodes/Maps/dm_grahhh/babymeat.tres" id="14_7frsc"]
 [ext_resource type="Texture2D" uid="uid://eu5sfmi8wro2" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/importmodels/mallard-duck-male/source/scene/mallardMale.jpg" id="14_7ixng"]
 [ext_resource type="Material" uid="uid://dydvfbi0jghb1" path="res://MapsAndGamemodes/Maps/dm_grahhh/gallerywall.tres" id="14_wiiho"]
@@ -32,7 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://j2uyp84sciq2" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/materials_nippertextures_blah_nmb_brainpic.png" id="15_gsea5"]
 [ext_resource type="Texture2D" uid="uid://doewnhqut8x7b" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/materials_nippertextures_blah_nmb_treetop1.png" id="16_6lvy7"]
 [ext_resource type="Texture2D" uid="uid://cxx7nfo8ono77" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/black-asphalt-texture-free-photo.png" id="16_gfr07"]
-[ext_resource type="AudioStream" uid="uid://bii7de0mybice" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/grahhh_eyehurt.mp3" id="17_vt8bc"]
+[ext_resource type="AudioStream" uid="uid://cw2xft6v25q3e" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/grahhh_eyehurt.mp3" id="17_vt8bc"]
 [ext_resource type="Texture2D" uid="uid://b8oj58qh5epxp" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/materials_nippertextures_blah_nmb_yellowgrid.png" id="17_yxkyj"]
 [ext_resource type="Shader" uid="uid://l5lm6vfqenv3" path="res://MapsAndGamemodes/Maps/dm_grahhh/dm_grahhh_babymeat.gdshader" id="18_7ixng"]
 [ext_resource type="Material" uid="uid://dkq1jrpgabpt7" path="res://MapsAndGamemodes/Maps/dm_grahhh/eyeclosed.tres" id="18_8hdxd"]
@@ -50,9 +50,9 @@
 [ext_resource type="Texture2D" uid="uid://cmac7t3bika1t" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/sourcetreeman_3.png" id="29_2k2lh"]
 [ext_resource type="Material" uid="uid://2bbp2iye2dgc" path="res://MapsAndGamemodes/Maps/dm_grahhh/grahhhsky.tres" id="29_7ixng"]
 [ext_resource type="Texture2D" uid="uid://bkxqxnqb7gtdi" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/blahhh_reference_1.png" id="29_du516"]
-[ext_resource type="ArrayMesh" uid="uid://sm3pkc5b01hr" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/puppet.obj" id="29_spnh3"]
+[ext_resource type="ArrayMesh" uid="uid://cmp2cmw6lxlnb" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/puppet.obj" id="29_spnh3"]
 [ext_resource type="Texture2D" uid="uid://cp2w7wahujard" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/blahhh_reference_7.png" id="30_7ixng"]
-[ext_resource type="AudioStream" uid="uid://cy2qukf55mxhw" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/Strong Wind Blowing - Sound Effect.mp3" id="30_ua3rl"]
+[ext_resource type="AudioStream" uid="uid://d21k83vro0oq5" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/Strong Wind Blowing - Sound Effect.mp3" id="30_ua3rl"]
 [ext_resource type="Texture2D" uid="uid://cs0s40goecmxv" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/sourcetreeman_4.png" id="30_vidfe"]
 [ext_resource type="Texture2D" uid="uid://ca4hdaj7x8h11" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/blahhh_reference_6.png" id="31_di67j"]
 [ext_resource type="PackedScene" uid="uid://cjp3h43ksb6d6" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/sourcelamp.fbx" id="31_gm57k"]
@@ -65,34 +65,34 @@
 [ext_resource type="Texture2D" uid="uid://ep38lyuw6ygi" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/blahhh_reference_3.png" id="35_0i55w"]
 [ext_resource type="ArrayMesh" uid="uid://bdr6s8u5xy4rp" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/importmodels/source/CSS_CAR!!!_obj/0IKAT38U6EJM0FFVWVKHVPMQX.obj" id="35_o5tuq"]
 [ext_resource type="Texture2D" uid="uid://5cujynj32om0" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/importmodels/source/CSS_CAR!!!_obj/car_white.jpg" id="36_iq0kv"]
-[ext_resource type="Texture2D" uid="uid://b5bmmpconga88" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/grahhh_spaceman.png" id="36_v6lfw"]
+[ext_resource type="Texture2D" uid="uid://cgyyrsq8fte2g" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/grahhh_spaceman.png" id="36_v6lfw"]
 [ext_resource type="Texture2D" uid="uid://btyue2gieti8x" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/materials_nippertextures_blah_nmb_door2.png" id="36_x13d6"]
 [ext_resource type="Script" uid="uid://o1rqoco7a0b5" path="res://MapsAndGamemodes/Maps/dm_grahhh/sprite_3d_3.gd" id="37_njwd1"]
 [ext_resource type="Texture2D" uid="uid://bnpxjsp5g8uc6" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/materials_nippertextures_blah_nmb_meat.png" id="37_v6lfw"]
 [ext_resource type="AudioStream" uid="uid://cvtgf0a1tb12q" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/grahhh_paintingrant.wav" id="37_w8l1x"]
-[ext_resource type="Texture2D" uid="uid://bwlw7b26253ob" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/grahhh_ISS.png" id="38_idxr7"]
+[ext_resource type="Texture2D" uid="uid://dmsncjo6dhba3" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/grahhh_ISS.png" id="38_idxr7"]
 [ext_resource type="Script" uid="uid://cnngmih11eb26" path="res://MapsAndGamemodes/Maps/dm_grahhh/meat.gd" id="38_n5ope"]
 [ext_resource type="Texture2D" uid="uid://sb8c8gkl58kk" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/360_F_141348580_9a7kGAPuT6T5ZSBFVPgAlRBPqjE2Ko7K.png" id="39_n5ope"]
-[ext_resource type="Texture2D" uid="uid://b8alkdxx5x5lc" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/The_Earth_seen_from_Apollo_17_with_transparent_background(1).png" id="40_2ro4f"]
-[ext_resource type="Texture2D" uid="uid://ggk208w458eh" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/image-removebg-preview(8).png" id="40_o2h34"]
-[ext_resource type="AudioStream" uid="uid://etffe42thnlv" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/horse_eat_2.wav" id="40_xc31k"]
-[ext_resource type="Texture2D" uid="uid://dl877e32suhae" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/image-removebg-preview(9).png" id="41_ua3rl"]
-[ext_resource type="Texture2D" uid="uid://c7420ytcptytx" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/CSS-cs_havana-bookse.png" id="47_o2h34"]
-[ext_resource type="Texture2D" uid="uid://bmt60phcqci4j" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/CSS-cs_havana-planta.png" id="48_6fnao"]
-[ext_resource type="Texture2D" uid="uid://buivxlu8pntoi" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/CSS-cs_havana-poster01spam.png" id="49_2ro4f"]
+[ext_resource type="Texture2D" uid="uid://d17mb137u67rn" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/The_Earth_seen_from_Apollo_17_with_transparent_background(1).png" id="40_2ro4f"]
+[ext_resource type="Texture2D" uid="uid://bcta8t1j5aeid" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/image-removebg-preview(8).png" id="40_o2h34"]
+[ext_resource type="AudioStream" uid="uid://bpn4lasac1a1s" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/horse_eat_2.wav" id="40_xc31k"]
+[ext_resource type="Texture2D" uid="uid://cpp05eqijfkim" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/image-removebg-preview(9).png" id="41_ua3rl"]
+[ext_resource type="Texture2D" uid="uid://cybmnx2woopan" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/CSS-cs_havana-bookse.png" id="47_o2h34"]
+[ext_resource type="Texture2D" uid="uid://p0xgbr5pwq81" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/CSS-cs_havana-planta.png" id="48_6fnao"]
+[ext_resource type="Texture2D" uid="uid://b4wnqxsuuqy0l" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/CSS-cs_havana-poster01spam.png" id="49_2ro4f"]
 [ext_resource type="Script" uid="uid://825okv1ag7wx" path="res://MapsAndGamemodes/Maps/dm_grahhh/spacediner.gd" id="51_idxr7"]
 [ext_resource type="Script" uid="uid://bi2uk2yx7migv" path="res://MapsAndGamemodes/Maps/dm_grahhh/brain.gd" id="54_8fgbp"]
-[ext_resource type="AudioStream" uid="uid://dn44wjcjnnqwl" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/nm_doors_scream.wav" id="58_40l72"]
+[ext_resource type="AudioStream" uid="uid://bqy58gesefli" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/nm_doors_scream.wav" id="58_40l72"]
 [ext_resource type="Script" uid="uid://cye32fg8p488d" path="res://MapsAndGamemodes/Maps/dm_grahhh/paintingrant.gd" id="58_gsea5"]
 [ext_resource type="AudioStream" uid="uid://cyir8n1ljupgw" path="res://MapsAndGamemodes/Maps/dm_grahhh/ghostwhispersloop.tres" id="59_le0rn"]
 [ext_resource type="Texture2D" uid="uid://cnrsvxcsnwxps" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/materials_nippertextures_blah_nmb_idiots.png" id="59_spnh3"]
 [ext_resource type="Texture2D" uid="uid://bsg3co77o41eg" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/capecodeevening.png" id="59_wiiho"]
-[ext_resource type="Texture2D" uid="uid://bgcar16ghyexp" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/Lonely_looking_for_friends_18.png" id="61_gsea5"]
-[ext_resource type="Texture2D" uid="uid://dg886ys8m6de0" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/stepintothering.png" id="62_qkqhp"]
-[ext_resource type="AudioStream" uid="uid://dnm2bwdyxolch" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/Do you really want to step into the ring_.mp3" id="64_v5c7s"]
+[ext_resource type="Texture2D" uid="uid://d2dyt8cfhvcvl" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/Lonely_looking_for_friends_18.png" id="61_gsea5"]
+[ext_resource type="Texture2D" uid="uid://xh8oei5esh3a" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/stepintothering.png" id="62_qkqhp"]
+[ext_resource type="AudioStream" uid="uid://du62d8ktlex38" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/Do you really want to step into the ring_.mp3" id="64_v5c7s"]
 [ext_resource type="Script" uid="uid://dnp36dph6ipuk" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/importmodels/hand/grahhh_hand.gd" id="68_3ssqk"]
-[ext_resource type="Texture2D" uid="uid://c18dk0q7juv57" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/importmodels/hand/GrahhhHand_JohnBase Color.png" id="69_vm1bf"]
-[ext_resource type="AudioStream" uid="uid://0rf4rohii5li" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/importmodels/hand/grasping.mp3" id="70_j88de"]
+[ext_resource type="Texture2D" uid="uid://b3a40k5h0ayeo" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/importmodels/hand/GrahhhHand_JohnBase Color.png" id="69_vm1bf"]
+[ext_resource type="AudioStream" uid="uid://ddn648f5fbb3j" path="res://MapsAndGamemodes/Maps/dm_grahhh/assets/importmodels/hand/grasping.mp3" id="70_j88de"]
 [ext_resource type="PackedScene" uid="uid://bsq06hdwu0wav" path="res://MapsAndGamemodes/Maps/dm_grahhh/pudding.tscn" id="79_n5ope"]
 [ext_resource type="Shader" uid="uid://cq7k0p2vhltji" path="res://MapsAndGamemodes/Maps/dm_grahhh/dm_grahhh.gdshader" id="89_ua3rl"]
 
@@ -8483,15 +8483,17 @@ uv1_world_triplanar = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_unbgr"]
 size = Vector3(1, 1, 1.8634033)
 
-[node name="Node3D" type="Node3D" unique_id=1600260928 node_paths=PackedStringArray("attacker_spawn_points", "defender_spawn_points", "before_round_start_barriers")]
+[node name="Node3D" type="Node3D" unique_id=1600260928 node_paths=PackedStringArray("attacker_spawn_points", "defender_spawn_points", "before_round_start_barriers", "bomb_spawn_point")]
 script = ExtResource("1_tb2g2")
 freeze_duration = 9.0
-attacker_spawn_points = [NodePath("spawns/Marker3D"), NodePath("spawns/Marker3D12"), NodePath("spawns/Marker3D13"), NodePath("spawns/Marker3D14"), NodePath("spawns/Marker3D15")]
-defender_spawn_points = [NodePath("spawns/Marker3D10"), NodePath("spawns/Marker3D9"), NodePath("spawns/Marker3D5"), NodePath("spawns/Marker3D6"), NodePath("spawns/Marker3D11")]
+action_duration = 90.0
+attacker_spawn_points = [NodePath("spawns/Marker3D10"), NodePath("spawns/Marker3D9"), NodePath("spawns/Marker3D5"), NodePath("spawns/Marker3D6"), NodePath("spawns/Marker3D11")]
+defender_spawn_points = [NodePath("spawns/Marker3D"), NodePath("spawns/Marker3D12"), NodePath("spawns/Marker3D13"), NodePath("spawns/Marker3D14"), NodePath("spawns/Marker3D15")]
 before_round_start_barriers = NodePath("PrematchBarrier")
+bomb_spawn_point = NodePath("BombSpawnPoint")
 map_name = "de_grahhh"
 environment = ExtResource("2_spnh3")
-characters_allowed = Array[String](["YAM", "Fiend", "Tech", "Tracker", "CherryBomber"])
+characters_allowed = Array[String](["Arson", "Tech", "Tracker", "Crutch", "CherryBomber", "Fiend", "cheif"])
 
 [node name="spawns" type="Node3D" parent="." unique_id=1233941173]
 
@@ -12343,14 +12345,18 @@ transform = Transform3D(42.574593, 0, 0, 0, 26.140245, 0, 0, 0, 1, 0, 0, 0.43170
 shape = SubResource("BoxShape3D_unbgr")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="PrematchBarrier" unique_id=1581269311]
-transform = Transform3D(42.574593, 0, 0, 0, 26.140245, 0, 0, 0, 1, 0, 0, -32.37014)
+transform = Transform3D(42.574593, 0, 0, 0, 26.140245, 0, 0, 0, 1, 0, 0, -31.746662)
 mesh = SubResource("BoxMesh_3ssqk")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_j88de")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="PrematchBarrier" unique_id=551623302]
-transform = Transform3D(42.574593, 0, 0, 0, 26.140245, 0, 0, 0, 1, 0, 0, -32.37014)
+transform = Transform3D(42.574593, 0, 0, 0, 26.140245, 0, 0, 0, 1, 0, 0, -31.746662)
 shape = SubResource("BoxShape3D_unbgr")
+
+[node name="BombSpawnPoint" type="Marker3D" parent="." unique_id=1436916176]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0328622, 4.561704, 23.794388)
+gizmo_extents = 1.19
 
 [connection signal="body_entered" from="dm_grahhh/Jello/Area3D" to="dm_grahhh/Jello" method="_on_area_3d_body_entered"]
 [connection signal="timeout" from="dm_grahhh/Jello/Timer" to="dm_grahhh/Jello" method="_on_timer_timeout"]

@@ -2,7 +2,7 @@ extends Control
 
 func add_bolts(amount):
 	for i in amount:
-		var bolts_scene = load("res://PlayerControllers/Mercs/Tech/turretUI.tscn").instantiate()
+		var bolts_scene = load("res://PlayerControllers/Mercs/Tracker/dartUI.tscn").instantiate()
 		$VBoxContainer.add_child(bolts_scene)
 
 func remove_bolts(amount):

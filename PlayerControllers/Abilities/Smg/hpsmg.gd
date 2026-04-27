@@ -107,9 +107,13 @@ func _do_raycasts() -> void:
 		if rc.is_colliding():
 			var person_hit = rc.get_collider()
 			if person_hit != null and person_hit is Merc:
-				person_hit.take_damage.rpc_id(int(person_hit.name), damage)
-				person_hit.apply_knockback.rpc_id(int(person_hit.name), -(get_parent().position-person_hit.position).normalized(), 2, 0.91)
-				
+				if person_hit.team == merc.team:
+					if person_hit.get_health() < (person_hit.max_health+25):
+						person_hit.take_damage.rpc_id(int(person_hit.name), damage)
+				else:
+					person_hit.take_damage.rpc_id(int(person_hit.name), -damage)
+				$buffer/smg/HealthDisplay.text = str(person_hit.health)
+				$buffer/Crosshair002/Label.text = str(ammo) + "/" + str(max_ammo)
 			# Spawn tracer at hit point
 			tracer_effect._create_tracer_effect.rpc(tracer_effect.global_position, rc.get_collision_point())
 		else:
@@ -121,7 +125,14 @@ func equip():
 	equipped = true
 	show()
 	crosshair_002.show()
-	show_visual_hand.rpc(true)
+	show_self.rpc(true)
+
+@rpc("any_peer","call_remote","reliable")
+func show_self(vis : bool):
+	if vis:
+		show()
+	else:
+		hide()
 
 @rpc("any_peer","call_remote","reliable")
 func show_visual_hand(vis : bool):
@@ -132,7 +143,7 @@ func dequip():
 	equipped = false
 	hide()
 	crosshair_002.hide()
-	show_visual_hand.rpc(false)
+	show_self.rpc(false)
 
 # ==========================================
 # SOURCE-ENGINE WEAPON SWAY & BOB

@@ -29,7 +29,8 @@ func take_real_damage(damage):
 func _physics_process(delta):
 	if is_in_group("insmoke"):return
 	if targets.size() > 0 and !is_in_group("insmoke"):
-		
+		if !is_instance_valid(targets[0]):
+			targets.erase(0)
 		if !test_cast(targets[0]) and !$LockonTimer.is_stopped():
 			return
 		var rotation_speed = 5.0
@@ -63,8 +64,8 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		targets.append(body)
 
 func test_cast(body):
-	$TestCast.target_position = to_local(body.global_position)
-	if $TestCast.is_colliding():
+	$turret/turrethead/TestCast.target_position = to_local(body.global_position)
+	if $turret/turrethead/TestCast.is_colliding():
 		return true
 	else:
 		return false

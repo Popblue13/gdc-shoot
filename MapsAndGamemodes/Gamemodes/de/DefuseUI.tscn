@@ -1,12 +1,22 @@
 [gd_scene format=3 uid="uid://d3u6kbgjud08k"]
 
 [ext_resource type="Script" uid="uid://bd1ilun1055ko" path="res://MapsAndGamemodes/Gamemodes/de/defuse_ui.gd" id="1_il0pd"]
+[ext_resource type="FontFile" uid="uid://bbiqgpxf2c38" path="res://Misc/UI/fonts/GothicA1-Black.ttf" id="2_k7brl"]
+[ext_resource type="FontFile" uid="uid://b1ohfsj2areyx" path="res://Misc/UI/fonts/GothicA1-Medium.ttf" id="3_iviih"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_il0pd"]
-font_size = 17
-outline_size = 1
+[sub_resource type="LabelSettings" id="LabelSettings_y35bt"]
+font = ExtResource("2_k7brl")
+font_size = 26
+font_color = Color(0.13, 0.13, 0.13, 1)
 outline_color = Color(0, 0, 0, 1)
-shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ravbi"]
+font = ExtResource("2_k7brl")
+font_size = 33
+
+[sub_resource type="LabelSettings" id="LabelSettings_eeq32"]
+font = ExtResource("3_iviih")
+font_size = 23
 
 [node name="DefuseUi" type="Control" unique_id=665496908 node_paths=PackedStringArray("timer_label", "state_label", "attackers_score_label", "defenders_score_label")]
 layout_mode = 3
@@ -17,43 +27,89 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_il0pd")
-timer_label = NodePath("Timer")
-state_label = NodePath("state")
-attackers_score_label = NodePath("attacker")
-defenders_score_label = NodePath("defender")
+timer_label = NodePath("HBoxContainer/VBoxContainer/PanelContainer/Time")
+state_label = NodePath("HBoxContainer/VBoxContainer/State")
+attackers_score_label = NodePath("HBoxContainer/VBoxContainer/PanelContainer/PanelContainer/AWins")
+defenders_score_label = NodePath("HBoxContainer/VBoxContainer/PanelContainer/PanelContainer2/DWins")
 
-[node name="Timer" type="Label" parent="." unique_id=1035768671]
-layout_mode = 0
-offset_left = 238.0
-offset_top = 4.0
-offset_right = 278.0
-offset_bottom = 21.0
-text = "TIMER"
-label_settings = SubResource("LabelSettings_il0pd")
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1978220542]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -65.0
+offset_right = 65.0
+offset_bottom = 62.0
+grow_horizontal = 2
 
-[node name="state" type="Label" parent="." unique_id=756958084]
-layout_mode = 0
-offset_left = 246.0
-offset_top = 37.0
-offset_right = 292.0
-offset_bottom = 54.0
-text = "STATE"
-label_settings = SubResource("LabelSettings_il0pd")
+[node name="ColorRect2" type="ColorRect" parent="HBoxContainer" unique_id=1729277180]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+color = Color(1, 0.44, 0.44, 1)
 
-[node name="attacker" type="Label" parent="." unique_id=650075467]
+[node name="ARemaining" type="Label" parent="HBoxContainer/ColorRect2" unique_id=1586010411]
 layout_mode = 0
-offset_left = 247.0
-offset_top = 72.0
-offset_right = 287.0
-offset_bottom = 89.0
-text = "ATTACKER"
-label_settings = SubResource("LabelSettings_il0pd")
+offset_right = 65.0
+offset_bottom = 85.0
+text = "0"
+label_settings = SubResource("LabelSettings_y35bt")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="defender" type="Label" parent="." unique_id=2124431975]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1887997321]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer" unique_id=817928568]
+custom_minimum_size = Vector2(139.025, 64.39)
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer/PanelContainer" unique_id=1555421468]
+custom_minimum_size = Vector2(23.39, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="AWins" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer/PanelContainer" unique_id=976199125]
+layout_mode = 2
+text = "00"
+label_settings = SubResource("LabelSettings_ravbi")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Time" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer" unique_id=860093040]
+layout_mode = 2
+text = "0:00"
+label_settings = SubResource("LabelSettings_eeq32")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer/VBoxContainer/PanelContainer" unique_id=181317081]
+custom_minimum_size = Vector2(23.39, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="DWins" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer/PanelContainer2" unique_id=2028578017]
+layout_mode = 2
+text = "00"
+label_settings = SubResource("LabelSettings_ravbi")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="State" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=234974967]
+layout_mode = 2
+text = "ROUND STALLED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer" unique_id=827763817]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+color = Color(0.39099997, 0.37, 1, 1)
+
+[node name="DRemaining" type="Label" parent="HBoxContainer/ColorRect" unique_id=977239047]
 layout_mode = 0
-offset_left = 247.0
-offset_top = 97.0
-offset_right = 287.0
-offset_bottom = 114.0
-text = "DEFENDER"
-label_settings = SubResource("LabelSettings_il0pd")
+offset_right = 65.0
+offset_bottom = 84.0
+text = "0"
+label_settings = SubResource("LabelSettings_y35bt")
+horizontal_alignment = 1
+vertical_alignment = 1

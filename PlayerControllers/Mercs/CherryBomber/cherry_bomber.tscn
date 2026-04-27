@@ -1230,6 +1230,7 @@ _data = {
 }
 
 [node name="CherryBomber" type="CharacterBody3D" unique_id=979811932 node_paths=PackedStringArray("camera", "visual_body", "abilities")]
+collision_layer = 3
 script = ExtResource("1_uvt7h")
 debug_mode = true
 camera = NodePath("Camera3D")
@@ -1418,7 +1419,7 @@ visible = false
 shape = SubResource("BoxShape3D_r51g3")
 
 [node name="Doohicky" type="Node3D" parent="C4" unique_id=1747705607]
-transform = Transform3D(-0.4600466, 0.093597576, -0.8829473, 0.19936785, 0.9799247, 0, 0.8652218, -0.17603143, -0.46947142, 0.54, -0.33, -0.85)
+transform = Transform3D(-0.46004653, 0.093597576, -0.8829473, 0.19936782, 0.9799247, 0, 0.8652216, -0.17603143, -0.46947142, 0.54, -0.33, -0.85)
 visible = false
 
 [node name="Body" type="MeshInstance3D" parent="C4/Doohicky" unique_id=1592089141]

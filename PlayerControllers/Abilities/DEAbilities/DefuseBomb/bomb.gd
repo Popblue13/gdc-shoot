@@ -5,7 +5,7 @@ var max_time_to_plant : float = 2.5
 var time_to_plant : float = 1.0
 
 @onready var plant_raycast: RayCast3D = $PlantRaycast
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var animation_player: AnimationPlayer = $buffer/AnimationPlayer
 @onready var hologram_mesh: Marker3D = $HologramMesh
 
 var planted : bool = false
@@ -17,9 +17,11 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if !is_multiplayer_authority(): return
+	visual_hand.hide()
 	if !currently_active: return
 	#if !defuse_gamemode: return
 	if planted: return
+	
 	
 	# --- RIGHT CLICK TO DROP ---
 	if Input.is_action_just_pressed("right_click"): # Make sure this action is in your Input Map!
@@ -44,16 +46,13 @@ func _process(delta: float) -> void:
 		hologram_mesh.hide()
 	
 	if Input.is_action_pressed("left_click") and surface_point != Vector3.ZERO:
-		if surface_normal.dot(Vector3.UP) > 0.8:
-			if animation_player.current_animation != 'plant':
-				animation_player.play('plant')
-				
-			time_to_plant -= delta
-			if time_to_plant <= 0.0:
-				# Tell the server to handle the actual planting!
-				_request_plant_bomb.rpc_id(1, surface_point, surface_normal)
-		else:
-			reset_plant_state()
+		if animation_player.current_animation != 'plant':
+			animation_player.play('plant')
+			
+		time_to_plant -= delta
+		if time_to_plant <= 0.0:
+			# Tell the server to handle the actual planting!
+			_request_plant_bomb.rpc_id(1, surface_point, surface_normal)
 	else:
 		reset_plant_state()
 
@@ -85,11 +84,15 @@ func _request_plant_bomb(plant_spot: Vector3, surface_normal: Vector3):
 	if planted: return
 	
 	planted = true
-	
+	if merc:
+		var merc_parent = merc.get_parent()
+		if merc_parent is DE:
+			defuse_gamemode = merc_parent
+			
 	# 1. Ask the Gamemode to spawn the REAL bomb into the world
 	if defuse_gamemode:
 		var planter_id = multiplayer.get_remote_sender_id()
 		defuse_gamemode.spawn_real_bomb(planter_id, plant_spot, surface_normal)
-		
+		print(defuse_gamemode)
 	# 2. Delete this visual hand-bomb from the player's inventory completely!
 	merc.remove_ability(self)

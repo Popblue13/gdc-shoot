@@ -73,7 +73,7 @@ func _respawn_player(player_id: int):
 		var spawn_pos = Vector3.ZERO
 		var random_spawn = null
 		
-		# Fixed Bug 2: Check spawn arrays independently so one missing team doesn't break the other
+		# Check spawn arrays independently so one missing team doesn't break the other
 		if chosen_team == "red" and red_spawn_points.size() > 0:
 			random_spawn = red_spawn_points.pick_random()
 		elif chosen_team == "blue" and blue_spawn_points.size() > 0:
@@ -85,8 +85,17 @@ func _respawn_player(player_id: int):
 		player_spawner.spawn({
 			"merc_type": chosen_merc,
 			"position": spawn_pos,
-			"peer_id": player_id
+			"peer_id": player_id,
+			"team": chosen_team # <--- PAYLOAD INJECTION ADDED HERE
 		})
+
+
+# --- TD SPECIFIC SERVER LOGIC ---
+@rpc("authority", "call_local", "reliable")
+func update_client_team_databases(new_database: Dictionary) -> void:
+	master_team_database = new_database
+	# Removed the loop that called ch`ild.sync_team_database() because 
+	# Mercs now get their team natively on spawn!
 
 func _on_player_left(player_id: int) -> void:
 	super._on_player_left(player_id) # Let DM handle the baseline cleanup
@@ -112,14 +121,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 			team_select_ui.show()
 		request_suicide_for_switch.rpc_id(1, 'team')
-
-# --- TD SPECIFIC SERVER LOGIC ---
-@rpc("authority", "call_local", "reliable")
-func update_client_team_databases(new_database: Dictionary) -> void:
-	master_team_database = new_database
-	for child in get_children():
-		if child is Merc:
-			child.sync_team_database(master_team_database)
 
 @rpc("any_peer", "call_remote", "reliable")
 func submit_team_choice(team_name: String):

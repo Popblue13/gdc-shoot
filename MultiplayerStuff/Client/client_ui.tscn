@@ -4,7 +4,22 @@
 [ext_resource type="Script" uid="uid://bwv3skhkt52ki" path="res://MultiplayerStuff/Client/menu_ui.gd" id="2_c7bsp"]
 [ext_resource type="Script" uid="uid://bhbctyg6iyw5o" path="res://MultiplayerStuff/Client/name_change.gd" id="3_b2t23"]
 [ext_resource type="Script" uid="uid://c8i0a53aap31q" path="res://MultiplayerStuff/Client/chat.gd" id="3_ty0e6"]
+[ext_resource type="FontFile" uid="uid://6v8rtjai6ol4" path="res://Misc/UI/fonts/GothicA1-Regular.ttf" id="4_kgyih"]
 [ext_resource type="Texture2D" uid="uid://btcwv6lmydfjx" path="res://MultiplayerStuff/home -._-/vhsoff-Sheet.png" id="4_ogf0i"]
+[ext_resource type="FontFile" uid="uid://dahun501afygc" path="res://Misc/UI/fonts/GothicA1-ExtraBold.ttf" id="5_qlpsn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5jdun"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(8.4830447e-07, 0.26743576, 0.061849646, 1)
+corner_detail = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b2t23"]
 atlas = ExtResource("4_ogf0i")
@@ -143,10 +158,10 @@ text = "Close Game :,("
 
 [node name="NameChange" type="Control" parent="Menu" unique_id=1327057232]
 anchors_preset = 0
-offset_left = 268.0
-offset_top = 268.0
-offset_right = 757.0
-offset_bottom = 396.0
+offset_left = 269.0
+offset_top = 222.0
+offset_right = 758.0
+offset_bottom = 350.0
 script = ExtResource("3_b2t23")
 
 [node name="Panel2" type="Panel" parent="Menu/NameChange" unique_id=1740546727]
@@ -171,6 +186,28 @@ offset_top = 58.0
 offset_right = 295.0
 offset_bottom = 98.0
 text = "Change Name!"
+
+[node name="Title2" type="RichTextLabel" parent="Menu" unique_id=1003447778]
+layout_mode = 0
+offset_left = 263.0
+offset_top = 355.0
+offset_right = 636.0
+offset_bottom = 512.0
+theme_override_colors/default_color = Color(0.5039348, 0.77575725, 0.6110267, 1)
+theme_override_fonts/normal_font = ExtResource("4_kgyih")
+theme_override_fonts/bold_font = ExtResource("5_qlpsn")
+theme_override_styles/normal = SubResource("StyleBoxFlat_5jdun")
+bbcode_enabled = true
+text = "Controls
+
+WASD to move
+Left click to interact at home
+Right click to wave
+~ to close the game
+Esc to open menu
+M to change your character(if gamemode permits)
+N to change your team(if gamemode permits)
+"
 
 [node name="Chat" type="Control" parent="." unique_id=1833918700]
 layout_mode = 1

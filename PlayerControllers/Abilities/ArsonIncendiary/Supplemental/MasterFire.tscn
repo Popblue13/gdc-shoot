@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ba5ton4reb1ip"]
+
+[ext_resource type="Script" uid="uid://c2e1bf1birtmm" path="res://PlayerControllers/Abilities/ArsonIncendiary/Supplemental/master_fire.gd" id="1_0l4x6"]
+
+[node name="MasterFire" type="Node3D" unique_id=2016640877]
+script = ExtResource("1_0l4x6")

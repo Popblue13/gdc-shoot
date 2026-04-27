@@ -5,6 +5,29 @@
 [ext_resource type="Shader" uid="uid://cdlqvxsd75l0j" path="res://PlayerControllers/Abilities/BizarreBall/BizarreBallExplosion.gdshader" id="3_6wvgu"]
 [ext_resource type="Texture2D" uid="uid://b65fa3kdr05md" path="res://PrototypeAssets/PrototypeCrosshairsAssets/PNG/White/crosshair002.png" id="4_a1cf6"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_a1cf6"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:visible")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("../Black Hole:position")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("../Black Hole:visible")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("../Curious Crystal:position")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("../Curious Crystal:visible")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath("..:active_black_hole")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_tmm1g"]
 radius = 0.18295527
 
@@ -119,15 +142,14 @@ _data = {
 &"spin": SubResource("Animation_a1cf6")
 }
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_tmm1g"]
-properties/0/path = NodePath("Ball:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-
 [node name="BizarreBall" type="Node3D" unique_id=336212865]
 script = ExtResource("1_82hwi")
 AbilityDescription = "Left-click to shoot a green ball. Ball explodes on contact or when you left-click again. If the ball hits the ground, it creates a green black hole that teleports a target to a green crystal. Right-click to throw green crystal."
 trigger_key = "1"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1763272300]
+root_path = NodePath("../Ball")
+replication_config = SubResource("SceneReplicationConfig_a1cf6")
 
 [node name="Ball" type="RigidBody3D" parent="." unique_id=1089096127]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -232,6 +254,9 @@ shape = SubResource("BoxShape3D_a1cf6")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Curious Crystal" unique_id=199989731]
 libraries/ = SubResource("AnimationLibrary_3uq8b")
 
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Curious Crystal" unique_id=1680854078]
+replication_config = SubResource("SceneReplicationConfig_a1cf6")
+
 [node name="Hand" type="RemoteTransform3D" parent="." unique_id=903432749]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 remote_path = NodePath("../Ball")
@@ -251,9 +276,6 @@ scale = Vector2(0.5173408, 0.5173408)
 theme_override_font_sizes/font_size = 46
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=16250559]
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2098028304]
-replication_config = SubResource("SceneReplicationConfig_tmm1g")
 
 [node name="Explosion Timeout" type="Timer" parent="." unique_id=1276982459]
 wait_time = 3.0

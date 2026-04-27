@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ca0y4uoljvp0i"]
 
-[ext_resource type="Script" uid="uid://blr3kyoel830j" path="res://PlayerControllers/Abilities/TurretPlacer/evil_gun_ability.gd" id="1_06rn6"]
+[ext_resource type="Script" path="res://PlayerControllers/Abilities/TurretPlacer/turret_placer.gd" id="1_06rn6"]
 [ext_resource type="PackedScene" uid="uid://6x6gu77dqv6t" path="res://PlayerControllers/Abilities/Turret/turretpreview.tscn" id="4_56wcs"]
 [ext_resource type="Texture2D" uid="uid://rvpv4bbuep0t" path="res://PrototypeAssets/PrototypeCrosshairsAssets/PNG/White/crosshair025.png" id="4_pjifs"]
 [ext_resource type="PackedScene" uid="uid://dnbjfsltlnp1h" path="res://PlayerControllers/Abilities/TurretPlacer/toolbox.fbx" id="5_sjws2"]
@@ -100,13 +100,12 @@ _data = {
 &"shoot": SubResource("Animation_pjifs")
 }
 
-[node name="turretplacer" type="Node3D" unique_id=1600695075 node_paths=PackedStringArray("weapon_mesh", "raycasts", "visual_hand")]
+[node name="turretplacer" type="Node3D" unique_id=1600695075 node_paths=PackedStringArray("weapon_mesh", "raycasts")]
 script = ExtResource("1_06rn6")
 fire_speed = 0.5
 weapon_mesh = NodePath("toolbox")
 raycasts = [NodePath("PlacementRay")]
 AbilityDescription = "blam r to reload left click to shoot"
-visual_hand = NodePath("VisualHand")
 trigger_key = "2"
 
 [node name="PlacementRay" type="RayCast3D" parent="." unique_id=1097835970]

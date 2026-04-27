@@ -1,12 +1,12 @@
 [gd_scene format=4 uid="uid://c4indsu5jqmn6"]
 
-[ext_resource type="Script" uid="uid://csy5ae7uxmqla" path="res://PlayerControllers/Abilities/Smg/evil_gun_ability.gd" id="1_6fyxj"]
+[ext_resource type="Script" uid="uid://csy5ae7uxmqla" path="res://PlayerControllers/Abilities/Smg/hpsmg.gd" id="1_6fyxj"]
 [ext_resource type="PackedScene" uid="uid://lgfelikpw6ce" path="res://PlayerControllers/Abilities/TrackerRifle/tracer_effect.tscn" id="2_kvdrf"]
 [ext_resource type="Script" uid="uid://doi6ksc5c3s7p" path="res://PlayerControllers/Abilities/TrackerRifle/tracer_effect.gd" id="3_0m1ia"]
 [ext_resource type="Texture2D" uid="uid://b65fa3kdr05md" path="res://PrototypeAssets/PrototypeCrosshairsAssets/PNG/White/crosshair002.png" id="4_57l42"]
 [ext_resource type="FontFile" uid="uid://b1ohfsj2areyx" path="res://Misc/UI/fonts/GothicA1-Medium.ttf" id="5_fpsyp"]
-[ext_resource type="AudioStream" uid="uid://d3jshgvujyeao" path="res://PlayerControllers/Abilities/Smg/gunshot.mp3" id="5_rdqvm"]
-[ext_resource type="Material" uid="uid://cvb22fneqgci8" path="res://PlayerControllers/Abilities/DefuseBomb/explosivematerial.tres" id="6_62nle"]
+[ext_resource type="AudioStream" uid="uid://bblluxxnhm6iq" path="res://PlayerControllers/Abilities/Smg/gunshot.mp3" id="5_rdqvm"]
+[ext_resource type="Material" uid="uid://ej07qv6yq17u" path="res://PlayerControllers/Abilities/DefuseBomb/explosivematerial.tres" id="6_62nle"]
 [ext_resource type="FontFile" uid="uid://f180c453b627" path="res://Misc/UI/fonts/GothicA1-SemiBold.ttf" id="7_j3to8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_pod13"]
@@ -261,13 +261,12 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_jcptg")
 
-[node name="TrackerRifle" type="Node3D" unique_id=1600695075 node_paths=PackedStringArray("weapon_mesh", "raycasts")]
+[node name="TrackerRifle" type="Node3D" unique_id=1600695075 node_paths=PackedStringArray("raycasts")]
 script = ExtResource("1_6fyxj")
 is_auto = true
 max_ammo = 22
-damage = -1.4
+damage = -1.6
 fire_speed = 0.09
-weapon_mesh = NodePath("")
 bob_amplitude = 0.03
 raycasts = [NodePath("buffer/BulletRayCast")]
 trigger_key = "1"

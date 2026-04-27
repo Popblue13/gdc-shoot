@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c3p4qhn3otb4h"]
+
+[ext_resource type="AudioStream" uid="uid://bbcy5ggjejb0j" path="res://Misc/Sounds/killding.wav" id="1_3f3lr"]
+
+[node name="KillConfirmed" type="AudioStreamPlayer" unique_id=1366013781]
+stream = ExtResource("1_3f3lr")

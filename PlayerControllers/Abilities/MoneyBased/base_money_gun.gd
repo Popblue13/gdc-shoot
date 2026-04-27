@@ -22,7 +22,6 @@ signal mult_updated(old: float, new: float)
 signal activations_updated(old: int, new: int)
 
 signal fired(cost: float)
-signal equipped(this: Ability)
 
 var activations: int = abh.activations:
 	get: return abh.activations
@@ -62,6 +61,7 @@ var cash_storage: float = abh.cash_storage:
 	set(m): 
 		abh.cash_storage = m
 		cash_storage = abh.cash_storage
+		update_label()
 
 var net_activation_cost: float = abh.net_activation_cost:
 	get: return abh.net_activation_cost
@@ -75,15 +75,8 @@ var connected: bool = abh.connected:
 		abh.connected = v
 		connected = abh.connected
 
-var m: Merc = null:
-	get: return abh.m
-	set(mer):
-		abh.m = mer
-		m = abh.m
-
 func connect_player_cash(player: Merc) -> void:
 	abh.connect_player_cash(player)
-	m = player
 
 func _ready() -> void:
 	add_to_group(abh.GROUP_NAME)
@@ -91,27 +84,32 @@ func _ready() -> void:
 	abh.reward_updated		.connect(func(old: float, new: float) -> void: self.reward_updated		.emit(old, new))
 	abh.mult_updated		.connect(func(old: float, new: float) -> void: self.mult_updated		.emit(old, new))
 	abh.activations_updated	.connect(func(old: float, new: float) -> void: self.activations_updated	.emit(old, new))
-	abh.equipped			.connect(func(ab: Ability) -> void: self.equipped.emit(ab))
 	
 	## Gun Settings
 	ammo = 99
 	max_ammo = 99
 	super()
 	
+	update_label()
 	cost_per_activation = 0
 	reward_per_kill = -500
 	can_kill = true
-	
-	$Crosshair002/Label.visible = false
 
 func _process(delta: float) -> void:
 	super(delta)
+	
+	# TODO: This is a bit hacky, and I don't love it, but it works for now. Figure out why it's not updating
+	# correctly and remove this so that it only updates on actual cash update
+	update_label()
 
 ### Gun Stuff ###
 
+func update_label() -> void:
+	label.text = "%0.2f/%0.2f: %0.f" % [cash_storage, net_activation_cost, floor(cash_storage / net_activation_cost)]
+
 func equip() -> void:
 	super()
-	abh.equipped.emit(self)
+	update_label()
 
 func reload() -> void: return
 
@@ -130,30 +128,10 @@ func shoot():
 	fire_attack_speed.start()
 	
 	# 4. Fire every raycast in the array (1 for Pistol, Many for Shotgun)
-	_do_raycasts() #CRASHING THE GAME?
+	#_do_raycasts()
 	
 	fired.emit(net_activation_cost)
 	activations += 1
 	
 	success.emit()
 	activated.emit(true)
-
-# Test
-func _do_raycasts() -> void:
-	for rc in raycasts:
-		if not is_instance_valid(rc): continue
-		
-		# Force update so the raycast is perfectly aligned with the camera this frame
-		rc.force_raycast_update()
-
-		if rc.is_colliding():
-			var person_hit = rc.get_collider()
-			if person_hit == null or person_hit == m: return
-			if person_hit is Merc: person_hit.take_damage.rpc_id(int(person_hit.name), damage)
-			
-			# Spawn tracer at hit point
-			tracer_effect._create_tracer_effect.rpc(tracer_effect.global_position, rc.get_collision_point())
-		else:
-			# Spawn tracer fading off into the distance if they missed
-			var miss_point = rc.global_transform * rc.target_position
-			tracer_effect._create_tracer_effect.rpc(tracer_effect.global_position, miss_point)

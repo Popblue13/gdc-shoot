@@ -27,22 +27,25 @@ var defuse_ui_scene = preload("res://MapsAndGamemodes/Gamemodes/de/DefuseUI.tscn
 var char_select_scene = preload("res://MapsAndGamemodes/Gamemodes/PresetGamemodeWidgets/CharacterSelect/CharacterSelect.tscn")
 var team_select_scene = preload("res://MapsAndGamemodes/Gamemodes/dm/deathmatch side choice button.tscn")
 const ABILITY_PICKUP = preload("res://MapsAndGamemodes/Gamemodes/PresetGamemodeWidgets/AbilityPickup/ability_pickup.tscn")
+const DEFUSE_LOSE_SOUND = preload("res://MapsAndGamemodes/Gamemodes/de/DefuseLoseSound.tscn")
+const DEFUSE_WIN_SOUND = preload("res://MapsAndGamemodes/Gamemodes/de/DefuseWinSound.tscn")
+const SPECTATOR_MODE = preload("res://MapsAndGamemodes/Gamemodes/PresetGamemodeWidgets/SpectatorMode/SpectatorMode.tscn")
 
 var defuser_node_scene = "res://PlayerControllers/Abilities/DEAbilities/Defuser/Defuser.tscn"
 var defuse_ui: DEUI
+var defuse_win_sound : AudioStreamPlayer
+var defuse_lose_sound : AudioStreamPlayer
+var spectator_mode : Control
 var char_select_ui
 var team_select_ui
 var has_picked_team_locally := false
 
-var active_bomb: PlantedBomb = null # Changed from DEBOMB to PlantedBomb
+var active_bomb: PlantedBomb = null 
 var bomb_container: Node3D
 var bomb_spawner: MultiplayerSpawner
-
-# IMPORTANT: Put the exact path to your new scene here!
 var planted_bomb_scene = preload("res://MapsAndGamemodes/Gamemodes/de/PlantedBomb.tscn")
 
 func _ready() -> void:
-		# 1. Create a clean folder node for the physical bomb to live in
 	bomb_container = Node3D.new()
 	bomb_container.name = "BombContainer"
 	add_child(bomb_container)
@@ -61,6 +64,14 @@ func _ready() -> void:
 	# Instance all UI elements exactly like in DM and TD
 	defuse_ui = defuse_ui_scene.instantiate()
 	add_child(defuse_ui)
+	
+	spectator_mode = SPECTATOR_MODE.instantiate()
+	add_child(spectator_mode)
+	
+	defuse_win_sound = DEFUSE_WIN_SOUND.instantiate()
+	add_child(defuse_win_sound)
+	defuse_lose_sound = DEFUSE_LOSE_SOUND.instantiate()
+	add_child(defuse_lose_sound)
 	
 	char_select_ui = char_select_scene.instantiate()
 	add_child(char_select_ui)
@@ -208,6 +219,9 @@ func player_died(merc: Merc, killer_id: int = 0) -> void:
 	players_alive_this_round.erase(player_id)
 	merc.queue_free()
 	
+	# Tell the dead player to start spectating
+	client_enable_spectator.rpc_id(player_id)
+	
 	check_win_conditions()
 
 func spawn_teams_for_new_round() -> void:
@@ -223,6 +237,8 @@ func spawn_teams_for_new_round() -> void:
 			
 		_spawn_individual_for_round(player_id, team)
 		players_alive_this_round.append(player_id)
+	
+	check_win_conditions()
 
 func _spawn_individual_for_round(player_id: int, team: String) -> void:
 	var chosen_merc = master_character_database.get(player_id, "default")
@@ -244,25 +260,31 @@ func _spawn_individual_for_round(player_id: int, team: String) -> void:
 	var player : Merc = player_spawner.spawn({
 		"merc_type": chosen_merc,
 		"position": spawn_pos,
-		"peer_id": player_id
+		"peer_id": player_id,
+		"team": team
 	})
 	if team == 'blue': player.add_ability(defuser_node_scene)
+	
+	client_disable_spectator.rpc_id(player_id)
 
 @rpc("any_peer", "call_remote", "reliable")
 func submit_team_choice(team_name: String) -> void:
 	var sender_id = multiplayer.get_remote_sender_id()
 	master_team_database[sender_id] = team_name
 	
-	# Spawn them immediately if they lock in during the FREEZE phase
+	if team_name == "spectator":
+		client_enable_spectator.rpc_id(sender_id)
+
 	if current_state == RoundState.FREEZE and team_name in ["red", "blue"]:
 		if not players_alive_this_round.has(sender_id):
 			_spawn_individual_for_round(sender_id, team_name)
 			players_alive_this_round.append(sender_id)
+			check_win_conditions()
 
 # Called by the server when the player finishes the plant animation
 func spawn_real_bomb(planter_id: int, plant_spot: Vector3, surface_normal: Vector3) -> void:
 	if not multiplayer.is_server(): return
-
+	print('BOMB HERE PLEASE', plant_spot)
 	# Package the spawn location data
 	var spawn_data = {
 		"pos": plant_spot,
@@ -278,13 +300,7 @@ func spawn_real_bomb(planter_id: int, plant_spot: Vector3, surface_normal: Vecto
 # --- SERVER FUNCTION ---
 func spawn_bomb_pickup(drop_spot: Vector3) -> void:
 	if not multiplayer.is_server(): return
-	return
-	# Package the spawn location data
-	var spawn_data = {
-		"pos": bomb_spawn_point
-	}
 	
-	# This automatically triggers _spawn_pickup_bomb_item on ALL clients
 	spawn_dropped_orb("res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/Bomb.tscn", bomb_spawn_point.global_position, true)
 # Automatically executes on Server and Clients to build the physical node
 func _spawn_planted_bomb(data: Variant) -> Node:
@@ -344,7 +360,9 @@ func check_win_conditions() -> void:
 			alive_attackers += 1
 		elif team == "blue":
 			alive_defenders += 1
-			
+	
+	_sync_alive_players.rpc(alive_attackers, alive_defenders)
+	
 	if current_state == RoundState.ACTION:
 		# If all attackers are dead, defenders win
 		if alive_attackers == 0 and alive_defenders > 0:
@@ -369,6 +387,17 @@ func _round_won(winning_team: String) -> void:
 		defenders_score += 1
 		
 	_sync_scores.rpc(attackers_score, defenders_score)
+	
+	# Loop through all players to send the specific win/lose sounds
+	for player_id in master_team_database:
+		var player_team = master_team_database[player_id]
+		
+		# Make sure we only play sounds for active players, not spectators
+		if player_team in ["red", "blue"]:
+			if player_team == winning_team:
+				_play_win_sound.rpc_id(player_id)
+			else:
+				_play_lose_sound.rpc_id(player_id)
 	
 	# Check for Match Win
 	if attackers_score >= rounds_to_win or defenders_score >= rounds_to_win:
@@ -402,6 +431,7 @@ func _on_local_team_locked_in(chosen_team: String):
 func start_char_select():
 	if char_select_ui:
 		char_select_ui.show()
+		spectator_mode.hide()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("change_character"):
@@ -437,3 +467,29 @@ func request_suicide_for_switch(switch_type: String = "character"):
 		if merc_node.has_method("death_effects"):
 			merc_node.death_effects.rpc()
 		merc_node.emit_signal("died", merc_node)
+
+@rpc("authority", "call_local", "reliable")
+func _sync_alive_players(attackers: int, defenders: int) -> void:
+	if defuse_ui:
+		defuse_ui.update_remaining_players(attackers, defenders)
+
+@rpc("authority", "call_remote", "reliable")
+func _play_win_sound() -> void:
+	if defuse_win_sound:
+		defuse_win_sound.play()
+
+@rpc("authority", "call_remote", "reliable")
+func _play_lose_sound() -> void:
+	if defuse_lose_sound:
+		defuse_lose_sound.play()
+
+@rpc("authority", "call_remote", "reliable")
+func client_enable_spectator() -> void:
+	if spectator_mode:
+		spectator_mode.show()
+		spectator_mode.refresh_players()
+
+@rpc("authority", "call_remote", "reliable")
+func client_disable_spectator() -> void:
+	if spectator_mode:
+		spectator_mode.hide()

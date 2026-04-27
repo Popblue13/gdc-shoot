@@ -103,7 +103,7 @@ func _do_raycasts() -> void:
 			var person_hit = rc.get_collider()
 			if person_hit != null and person_hit is Merc:
 				person_hit.take_damage.rpc_id(int(person_hit.name), damage)
-				person_hit.apply_knockback.rpc_id(int(person_hit.name), -(get_parent().position-person_hit.position).normalized(), 5, 0.91)
+				person_hit.apply_knockback.rpc_id(int(person_hit.name), -(get_parent().position-person_hit.position).normalized(), 11, 0.91)
 				
 			# Spawn tracer at hit point
 			tracer_effect._create_tracer_effect.rpc(tracer_effect.global_position, rc.get_collision_point())
@@ -116,6 +116,14 @@ func equip():
 	equipped = true
 	show()
 	show_visual_hand.rpc(true)
+	show_self.rpc(true) #tell all clients to update
+
+@rpc("any_peer","call_remote","reliable")
+func show_self(vis : bool):
+	if vis:
+		show()
+	else:
+		hide()
 
 @rpc("any_peer","call_local","reliable")
 func play_gunshot():
@@ -130,7 +138,7 @@ func dequip():
 	equipped = false
 	hide()
 	crosshair_002.hide()
-	show_visual_hand.rpc(false)
+	show_self.rpc(false)
 
 # ==========================================
 # SOURCE-ENGINE WEAPON SWAY & BOB

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c3j336qdd1ylu" path="res://PlayerControllers/Abilities/Turret/turret.gd" id="1_q0cjq"]
 [ext_resource type="Material" uid="uid://bj31ogvo4qulj" path="res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/bombmaterial.tres" id="2_8e6j0"]
 [ext_resource type="AudioStream" uid="uid://da8a61gmx8n8s" path="res://PlayerControllers/Abilities/Turret/turretshot.mp3" id="3_8e6j0"]
-[ext_resource type="AudioStream" uid="uid://dwghdiey65eg5" path="res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/bombplanted.mp3" id="4_0n1m3"]
+[ext_resource type="AudioStream" uid="uid://chek2v50yrpay" path="res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/bombplanted.mp3" id="4_0n1m3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_47kkg"]
 resource_name = "metal.001"

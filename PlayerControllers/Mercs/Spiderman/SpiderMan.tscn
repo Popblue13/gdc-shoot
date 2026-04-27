@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://5a3huyysdg4m" path="res://PlayerControllers/Abilities/Spiderman-Punch/spiderman_punch.tscn" id="3_grw8o"]
 [ext_resource type="PackedScene" uid="uid://b36uuh56645j5" path="res://PlayerControllers/Abilities/Jump/JumpAbility.tscn" id="3_kgdjr"]
 [ext_resource type="PackedScene" uid="uid://byblikkwgri3q" path="res://PlayerControllers/Abilities/Sprint/SprintAbility.tscn" id="4_grw8o"]
-[ext_resource type="Material" uid="uid://bk7hnigx4dcm7" path="res://PlayerControllers/Mercs/BoomerShooter/Assets/HitScanBulletlaserr.tres" id="4_kgdjr"]
+[ext_resource type="Material" path="res://PlayerControllers/Mercs/BoomerShooter/Assets/HitScanBulletlaserr.tres" id="4_kgdjr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_grw8o"]
 
@@ -13,7 +13,7 @@
 material = ExtResource("4_kgdjr")
 
 [node name="SpiderMan" type="CharacterBody3D" unique_id=1829145158 node_paths=PackedStringArray("camera", "visual_body", "abilities")]
-collision_layer = 2
+collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_l851f")
 debug_mode = true

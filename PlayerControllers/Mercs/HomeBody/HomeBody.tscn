@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bsf55tn5c3yh4" path="res://PlayerControllers/Mercs/HomeBody/homebody.gd" id="1_c4nve"]
 [ext_resource type="PackedScene" uid="uid://0dr7xw7mcvp6" path="res://PlayerControllers/Abilities/HomeBodyHand/HomeBodyHand.tscn" id="2_6lw5w"]
-[ext_resource type="PackedScene" uid="uid://bwbfmr1nmjwg" path="res://PlayerControllers/Abilities/EvilGun/EvilGunAbility.tscn" id="2_ksmpc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lwjk5"]
 
@@ -15,9 +14,7 @@ debug_mode = true
 camera = NodePath("Camera3D")
 visual_body = NodePath("MeshInstance3D")
 visual_hand = NodePath("CSGSphere3D4")
-abilities = [NodePath("HomeBodyHand"), NodePath("EvilGun"), NodePath("")]
-
-[node name="EvilGun" parent="." unique_id=142586173 instance=ExtResource("2_ksmpc")]
+abilities = [NodePath("HomeBodyHand")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1977683154]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.017142773)

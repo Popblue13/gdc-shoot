@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://c5q1skub8jvar"]
+
+[ext_resource type="Script" uid="uid://dqc3trup00bqf" path="res://MapsAndGamemodes/Gamemodes/dm/tdmleaderboard.gd" id="1_6e2g7"]
+
+[node name="LeaderBoardUI" type="Control" unique_id=2123499602]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 229.0
+offset_top = 2.0
+offset_right = -247.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_6e2g7")
+
+[node name="Panel" type="Panel" parent="." unique_id=1696344435]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 26.0
+offset_right = -21.0
+offset_bottom = -54.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=2133103801]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = 42.0
+offset_right = -12.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 2

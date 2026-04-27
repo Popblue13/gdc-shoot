@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://ci5nr6h442a74"]
+
+[ext_resource type="Script" uid="uid://fmjomtt57ra7" path="res://MapsAndGamemodes/Gamemodes/PresetGamemodeWidgets/SpectatorMode/spectator_mode.gd" id="1_m50jk"]
+
+[node name="SpectatorMode" type="Control" unique_id=1812751656]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m50jk")
+
+[node name=">" type="Button" parent="." unique_id=739038439]
+layout_mode = 0
+offset_left = 1215.0
+offset_top = 362.0
+offset_right = 1255.0
+offset_bottom = 402.0
+text = ">"
+
+[node name="<" type="Button" parent="." unique_id=1781248116]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 373.0
+offset_right = 74.0
+offset_bottom = 413.0
+text = "<"
+
+[node name="PlayerWatching" type="Label" parent="." unique_id=1465757485]
+layout_mode = 0
+offset_left = 968.0
+offset_top = 63.0
+offset_right = 1248.0
+offset_bottom = 101.0
+theme_override_colors/font_color = Color(3.8648992e-05, 0.80095685, 0.18328175, 1)
+text = "Spectating"
+
+[connection signal="pressed" from=">" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="<" to="." method="_on_left_pressed"]

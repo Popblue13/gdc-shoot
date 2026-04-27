@@ -1,5 +1,5 @@
 extends LeaderBoard
-class_name TDMLeaderBoard
+class_name DELeaderBoard
 
 const TEAM_COLORS = {
 	"red": Color.RED,
@@ -8,7 +8,7 @@ const TEAM_COLORS = {
 }
 
 # ==========================================
-# SERVER API OVERRIDES & ADDITIONS
+# SERVER API
 # ==========================================
 
 func add_player(player_id: int) -> void:
@@ -22,16 +22,42 @@ func set_player_team(player_id: int, team: String) -> void:
 		stats[player_id]["team"] = team
 		_sync_stats.rpc(stats)
 
+func add_kill(player_id: int) -> void:
+	if not multiplayer.is_server(): return
+	if stats.has(player_id):
+		stats[player_id]["kills"] += 1
+		_sync_stats.rpc(stats)
+
+func add_death(player_id: int) -> void:
+	if not multiplayer.is_server(): return
+	if stats.has(player_id):
+		stats[player_id]["deaths"] += 1
+		stats[player_id]["is_dead"] = true
+		_sync_stats.rpc(stats)
+
+func set_alive(player_id: int) -> void:
+	if not multiplayer.is_server(): return
+	if stats.has(player_id):
+		stats[player_id]["is_dead"] = false
+		_sync_stats.rpc(stats)
+
 # ==========================================
-# UI OVERRIDES
+# SYNC
+# ==========================================
+
+@rpc("authority", "call_local", "reliable")
+func _sync_stats(new_stats: Dictionary) -> void:
+	stats = new_stats
+	update_ui()
+
+# ==========================================
+# UI
 # ==========================================
 
 func update_ui() -> void:
-	# 1. Clear out the old list
 	for child in v_box_container.get_children():
 		child.queue_free()
 		
-	# 2. Build the new player list, colored by team
 	for player_id in stats.keys():
 		var player_data = stats[player_id]
 		var kills = player_data["kills"]
@@ -39,7 +65,7 @@ func update_ui() -> void:
 		var team = player_data.get("team", "default")
 		var status = "DEAD" if player_data.get("is_dead", true) else "ALIVE"
 		
-		var player_name = get_gamertag(player_id) # INHERITED HELPER
+		var player_name = get_gamertag(player_id)
 		
 		var label = Label.new()
 		label.text = "%s | Kills: %d | Deaths: %d | %s" % [player_name, kills, deaths, status]
@@ -52,19 +78,17 @@ func update_ui() -> void:
 @rpc("authority", "call_local", "reliable")
 func show_end_game_showcase(top_players: Array) -> void:
 	is_showcasing = true
-	show() # Force the UI open
+	show()
 	
 	for child in v_box_container.get_children():
 		child.queue_free()
 		
-	# Calculate Final Team Scores
 	var team_scores = {"red": 0, "blue": 0}
 	for p_id in stats:
 		var t = stats[p_id].get("team", "default")
 		if team_scores.has(t):
 			team_scores[t] += stats[p_id]["kills"]
 			
-	# Add a title based on who won
 	var title = Label.new()
 	if team_scores["red"] > team_scores["blue"]:
 		title.text = "🏆 RED TEAM WINS! 🏆"
@@ -85,19 +109,17 @@ func show_end_game_showcase(top_players: Array) -> void:
 	
 	v_box_container.add_child(HSeparator.new())
 	
-	# MVP Title
 	var mvp_title = Label.new()
 	mvp_title.text = "--- MATCH MVPs ---"
 	mvp_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	v_box_container.add_child(mvp_title)
 	
-	# Showcase the Top 3 Players, colored by their team
 	for i in range(top_players.size()):
 		var p_id = top_players[i]
 		var p_data = stats[p_id]
-		var p_name = get_gamertag(p_id) # INHERITED HELPER
-		var label = Label.new()
+		var p_name = get_gamertag(p_id)
 		
+		var label = Label.new()
 		label.text = "#%d: %s - %d Kills" % [i + 1, p_name, p_data["kills"]]
 		
 		var team = p_data.get("team", "default")

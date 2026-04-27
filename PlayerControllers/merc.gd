@@ -3,6 +3,7 @@ class_name Merc extends CharacterBody3D
 signal died(_self, killer_id: int) #Server will disable input on character
 ## @deprecated: Use `health_changed` and look for when `new < old`
 signal took_damage
+signal healed
 signal kill_confirmed(person_killed_id : int)
 signal health_changed(old: float, new: float)
 
@@ -14,7 +15,9 @@ const ABILITY_UI = preload("res://Misc/UI/ability_ui.tscn")
 const MERC_LABEL = preload("res://MultiplayerStuff/Client/MercLabel.tscn")
 const HEALTH_BAR = preload("res://Misc/UI/health_bar.tscn")
 const FOOTSTEPS = preload("res://PlayerControllers/Abilities/Footsteps/footsteps.tscn")
+const KILL_CONFIRMED = preload("res://Misc/Sounds/KillConfirmed.tscn")
 
+var kill_confirmed_sound : AudioStreamPlayer
 var health_bar: ProgressBar
 
 @export var debug_mode : bool = false
@@ -24,7 +27,7 @@ var health_bar: ProgressBar
 @export_group("Universal Properties")
 @export var health :float = 100.0:
 	set(value):
-		if health_bar: health_bar.health = clamp(value, 0, max_health)
+		if health_bar: health_bar.health = value
 		if value != health:
 			var old := health
 			health = value
@@ -50,7 +53,6 @@ var health_bar: ProgressBar
 			#scale
 			#velocity
 			#is_on_floor()
-
 
 @export var abilities : Array[Ability]
 #reminder abilities  can have their own ui
@@ -132,12 +134,11 @@ func _ready() -> void:
 	
 	name_label_instance = MERC_LABEL.instantiate()
 	add_child(name_label_instance)
-	
 	name_label_instance.position = Vector3(0, 1.6, 0) 
 	
-	var parent_gamemode = get_parent()
-	if parent_gamemode and "master_team_database" in parent_gamemode:
-		sync_team_database(parent_gamemode.master_team_database)
+	kill_confirmed_sound = KILL_CONFIRMED.instantiate()
+	add_child(kill_confirmed_sound)
+	
 	# Pass the player's network ID into the label so it knows whose name to grab
 	name_label_instance.setup(name.to_int())
 	if TEAM_COLORS.has(team):
@@ -207,6 +208,11 @@ func _setup_synchronizer() -> void:
 var knockback_dir : Vector3 = Vector3(0,0,0)
 var knockback_pwr := 0
 var knockback_decay := 0.3
+
+
+@rpc("any_peer", "call_local", "reliable")
+func get_health():
+	return health
 
 @rpc("any_peer", "call_remote", "reliable")
 func apply_knockback(vec:Vector3, power:float, decay:float):
@@ -376,8 +382,7 @@ func _on_ability_spawned(new_ability: Ability) -> void:
 	# 4. Refresh local UI
 	if abilites_ui and abilites_ui.has_method("generate_ui"):
 		abilites_ui.generate_ui(self)
-		
-	new_ability.activate()
+	
 
 # Keep your remove logic relatively the same, just update the array cleanup
 func remove_ability(ability: Ability) -> void:
@@ -450,18 +455,6 @@ func request_drop_single_ability(ability_path: NodePath) -> void:
 # TEAM FIGHTING STUFF
 # ==========================================
 
-func sync_team_database(new_database: Dictionary) -> void:
-	player_teams = new_database
-	
-	# Update our own team based on our multiplayer ID (Node name)
-	var my_id = name.to_int()
-	if player_teams.has(my_id):
-		team = player_teams[my_id]
-		
-		# Update the UI color
-		if name_label_instance and TEAM_COLORS.has(team):
-			name_label_instance.modulate = TEAM_COLORS[team]
-
 @rpc("any_peer", "call_remote", "unreliable")
 func receive_pos_from_server(pos: Vector3, rot: Vector3):
 	# Don't move them yet! Just update the target.
@@ -472,15 +465,22 @@ func receive_pos_from_server(pos: Vector3, rot: Vector3):
 func take_damage(damage: float):
 	if !is_multiplayer_authority(): return
 	var attacker_id = multiplayer.get_remote_sender_id()
-	# 2. Check the local database for their team
-	if player_teams.has(attacker_id):
-		var attacker_team = player_teams[attacker_id]
+	
+	# 1. Find the attacker's actual node in the world
+	var map_node = get_parent()
+	if map_node:
+		var attacker_node = map_node.get_node_or_null(str(attacker_id))
 		
-		# 3. Filter friendly fire
-		if attacker_team == team and team != "default":
-			return # Block the damage!
-			
-	# Apply damage if they pass the check
+		# 2. Compare teams directly node-to-node
+		if attacker_node and attacker_node is Merc:
+			if attacker_node.team == self.team and self.team != "default":
+				return # Block friendly fire!
+				
+	if damage < 0:
+		if health > max_health+25:
+			return
+		healed.emit()
+		
 	health -= damage
 	
 	# TELL EVERYONE TO FLASH THIS PLAYER YELLOW
@@ -538,7 +538,9 @@ func die(killer_id: int = 0):
 #emits when you kill a player
 @rpc("any_peer","call_remote","reliable")
 func notify_kill_confirmed(id : int = 0): 
-	#was not working because players had the authority`
+	#was not working because players had the authority
+	if kill_confirmed_sound:
+		kill_confirmed_sound.play()
 	kill_confirmed.emit(id)
 
 func custom_process(delta : float):

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b75kusu2cdq7g"]
 
-[ext_resource type="Script" uid="uid://bk51phcq14oxy" path="res://PlayerControllers/Mercs/Default/first_person_controller.gd" id="1_jyy0p"]
+[ext_resource type="Script" uid="uid://bk51phcq14oxy" path="res://PlayerControllers/Mercs/Arson/first_person_controller.gd" id="1_jyy0p"]
 [ext_resource type="Script" uid="uid://citp50pf2ul2s" path="res://MultiplayerStuff/Client/client_ui.gd" id="2_lcf2t"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lwjk5"]

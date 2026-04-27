@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://g81jotrhgpcr"]
+
+[ext_resource type="Script" uid="uid://c1cdtxt0uvhb5" path="res://PlayerControllers/Abilities/ArsonFlamethrower/Supplemental/burning_effect.gd" id="1_d2f88"]
+
+[node name="StatusEffect_Burn" type="Node3D" unique_id=80567245]
+script = ExtResource("1_d2f88")

@@ -6,8 +6,11 @@
 [ext_resource type="Material" uid="uid://ej07qv6yq17u" path="res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/explosivematerial.tres" id="4_r0uuc"]
 [ext_resource type="Material" uid="uid://bj31ogvo4qulj" path="res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/bombmaterial.tres" id="5_4rluo"]
 [ext_resource type="FontFile" uid="uid://bxfv5oguicmee" path="res://Misc/UI/fonts/GothicA1-Light.ttf" id="6_fhdgg"]
-[ext_resource type="Texture2D" uid="uid://dgk8egylyylkq" path="res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/image-removebg-preview(10).png" id="7_d4rk3"]
+[ext_resource type="Texture2D" uid="uid://brupuhk60x54r" path="res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/image-removebg-preview(10).png" id="7_d4rk3"]
 [ext_resource type="Texture2D" uid="uid://cqh3me5bmmfrm" path="res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/Untitled.png" id="8_1reia"]
+[ext_resource type="AudioStream" uid="uid://dyix1uljwj8kw" path="res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/bombalert.mp3" id="9_r0uuc"]
+[ext_resource type="AudioStream" uid="uid://c424nfe3cco8y" path="res://PlayerControllers/Abilities/DEAbilities/DefuseBomb/bombexplosion.mp3" id="10_4rluo"]
+[ext_resource type="AudioStream" uid="uid://8locwy74jagb" path="res://MapsAndGamemodes/Gamemodes/de/vox/bombplanted.mp3" id="11_fhdgg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3hlvc"]
 
@@ -267,6 +270,42 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector3(16, 16, 16)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../palm/palm/SpotLight3D:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-8.742278e-08, -1.5707963, 3.1415927)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../palm/palm/SpotLight3D:light_energy")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../fingers:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.31450093, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_r0uuc"]
 resource_name = "explode"
@@ -335,6 +374,42 @@ tracks/4/keys = {
 [sub_resource type="Animation" id="Animation_4rluo"]
 resource_name = "idle"
 loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../palm/palm/SpotLight3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -1.5707964, -6.2831855), Vector3(6.2831855, -1.5707964, -6.2831855)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../palm/palm/SpotLight3D:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.795]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../fingers:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.31450093, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4rluo"]
 _data = {
@@ -412,6 +487,7 @@ albedo_mix = 0.54
 upper_fade = 1.3784376
 
 [node name="fingers" type="Node3D" parent="." unique_id=101316875]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.31450093, 0)
 
 [node name="finger" type="MeshInstance3D" parent="fingers" unique_id=1441487446]
 transform = Transform3D(20.684164, 0, 0, 0, -1.9073486e-06, 20.684162, 0, -20.684162, -1.9073486e-06, -0.39386034, 0.33035254, 0.39370117)
@@ -446,7 +522,7 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_4rluo")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="palm/palm" unique_id=1305037807]
-transform = Transform3D(-4.371139e-08, -8.742278e-08, -1, 0, -1, 8.742278e-08, -1, 3.821371e-15, 4.371139e-08, 0, 0, 0.001)
+transform = Transform3D(-7.549791e-08, -8.742277e-08, -1, -8.742278e-08, -1, 8.742278e-08, -1, 8.7422784e-08, 7.54979e-08, 0, 0, 0.001)
 light_color = Color(1, 0, 0, 1)
 light_indirect_energy = 3.553
 light_volumetric_fog_energy = 2.872
@@ -454,7 +530,7 @@ shadow_enabled = true
 shadow_opacity = 0.32
 shadow_blur = 3.766
 spot_range = 6.130899
-spot_angle = 21.704535
+spot_angle = 30.245432
 
 [node name="spinningpalm" type="MeshInstance3D" parent="palm" unique_id=509345058]
 transform = Transform3D(-2.5356635e-06, 41.302063, 0, 2.5356635e-06, 7.8915254e-14, 297.93698, 58.00922, 1.8053705e-06, -1.3023239e-05, 0, 0, 0)
@@ -503,3 +579,21 @@ transform = Transform3D(16, 0, 0, 0, 16, 0, 0, 0, 16, 0, 14.163658, 0)
 transparency = 1.0
 mesh = SubResource("CylinderMesh_4rluo")
 surface_material_override/0 = SubResource("StandardMaterial3D_d4rk3")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1416170533]
+stream = ExtResource("9_r0uuc")
+volume_db = -17.096
+max_db = -13.195
+pitch_scale = 0.8
+autoplay = true
+max_distance = 77.24
+panning_strength = 1.26
+parameters/looping = true
+
+[node name="Bombexplosion" type="AudioStreamPlayer3D" parent="." unique_id=1912963444]
+stream = ExtResource("10_4rluo")
+panning_strength = 1.68
+
+[node name="Bombplanted" type="AudioStreamPlayer" parent="." unique_id=299686077]
+stream = ExtResource("11_fhdgg")
+volume_db = -12.252

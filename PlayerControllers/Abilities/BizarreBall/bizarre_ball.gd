@@ -30,7 +30,7 @@ var can_throw_again : bool = true
 
 var moving_crystal : bool = false
 
-var active_black_hole: bool = false
+@export var active_black_hole: bool = false
 
 var last_ball_pos: Vector3 = Vector3.ZERO
 

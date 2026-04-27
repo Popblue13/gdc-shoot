@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bj8wv4nc3ufwx"]
+
+[ext_resource type="AudioStream" uid="uid://djoou8hk1jj4s" path="res://MapsAndGamemodes/Gamemodes/de/defusewin.mp3" id="1_cw0l3"]
+
+[node name="DefuseWinSound" type="AudioStreamPlayer" unique_id=805902952]
+stream = ExtResource("1_cw0l3")
+volume_db = -18.236

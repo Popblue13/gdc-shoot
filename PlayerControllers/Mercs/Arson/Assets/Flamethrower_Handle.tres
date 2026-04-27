@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://rdc0d4lmbpn3"]
+
+[resource]
+resource_name = "Flamethrower_Handle"
+cull_mode = 2
+albedo_color = Color(0.3428587, 0.15464026, 0.047216147, 1)
+roughness = 0.5

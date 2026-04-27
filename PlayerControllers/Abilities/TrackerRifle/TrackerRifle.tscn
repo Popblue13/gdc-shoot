@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://c4kg4o6mwrs2m"]
 
-[ext_resource type="Script" uid="uid://coo310pxwc2s8" path="res://PlayerControllers/Abilities/TrackerRifle/evil_gun_ability.gd" id="1_fwtrk"]
+[ext_resource type="Script" uid="uid://coo310pxwc2s8" path="res://PlayerControllers/Abilities/TrackerRifle/trackerrifle.gd" id="1_fwtrk"]
 [ext_resource type="PackedScene" uid="uid://lgfelikpw6ce" path="res://PlayerControllers/Abilities/TrackerRifle/tracer_effect.tscn" id="2_42kd8"]
 [ext_resource type="Script" uid="uid://doi6ksc5c3s7p" path="res://PlayerControllers/Abilities/TrackerRifle/tracer_effect.gd" id="3_nnlp6"]
 [ext_resource type="Texture2D" uid="uid://b65fa3kdr05md" path="res://PrototypeAssets/PrototypeCrosshairsAssets/PNG/White/crosshair002.png" id="4_niby8"]
@@ -373,7 +373,7 @@ _data = {
 &"shoot": SubResource("Animation_2e8bx")
 }
 
-[node name="TrackerRifle" type="Node3D" unique_id=1600695075 node_paths=PackedStringArray("weapon_mesh", "raycasts", "visual_hand")]
+[node name="TrackerRifle" type="Node3D" unique_id=1600695075 node_paths=PackedStringArray("weapon_mesh", "raycasts")]
 script = ExtResource("1_fwtrk")
 max_ammo = 5
 damage = 62.0
@@ -381,7 +381,6 @@ fire_speed = 1.0
 weapon_mesh = NodePath("trackerrifle")
 raycasts = [NodePath("BulletRayCast")]
 AbilityDescription = "RMB to scope in. shoot them."
-visual_hand = NodePath("VisualHand")
 trigger_key = "1"
 
 [node name="TracerEffect" parent="." unique_id=1482231535 instance=ExtResource("2_42kd8")]
@@ -450,6 +449,7 @@ skeleton = NodePath("")
 
 [node name="VisualHand" type="Marker3D" parent="." unique_id=295525846]
 transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)
+visible = false
 
 [node name="trackerrifle" type="Node3D" parent="VisualHand" unique_id=1821625065]
 transform = Transform3D(-1.2337712e-08, 0, -0.115000054, 0, 0.115000054, 0, 0.115000054, 0, -1.2337712e-08, -0.48568153, 0, 0)

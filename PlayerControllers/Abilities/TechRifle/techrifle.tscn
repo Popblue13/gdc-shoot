@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://cjg8huuii57ls"]
 
-[ext_resource type="Script" uid="uid://cvc128nvyg2ak" path="res://PlayerControllers/Abilities/TechRifle/evil_gun_ability.gd" id="1_07wno"]
+[ext_resource type="Script" uid="uid://cvc128nvyg2ak" path="res://PlayerControllers/Abilities/TechRifle/techrifle.gd" id="1_07wno"]
 [ext_resource type="PackedScene" uid="uid://lgfelikpw6ce" path="res://PlayerControllers/Abilities/TrackerRifle/tracer_effect.tscn" id="2_pbb3v"]
 [ext_resource type="Script" uid="uid://doi6ksc5c3s7p" path="res://PlayerControllers/Abilities/TrackerRifle/tracer_effect.gd" id="3_y1mh3"]
 [ext_resource type="Texture2D" uid="uid://b65fa3kdr05md" path="res://PrototypeAssets/PrototypeCrosshairsAssets/PNG/White/crosshair002.png" id="4_irb32"]
@@ -330,7 +330,8 @@ shadow_mesh = SubResource("ArrayMesh_qku2o")
 
 [node name="TrackerRifle" type="Node3D" unique_id=1600695075 node_paths=PackedStringArray("weapon_mesh", "raycasts")]
 script = ExtResource("1_07wno")
-fire_speed = 0.14
+damage = 9.0
+fire_speed = 0.2
 weapon_mesh = NodePath("buffer/techrifle")
 raycasts = [NodePath("buffer/BulletRayCast")]
 trigger_key = "1"

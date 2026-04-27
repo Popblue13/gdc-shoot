@@ -218,7 +218,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("bomb/palm/spinningpalm/DefuseTimer:visible")
+tracks/0/path = NodePath("buffer/bomb/palm/spinningpalm/DefuseTimer:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -230,7 +230,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("bomb/palm/spinningpalm:rotation")
+tracks/1/path = NodePath("buffer/bomb/palm/spinningpalm:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -242,7 +242,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("bomb/fingers:position")
+tracks/2/path = NodePath("buffer/bomb/fingers:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -254,7 +254,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("bomb/palm/palm/SpotLight3D:light_energy")
+tracks/3/path = NodePath("buffer/bomb/palm/palm/SpotLight3D:light_energy")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -266,7 +266,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/4/path = NodePath("buffer/AudioStreamPlayer3D:playing")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -278,7 +278,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("bomb:rotation")
+tracks/5/path = NodePath("buffer/bomb:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -290,19 +290,19 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("bomb:position")
+tracks/6/path = NodePath("buffer/bomb:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, -0.35789844, -1.3540034)]
+"values": [Vector3(0, -0.35789844, 1.1477127)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("bomb/palm/palm/SpotLight3D:rotation")
+tracks/7/path = NodePath("buffer/bomb/palm/palm/SpotLight3D:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -318,26 +318,26 @@ length = 0.6705
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("bomb:rotation")
+tracks/0/path = NodePath("buffer/bomb:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.03333333, 0.49999997),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.49999997),
+"transitions": PackedFloat32Array(0.43527526, 1),
 "update": 0,
-"values": [Vector3(0.80700636, -1.2017539, -0.4203116), Vector3(0.13166164, 0.933576, 1.2886964)]
+"values": [Vector3(-0.8360127, 1.5969763, 0.3298672), Vector3(0.13166164, 0.933576, 1.2886964)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("bomb:position")
+tracks/1/path = NodePath("buffer/bomb:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.03333333, 0.46666667),
+"times": PackedFloat32Array(0, 0.46666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(1.4453976, -0.873229, -2.2667933), Vector3(1.7126286, -1.9781165, -1.1581482)]
+"values": [Vector3(1.078, -1.003, -1.763), Vector3(0.893, -1.518, -0.533)]
 }
 
 [sub_resource type="Animation" id="Animation_p1o0t"]
@@ -345,26 +345,26 @@ resource_name = "equip"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("bomb:rotation")
+tracks/0/path = NodePath("buffer/bomb:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.38, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0.13166164, 0.933576, 1.2886964), Vector3(0.7994422, -1.2158315, -0.4317279), Vector3(0.80700636, -1.2017539, -0.4203116)]
+"values": [Vector3(0.13166164, 0.933576, 1.2886964), Vector3(0.7994422, -1.2158315, -0.4317279), Vector3(0.6981317, -1.0576695, -0.42062435)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("bomb:position")
+tracks/1/path = NodePath("buffer/bomb:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.38, 0.5),
+"times": PackedFloat32Array(0, 0.36666667, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(1.7126286, -1.9781165, -1.1581482), Vector3(1.4453976, -0.8276164, -2.2667933), Vector3(1.4453976, -0.873229, -2.2667933)]
+"values": [Vector3(1.078, -1.003, -1.763), Vector3(0.698, -1.058, -1.426), Vector3(0.698, -1.058, -1.426)]
 }
 
 [sub_resource type="Animation" id="Animation_o1hlm"]
@@ -373,7 +373,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("bomb:rotation")
+tracks/0/path = NodePath("buffer/bomb:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -385,7 +385,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("bomb:position")
+tracks/1/path = NodePath("buffer/bomb:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -397,7 +397,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("bomb/palm/spinningpalm/DefuseTimer:visible")
+tracks/2/path = NodePath("buffer/bomb/palm/spinningpalm/DefuseTimer:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -409,7 +409,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("bomb/fingers:position")
+tracks/3/path = NodePath("buffer/bomb/fingers:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -421,7 +421,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("bomb/palm/spinningpalm:rotation")
+tracks/4/path = NodePath("buffer/bomb/palm/spinningpalm:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -433,7 +433,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("bomb/palm/palm/SpotLight3D:light_energy")
+tracks/5/path = NodePath("buffer/bomb/palm/palm/SpotLight3D:light_energy")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -449,7 +449,7 @@ length = 2.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("bomb/palm/spinningpalm/DefuseTimer:visible")
+tracks/0/path = NodePath("buffer/bomb/palm/spinningpalm/DefuseTimer:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -461,7 +461,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("bomb/palm/spinningpalm:rotation")
+tracks/1/path = NodePath("buffer/bomb/palm/spinningpalm:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -473,7 +473,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("bomb/fingers:position")
+tracks/2/path = NodePath("buffer/bomb/fingers:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -485,7 +485,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("bomb/palm/palm/SpotLight3D:light_energy")
+tracks/3/path = NodePath("buffer/bomb/palm/palm/SpotLight3D:light_energy")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -497,7 +497,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = false
-tracks/4/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/4/path = NodePath("buffer/AudioStreamPlayer3D:playing")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -509,7 +509,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("bomb:rotation")
+tracks/5/path = NodePath("buffer/bomb:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -521,7 +521,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("bomb:position")
+tracks/6/path = NodePath("buffer/bomb:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -538,7 +538,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("bomb/palm/spinningpalm/DefuseTimer:visible")
+tracks/0/path = NodePath("buffer/bomb/palm/spinningpalm/DefuseTimer:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -550,7 +550,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("bomb/palm/spinningpalm:rotation")
+tracks/1/path = NodePath("buffer/bomb/palm/spinningpalm:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -562,7 +562,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("bomb/fingers:position")
+tracks/2/path = NodePath("buffer/bomb/fingers:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -574,7 +574,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("bomb/palm/palm/SpotLight3D:light_energy")
+tracks/3/path = NodePath("buffer/bomb/palm/palm/SpotLight3D:light_energy")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -586,7 +586,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/4/path = NodePath("buffer/AudioStreamPlayer3D:playing")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -598,7 +598,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("bomb/palm/palm/SpotLight3D:rotation")
+tracks/5/path = NodePath("buffer/bomb/palm/palm/SpotLight3D:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -618,49 +618,52 @@ _data = {
 &"planted": SubResource("Animation_hq3dx")
 }
 
-[node name="Bomb" type="Node3D" unique_id=1600695075]
+[node name="Bomb" type="Node3D" unique_id=1600695075 node_paths=PackedStringArray("visual_hand")]
 script = ExtResource("1_r4gtw")
-AbilityDescription = null
+visual_hand = NodePath("Marker3D")
 trigger_key = "5"
 
-[node name="bomb" type="StaticBody3D" parent="." unique_id=1844621931]
-transform = Transform3D(0.9999993, 0, 0, 0, 0.57489115, -0.8182298, 0, 0.81823015, 0.5748909, 0, -0.35789844, -1.3540034)
+[node name="buffer" type="Node3D" parent="." unique_id=1112364665]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59834313, 0.67304945)
 
-[node name="fingers" type="Node3D" parent="bomb" unique_id=1183131638]
+[node name="bomb" type="StaticBody3D" parent="buffer" unique_id=1844621931]
+transform = Transform3D(0.49, 0, 0, 0, 0.28169662, -0.40093273, 0, 0.40093273, 0.28169662, 0, -0.35789844, 1.1477127)
 
-[node name="finger" type="MeshInstance3D" parent="bomb/fingers" unique_id=1700901070]
+[node name="fingers" type="Node3D" parent="buffer/bomb" unique_id=1183131638]
+
+[node name="finger" type="MeshInstance3D" parent="buffer/bomb/fingers" unique_id=1700901070]
 transform = Transform3D(20.684164, 0, 0, 0, -1.9073486e-06, 20.684162, 0, -20.684162, -1.9073486e-06, -0.39386034, 0.33035254, 0.39370117)
 mesh = SubResource("ArrayMesh_h24ky")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("3_qqgut")
 
-[node name="finger_001" type="MeshInstance3D" parent="bomb/fingers" unique_id=1246743809]
+[node name="finger_001" type="MeshInstance3D" parent="buffer/bomb/fingers" unique_id=1246743809]
 transform = Transform3D(20.684164, 0, 0, 0, -2.4657445e-06, 20.684162, 0, -20.684162, -2.4657445e-06, -0.39444578, 0.33035251, -0.40294564)
 mesh = SubResource("ArrayMesh_jfad8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("3_qqgut")
 
-[node name="finger_002" type="MeshInstance3D" parent="bomb/fingers" unique_id=1886500280]
+[node name="finger_002" type="MeshInstance3D" parent="buffer/bomb/fingers" unique_id=1886500280]
 transform = Transform3D(20.684164, 0, 0, 0, -2.4657445e-06, 20.684162, 0, -20.684162, -2.4657445e-06, 0.39608184, 0.33035251, -0.40294564)
 mesh = SubResource("ArrayMesh_n4nhb")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("3_qqgut")
 
-[node name="finger_003" type="MeshInstance3D" parent="bomb/fingers" unique_id=649337528]
+[node name="finger_003" type="MeshInstance3D" parent="buffer/bomb/fingers" unique_id=649337528]
 transform = Transform3D(20.684164, 0, 0, 0, -2.4657445e-06, 20.684162, 0, -20.684162, -2.4657445e-06, 0.39608184, 0.33035251, 0.3937012)
 mesh = SubResource("ArrayMesh_3q66f")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("3_qqgut")
 
-[node name="palm" type="Node3D" parent="bomb" unique_id=354404539]
+[node name="palm" type="Node3D" parent="buffer/bomb" unique_id=354404539]
 
-[node name="palm" type="MeshInstance3D" parent="bomb/palm" unique_id=1762382267]
+[node name="palm" type="MeshInstance3D" parent="buffer/bomb/palm" unique_id=1762382267]
 transform = Transform3D(58.009216, 0, 0, 0, -1.8053703e-06, 297.93698, 0, -41.30206, -1.3023239e-05, 0, 0, 0)
 mesh = SubResource("ArrayMesh_wcy81")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("3_r4gtw")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="bomb/palm/palm" unique_id=2127056367]
+[node name="SpotLight3D" type="SpotLight3D" parent="buffer/bomb/palm/palm" unique_id=2127056367]
 transform = Transform3D(-7.549791e-08, -8.742277e-08, -1, -8.742278e-08, -1, 8.742278e-08, -1, 8.7422784e-08, 7.54979e-08, 0, 0, 0.001)
 light_color = Color(1, 0, 0, 1)
 light_indirect_energy = 3.553
@@ -672,13 +675,13 @@ spot_range = 12.637
 spot_attenuation = 1.87
 spot_angle = 92.13
 
-[node name="spinningpalm" type="MeshInstance3D" parent="bomb/palm" unique_id=1198912050]
+[node name="spinningpalm" type="MeshInstance3D" parent="buffer/bomb/palm" unique_id=1198912050]
 transform = Transform3D(-2.5356635e-06, 41.302063, 0, 2.5356635e-06, 7.8915254e-14, 297.93698, 58.00922, 1.8053705e-06, -1.3023239e-05, 0, 0, 0)
 mesh = SubResource("ArrayMesh_qcq4n")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("3_r4gtw")
 
-[node name="DefuseTimer" type="Label3D" parent="bomb/palm/spinningpalm" unique_id=486757335]
+[node name="DefuseTimer" type="Label3D" parent="buffer/bomb/palm/spinningpalm" unique_id=486757335]
 transform = Transform3D(0.017238637, 0, 0, 0, 0.024211865, 3.7252903e-09, 0, -2.3283064e-10, 0.0033564141, 0.00012390503, 0.002327418, 0.0025939578)
 visible = false
 modulate = Color(1, 0, 0, 1)
@@ -686,7 +689,7 @@ text = "0:45"
 font = ExtResource("4_r4gtw")
 outline_size = 8
 
-[node name="Sprite3D" type="Sprite3D" parent="bomb/palm/spinningpalm" unique_id=1722352821]
+[node name="Sprite3D" type="Sprite3D" parent="buffer/bomb/palm/spinningpalm" unique_id=1722352821]
 transform = Transform3D(0.001330341, -0.000698017, -0.0004853012, 0.00086965214, 0.0020935256, -0.0015187664, 1.4889523e-05, 1.4412988e-05, 0.0033484711, -0.0040406357, -0.005320834, 0.0025390123)
 modulate = Color(1, 1, 1, 0.45490196)
 pixel_size = 0.009427
@@ -695,21 +698,22 @@ alpha_antialiasing_mode = 1
 texture_filter = 1
 texture = ExtResource("5_t045v")
 
-[node name="BombCollisionShape" type="CollisionShape3D" parent="bomb" unique_id=181307900]
+[node name="BombCollisionShape" type="CollisionShape3D" parent="buffer/bomb" unique_id=181307900]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.009918213, 0.06048596, 0.0029296875)
 shape = SubResource("BoxShape3D_r4gtw")
 disabled = true
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="bomb" unique_id=568046422]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="buffer/bomb" unique_id=568046422]
 replication_config = SubResource("SceneReplicationConfig_bd5au")
 
-[node name="VisualHand" type="Marker3D" parent="." unique_id=295525846]
+[node name="VisualHand" type="Marker3D" parent="buffer" unique_id=295525846]
 transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=168165693]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="buffer" unique_id=168165693]
+root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_angkb")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1838415867]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="buffer" unique_id=1838415867]
 stream = ExtResource("5_qqgut")
 volume_db = -4.8
 max_db = -10.5
@@ -758,3 +762,74 @@ transform = Transform3D(58.00922, 0, 0, 0, -1.8053705e-06, 297.93698, 0, -41.302
 mesh = SubResource("ArrayMesh_qcq4n")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("3_o1hlm")
+
+[node name="Marker3D" type="Marker3D" parent="." unique_id=1292719646]
+
+[node name="fingers" type="Node3D" parent="Marker3D" unique_id=89909613]
+
+[node name="finger" type="MeshInstance3D" parent="Marker3D/fingers" unique_id=1646678529]
+transform = Transform3D(20.684164, 0, 0, 0, -1.9073486e-06, 20.684162, 0, -20.684162, -1.9073486e-06, -0.39386034, 0.33035254, 0.39370117)
+mesh = SubResource("ArrayMesh_h24ky")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("3_qqgut")
+
+[node name="finger_001" type="MeshInstance3D" parent="Marker3D/fingers" unique_id=1576667125]
+transform = Transform3D(20.684164, 0, 0, 0, -2.4657445e-06, 20.684162, 0, -20.684162, -2.4657445e-06, -0.39444578, 0.33035251, -0.40294564)
+mesh = SubResource("ArrayMesh_jfad8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("3_qqgut")
+
+[node name="finger_002" type="MeshInstance3D" parent="Marker3D/fingers" unique_id=1106449487]
+transform = Transform3D(20.684164, 0, 0, 0, -2.4657445e-06, 20.684162, 0, -20.684162, -2.4657445e-06, 0.39608184, 0.33035251, -0.40294564)
+mesh = SubResource("ArrayMesh_n4nhb")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("3_qqgut")
+
+[node name="finger_003" type="MeshInstance3D" parent="Marker3D/fingers" unique_id=141279376]
+transform = Transform3D(20.684164, 0, 0, 0, -2.4657445e-06, 20.684162, 0, -20.684162, -2.4657445e-06, 0.39608184, 0.33035251, 0.3937012)
+mesh = SubResource("ArrayMesh_3q66f")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("3_qqgut")
+
+[node name="palm" type="Node3D" parent="Marker3D" unique_id=2001852633]
+
+[node name="palm" type="MeshInstance3D" parent="Marker3D/palm" unique_id=127718975]
+transform = Transform3D(58.009216, 0, 0, 0, -1.8053703e-06, 297.93698, 0, -41.30206, -1.3023239e-05, 0, 0, 0)
+mesh = SubResource("ArrayMesh_wcy81")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("3_r4gtw")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Marker3D/palm/palm" unique_id=961763289]
+transform = Transform3D(-7.549791e-08, -8.742277e-08, -1, -8.742278e-08, -1, 8.742278e-08, -1, 8.7422784e-08, 7.54979e-08, 0, 0, 0.001)
+light_color = Color(1, 0, 0, 1)
+light_indirect_energy = 3.553
+light_volumetric_fog_energy = 2.872
+shadow_enabled = true
+shadow_opacity = 0.32
+shadow_blur = 3.766
+spot_range = 12.637
+spot_attenuation = 1.87
+spot_angle = 92.13
+
+[node name="spinningpalm" type="MeshInstance3D" parent="Marker3D/palm" unique_id=766537188]
+transform = Transform3D(-2.5356635e-06, 41.302063, 0, 2.5356635e-06, 7.8915254e-14, 297.93698, 58.00922, 1.8053705e-06, -1.3023239e-05, 0, 0, 0)
+mesh = SubResource("ArrayMesh_qcq4n")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("3_r4gtw")
+
+[node name="DefuseTimer" type="Label3D" parent="Marker3D/palm/spinningpalm" unique_id=1446421992]
+transform = Transform3D(0.017238637, 0, 0, 0, 0.024211865, 3.7252903e-09, 0, -2.3283064e-10, 0.0033564141, 0.00012390503, 0.002327418, 0.0025939578)
+visible = false
+modulate = Color(1, 0, 0, 1)
+text = "0:45"
+font = ExtResource("4_r4gtw")
+outline_size = 8
+
+[node name="Sprite3D" type="Sprite3D" parent="Marker3D/palm/spinningpalm" unique_id=1652314379]
+transform = Transform3D(0.001330341, -0.000698017, -0.0004853012, 0.00086965214, 0.0020935256, -0.0015187664, 1.4889523e-05, 1.4412988e-05, 0.0033484711, -0.0040406357, -0.005320834, 0.0025390123)
+modulate = Color(1, 1, 1, 0.45490196)
+pixel_size = 0.009427
+shaded = true
+alpha_antialiasing_mode = 1
+texture_filter = 1
+texture = ExtResource("5_t045v")

@@ -49,7 +49,7 @@ func register_mercs() -> void:
 	if data_base_to_fill == []:
 		data_base_to_fill = ServerDatabase.Mercs
 	
-	for merc_name in ServerDatabase.Mercs:
+	for merc_name in data_base_to_fill:
 		
 		var btn = Button.new()
 		btn.text = merc_name.capitalize() # Makes "default" look like "Default"

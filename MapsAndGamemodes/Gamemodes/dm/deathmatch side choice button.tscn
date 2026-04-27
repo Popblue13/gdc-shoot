@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://c54k3yummyaqq" path="res://MapsAndGamemodes/Gamemodes/dm/deathmatch_side_choice_button.gd" id="1_6wl1t"]
 
 [node name="Control" type="Control" unique_id=1643140525]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,6 +16,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -81.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -34,5 +34,14 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 180
 text = "BLUE"
 
+[node name="Spectator" type="Button" parent="." unique_id=1506445657]
+layout_mode = 0
+offset_left = 387.0
+offset_top = 661.0
+offset_right = 881.0
+offset_bottom = 701.0
+text = "Spectator"
+
 [connection signal="pressed" from="HBoxContainer/Red" to="." method="_on_red_pressed"]
 [connection signal="pressed" from="HBoxContainer/Blue" to="." method="_on_blue_pressed"]
+[connection signal="pressed" from="Spectator" to="." method="_on_spectator_pressed"]

@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://dv0ocrkj3lp2v"]
+
+[ext_resource type="Script" uid="uid://dmgsxyfmwmmyt" path="res://PlayerControllers/Abilities/ArsonFlamethrower/Supplemental/FT_Particle.gd" id="1_hnskd"]
+[ext_resource type="Shader" uid="uid://cwr4kfdxwyfim" path="res://PlayerControllers/Abilities/ArsonFlamethrower/Supplemental/FT_Particle.gdshader" id="2_h6ttx"]
+[ext_resource type="Texture2D" uid="uid://bsil4irmhqlrv" path="res://PlayerControllers/Abilities/ArsonFlamethrower/Textures/FirePuffParticle4.png" id="3_jtl3o"]
+[ext_resource type="Texture2D" uid="uid://co8qer38il5gf" path="res://PlayerControllers/Abilities/ArsonFlamethrower/Textures/FT_ParticleNoise.tres" id="4_afq8e"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rlncx"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_h6ttx")
+shader_parameter/fire_texture = ExtResource("3_jtl3o")
+shader_parameter/noise_texture = ExtResource("4_afq8e")
+shader_parameter/scroll_speed = 1.2
+shader_parameter/life_value = 1.0
+shader_parameter/color_start = Color(1.2559999, 0.8852911, 0.31903842, 1)
+shader_parameter/color_mid = Color(0.99999994, 0.35746923, 0.12088605, 1)
+shader_parameter/color_end = Color(1, 0, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_h6ttx"]
+material = SubResource("ShaderMaterial_rlncx")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2el5u"]
+radius = 0.41735384
+
+[node name="FT_Particle" type="Node3D" unique_id=237298097]
+script = ExtResource("1_hnskd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=213945150]
+mesh = SubResource("QuadMesh_h6ttx")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=658030302]
+collision_layer = 2147483648
+collision_mask = 131075
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=709240761]
+transform = Transform3D(0.825, 0, 0, 0, 0.825, 0, 0, 0, 0.825, 0, 0, 0)
+shape = SubResource("SphereShape3D_2el5u")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

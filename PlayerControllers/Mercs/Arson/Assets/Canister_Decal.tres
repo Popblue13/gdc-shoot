@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c41od2r8lq1gk"]
+
+[resource]
+resource_name = "Canister_Decal"
+cull_mode = 2
+albedo_color = Color(0.67374235, 0.54430676, 0.28058103, 1)

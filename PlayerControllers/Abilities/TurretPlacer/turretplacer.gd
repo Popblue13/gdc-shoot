@@ -4,13 +4,11 @@ extends WeaponAbility
 @onready var tracer_effect: Node3D = $TracerEffect
 @onready var fire_attack_speed: Timer = $FireAttackSpeed
 @onready var crosshair_002: Sprite2D = $Crosshair002
-@onready var label: Label = $Label
-var equipped = false
+@onready var label: Label = $Crosshair002/Label
+@onready var turret_preview = $turretpreview
 
 @export_category("Weapon Stats")
 @export var is_auto: bool = false
-@export var max_ammo: int = 12
-@export var damage: float = 10.0
 @export var fire_speed: float = 0.1 # Time in seconds between shots
 
 @export_category("Weapon Movement Juice")
@@ -27,26 +25,13 @@ var _initial_mesh_rotation: Vector3
 # Add ONE RayCast3D here for a Pistol/Rifle, or add MULTIPLE for a Shotgun
 @export var raycasts: Array[RayCast3D] = [] 
 
-var ammo: int = 0 : set = set_ammo
-
-func set_ammo(value):
-	if value > 1:
-		ammo = 1
-	else:
-		ammo = value
-	label.text = str(get_parent().bolts)
-	if ammo <= 0:
-		$boltgun/Cube_002.hide()
-		$VisualHand/boltgun/Cube_002.hide()
-	else:
-		$boltgun/Cube_002.show()
-		$VisualHand/boltgun/Cube_002.show()
 
 func _ready() -> void:
+	crosshair_002.hide()
 	fire_attack_speed.wait_time = fire_speed
 	fire_attack_speed.one_shot = true
 	hide()
-	$boltgun/Cube_002.hide()
+	
 	# --- NEW: Save the resting position of the visual mesh ---
 	if weapon_mesh:
 		_initial_mesh_position = weapon_mesh.position
@@ -56,97 +41,73 @@ func _process(delta: float) -> void:
 	if !is_multiplayer_authority(): return
 	if !currently_active: return
 	
-	if ammo > 0:
-		crosshair_002.visible = visible
-		$Label.visible = visible
-	global_transform = merc.camera.global_transform
 	
-	# Don't allow shooting or reloading while already reloading
+	# Don't allow glooting or reloading while already reloading
 	if animation_player.is_playing() and animation_player.current_animation == "reload": 
 		return
-		
-	if Input.is_action_just_pressed("reload") and ammo <= 0:
-		reload()
-
 	# 2. Handle Single vs Auto fire inputs
 	var trigger_pulled: bool = false
 	if is_auto:
-		trigger_pulled = Input.is_action_pressed("left_click") # Hold to shoot
+		trigger_pulled = Input.is_action_pressed("left_click") # Hold to gloot
 	else:
-		trigger_pulled = Input.is_action_just_pressed("left_click") # Click to shoot
-		
+		trigger_pulled = Input.is_action_just_pressed("left_click") # Click to gloot
+	
 	# 3. Check if the gun is ready to fire based on the timer
-	if trigger_pulled and fire_attack_speed.is_stopped():
-		shoot()
+	if $PlacementRay.is_colliding() and get_parent().turrets >0 :
+		var preview_position = $PlacementRay.get_collision_point()
+		turret_preview.global_position = preview_position
+		turret_preview.visible = true
+		
+		if trigger_pulled and fire_attack_speed.is_stopped():
+			if get_parent().turrets <= 0:return
+			get_parent().turrets -= 1
+			var placement_position = $PlacementRay.get_collision_point()
+			gloot(placement_position)
+			gloot.rpc(placement_position)
+		
+	else:
+		turret_preview.visible = false
 	
 	if weapon_mesh:
 		_apply_weapon_bob_and_tilt(delta)
 
-func reload():
-	if animation_player.is_playing(): return
-	if get_parent().bolts <= 0: return
-	if ammo > 0: return
-	animation_player.play("reload")
-	await animation_player.animation_finished
-	ammo = 1
-	get_parent().bolts -= 1
-
 func shoot():
-	if ammo <= 0:
-		# Optional: Play a "click" sound here for empty ammo
-		return
-	
-	# Consume 1 ammo per trigger pull (even if it's a shotgun firing 8 pellets)
-	ammo -= 1
-	
-	$AudioStreamPlayer3D.play()
-	# Restart animation and start the cooldown timer
-	animation_player.stop() 
-	animation_player.play("shoot")
-	fire_attack_speed.start()
-	label.text = str(get_parent().bolts)
-	# 4. Fire every raycast in the array (1 for Pistol, Many for Shotgun)
-	_do_raycasts()
+	pass
 
-func _do_raycasts() -> void:
-	for rc in raycasts:
-		if not is_instance_valid(rc): continue
-		
-		# Force update so the raycast is perfectly aligned with the camera this frame
-		rc.force_raycast_update()
-		if rc.is_colliding():
-			var person_hit = rc.get_collider()
-			if person_hit != null and person_hit is Merc:
-				person_hit.take_damage.rpc_id(int(person_hit.name), damage)
-				
-				person_hit.speed -= 0.12
-				var tracker_bolt = load("res://PlayerControllers/Abilities/TrackerBoltGun/tracker_bolt.tscn").instantiate()
-				tracker_bolt.tracker = get_parent()
-				person_hit.add_child(tracker_bolt)
-				
-			# Spawn tracer at hit point
-			tracer_effect._create_tracer_effect.rpc(tracer_effect.global_position, rc.get_collision_point())
-		else:
-			# Spawn tracer fading off into the distance if they missed
-			var miss_point = rc.global_transform * rc.target_position
-			tracer_effect._create_tracer_effect.rpc(tracer_effect.global_position, miss_point)
+@rpc("any_peer", "call_remote", "reliable")
+func gloot(placement_position):
+	var sender_id = multiplayer.get_remote_sender_id()
+	var turret_scene = load("res://PlayerControllers/Abilities/Turret/turret.tscn").instantiate()
+	turret_scene.position = placement_position
+	turret_scene.dada = get_parent()
+	turret_scene.name = "turret_" + str(sender_id)
+	turret_scene.set_multiplayer_authority(sender_id)
+	get_parent().add_child(turret_scene)
 
 func equip():
-	equipped = true
 	show()
-	show_visual_hand.rpc(true)
+	crosshair_002.show()
+	animation_player.play("equip")
+	show_self.rpc(true) #tell all clients to update
+
+@rpc("any_peer","call_remote","reliable")
+func show_self(vis : bool):
+	if vis:
+		show()
+	else:
+		hide()
 
 @rpc("any_peer","call_remote","reliable")
 func show_visual_hand(vis : bool):
 	if visual_hand:
 		visual_hand.visible = vis
-	
+
 func dequip():
-	equipped = false
+	animation_player.play("dequip")
+	await animation_player.animation_finished
 	hide()
 	crosshair_002.hide()
-	$Label.hide()
-	show_visual_hand.rpc(false)
+	show_self.rpc(false)
 
 # ==========================================
 # SOURCE-ENGINE WEAPON SWAY & BOB

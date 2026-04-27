@@ -1,0 +1,289 @@
+[gd_scene format=3 uid="uid://dsyccwkkelmvi"]
+
+[ext_resource type="Script" uid="uid://80ig0gmv38ka" path="res://PlayerControllers/Abilities/ArsonIncendiary/ArsonIncendiary.gd" id="1_1dgpb"]
+[ext_resource type="PackedScene" uid="uid://ira31rxsm7x1" path="res://PlayerControllers/Mercs/Arson/Assets/Incendiary.glb" id="2_xs34p"]
+[ext_resource type="Material" uid="uid://rq7cqlljrpwr" path="res://PlayerControllers/Mercs/Arson/Assets/Flamethrower_Primary.tres" id="3_l3mhk"]
+[ext_resource type="Material" uid="uid://drorms66sqkvs" path="res://PlayerControllers/Mercs/Arson/Assets/Flamethrower_Metal.tres" id="4_std12"]
+[ext_resource type="Material" uid="uid://cms8odrf8y27v" path="res://PlayerControllers/Mercs/Arson/Assets/Flamethrower_Undermetal.tres" id="5_5mc0a"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_seah1"]
+radius = 0.09082031
+height = 0.4013672
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ypg12"]
+radius = 1.790106
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_26k3f"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_8vxmg"]
+material = SubResource("StandardMaterial3D_26k3f")
+
+[sub_resource type="Gradient" id="Gradient_nla6h"]
+colors = PackedColorArray(0, 0, 0, 1, 0.9544688, 0.10710748, 0, 1)
+
+[sub_resource type="Animation" id="Animation_pc0d5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nla6h"]
+resource_name = "dequip"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.11022457),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.42329928, -0.23782785, -0.66948545), Vector3(0.42329928, -0.8561233, -0.29262486)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.3228509, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_seah1"]
+resource_name = "equip"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13035865, 0.3),
+"transitions": PackedFloat32Array(0.2176377, -0.5, 1),
+"update": 0,
+"values": [Vector3(-0.55560935, -0.27658942, -0.090913), Vector3(-0.2782101, -0.2406513, -0.6273415), Vector3(0.42329928, -0.23782785, -0.66948545)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.3),
+"transitions": PackedFloat32Array(0.1538931, -0.5, 1),
+"update": 0,
+"values": [Vector3(0.3702678, 1.6343747, 0.11917809), Vector3(-0.6835726, 0.18785527, -0.46102214), Vector3(-0.3228509, 0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"finish_equip_anim"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ypg12"]
+resource_name = "hold_to_throw"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.058102872),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.42329928, -0.23782785, -0.66948545), Vector3(0.42329928, -0.06399463, -0.66948545)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.058102872),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.3228509, 0, 0), Vector3(0.404707, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_26k3f"]
+resource_name = "idle"
+length = 4.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.42329928, -0.23782785, -0.66948545)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.3228509, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Grenade/Incendiary2:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.016666668, 0.033333335, 0.05, 0.06666667, 0.083333336, 0.1, 0.11666667, 0.13333334, 0.15, 0.16666667, 0.18333334, 0.2, 0.21666667, 0.23333333, 0.25, 0.26666668, 0.28333333, 0.3, 0.31666666, 0.33333334, 0.35, 0.36666667, 0.38333333, 0.4, 0.41666666, 0.43333334, 0.45, 0.46666667, 0.48333332, 0.5, 0.51666665, 0.53333336, 0.55, 0.56666666, 0.5833333, 0.6, 0.6166667, 0.6333333, 0.65, 0.6666667, 0.68333334, 0.7, 0.71666664, 0.73333335, 0.75, 0.76666665, 0.78333336, 0.8, 0.81666666, 0.8333333, 0.85, 0.8666667, 0.8833333, 0.9, 0.9166667, 0.93333334, 0.95, 0.96666664, 0.98333335, 1, 1.0166667, 1.0333333, 1.05, 1.0666667, 1.0833334, 1.1, 1.1166667, 1.1333333, 1.15, 1.1666666, 1.1833333, 1.2, 1.2166667, 1.2333333, 1.25, 1.2666667, 1.2833333, 1.3, 1.3166667, 1.3333334, 1.35, 1.3666667, 1.3833333, 1.4, 1.4166666, 1.4333333, 1.45, 1.4666667, 1.4833333, 1.5, 1.5166667, 1.5333333, 1.55, 1.5666667, 1.5833334, 1.6, 1.6166667, 1.6333333, 1.65, 1.6666666, 1.6833333, 1.7, 1.7166667, 1.7333333, 1.75, 1.7666667, 1.7833333, 1.8, 1.8166667, 1.8333334, 1.85, 1.8666667, 1.8833333, 1.9, 1.9166666, 1.9333333, 1.95, 1.9666667, 1.9833333, 2, 2.0166667, 2.0333333, 2.05, 2.0666666, 2.0833333, 2.1, 2.1166666, 2.1333334, 2.15, 2.1666667, 2.1833334, 2.2, 2.2166667, 2.2333333, 2.25, 2.2666667, 2.2833333, 2.3, 2.3166666, 2.3333333, 2.35, 2.3666666, 2.3833334, 2.4, 2.4166667, 2.4333334, 2.45, 2.4666667, 2.4833333, 2.5, 2.5166667, 2.5333333, 2.55, 2.5666666, 2.5833333, 2.6, 2.6166666, 2.6333334, 2.65, 2.6666667, 2.6833334, 2.7, 2.7166667, 2.7333333, 2.75, 2.7666667, 2.7833333, 2.8, 2.8166666, 2.8333333, 2.85, 2.8666666, 2.8833334, 2.9, 2.9166667, 2.9333334, 2.95, 2.9666667, 2.9833333, 3, 3.0166667, 3.0333333, 3.05, 3.0666666, 3.0833333, 3.1, 3.1166666, 3.1333334, 3.15, 3.1666667, 3.1833334, 3.2, 3.2166667, 3.2333333, 3.25, 3.2666667, 3.2833333, 3.3, 3.3166666, 3.3333333, 3.35, 3.3666666, 3.3833334, 3.4, 3.4166667, 3.4333334, 3.45, 3.4666667, 3.4833333, 3.5, 3.5166667, 3.5333333, 3.55, 3.5666666, 3.5833333, 3.6, 3.6166666, 3.6333334, 3.65, 3.6666667, 3.6833334, 3.7, 3.7166667, 3.7333333, 3.75, 3.7666667, 3.7833333, 3.8, 3.8166666, 3.8333333, 3.85, 3.8666666, 3.8833334, 3.9, 3.9166667, 3.9333334, 3.95, 3.9666667, 3.9833333, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.09370057, -3.04458, -0.0041797925), Vector3(0.09347361, -3.0449543, -0.0041797925), Vector3(0.09326228, -3.0452936, -0.0041797925), Vector3(0.093069464, -3.0458062, -0.0041797925), Vector3(0.092901886, -3.0463665, -0.0041797925), Vector3(0.09277692, -3.0469215, -0.0041797925), Vector3(0.09274024, -3.0474708, -0.0041797925), Vector3(0.09285139, -3.0480146, -0.0041797925), Vector3(0.093086235, -3.0485525, -0.0041797925), Vector3(0.0933919, -3.0490835, -0.0041797925), Vector3(0.09374999, -3.049607, -0.0041797925), Vector3(0.0941599, -3.0502045, -0.0041797925), Vector3(0.09462537, -3.0510266, -0.0041797925), Vector3(0.09514754, -3.0518196, -0.0041797925), Vector3(0.09545206, -3.052578, -0.0041797925), Vector3(0.095756896, -3.0533624, -0.0041797925), Vector3(0.096125536, -3.0541122, -0.0041797925), Vector3(0.09655485, -3.0547967, -0.0041797925), Vector3(0.09704152, -3.055388, -0.0041797925), Vector3(0.09758081, -3.055955, -0.0041797925), Vector3(0.09816637, -3.0565157, -0.0041797925), Vector3(0.09879098, -3.0570042, -0.0041797925), Vector3(0.09944769, -3.0574398, -0.0041797925), Vector3(0.100130394, -3.0578318, -0.0041797925), Vector3(0.10044708, -3.0581822, -0.0041797925), Vector3(0.10059668, -3.0584855, -0.0041797925), Vector3(0.10062161, -3.0587199, -0.0041797925), Vector3(0.10031951, -3.058806, -0.0041797925), Vector3(0.10005374, -3.0587528, -0.0041797925), Vector3(0.09984306, -3.0586934, -0.0041797925), Vector3(0.09968849, -3.058558, -0.0041797925), Vector3(0.09958888, -3.0583637, -0.0041797925), Vector3(0.099541694, -3.0581198, -0.0041797925), Vector3(0.09954396, -3.057832, -0.0041797925), Vector3(0.099592775, -3.0576, -0.0041797925), Vector3(0.099685624, -3.057545, -0.0041797925), Vector3(0.099749535, -3.0574305, -0.0041797925), Vector3(0.09958925, -3.0572562, -0.0041797925), Vector3(0.09947228, -3.0570235, -0.0041797925), Vector3(0.0991863, -3.0567358, -0.0041797925), Vector3(0.09874749, -3.0563984, -0.0041797925), Vector3(0.098312244, -3.056018, -0.0041797925), Vector3(0.09792656, -3.0556014, -0.0041797925), Vector3(0.0975974, -3.0551531, -0.0041797925), Vector3(0.097320266, -3.054873, -0.0041797925), Vector3(0.09691417, -3.0548768, -0.0041797925), Vector3(0.09657219, -3.054862, -0.0041797925), Vector3(0.09629437, -3.0548034, -0.0041797925), Vector3(0.096012965, -3.0546968, -0.0041797925), Vector3(0.09554386, -3.0545392, -0.0041797925), Vector3(0.09512554, -3.0543292, -0.0041797925), Vector3(0.09475914, -3.054146, -0.0041797925), Vector3(0.094447136, -3.0545738, -0.0041797925), Vector3(0.094193704, -3.0549603, -0.0041797925), Vector3(0.09400291, -3.0553107, -0.0041797925), Vector3(0.09387556, -3.0558686, -0.0041797925), Vector3(0.09380701, -3.0564673, -0.0041797925), Vector3(0.09378842, -3.0570347, -0.0041797925), Vector3(0.09380989, -3.0575652, -0.0041797925), Vector3(0.09386283, -3.0580516, -0.0041797925), Vector3(0.093940735, -3.0584872, -0.0041797925), Vector3(0.09403896, -3.0588677, -0.0041797925), Vector3(0.094070725, -3.059193, -0.0041797925), Vector3(0.09383106, -3.0594678, -0.0041797925), Vector3(0.09349504, -3.0596986, -0.0041797925), Vector3(0.09311492, -3.0598922, -0.0041797925), Vector3(0.092775434, -3.0600548, -0.0041797925), Vector3(0.092483364, -3.06019, -0.0041797925), Vector3(0.09224632, -3.060352, -0.0041797925), Vector3(0.09193717, -3.0607846, -0.0041797925), Vector3(0.09158192, -3.0612073, -0.0041797925), Vector3(0.09128646, -3.0615978, -0.0041797925), Vector3(0.09104666, -3.0619483, -0.0041797925), Vector3(0.09085676, -3.0622497, -0.0041797925), Vector3(0.090711474, -3.0624876, -0.0041797925), Vector3(0.09046865, -3.0626457, -0.0041797925), Vector3(0.09001797, -3.0627027, -0.0041797925), Vector3(0.089459, -3.062638, -0.0041797925), Vector3(0.08872954, -3.062447, -0.0041797925), Vector3(0.088040166, -3.062149, -0.0041797925), Vector3(0.087403186, -3.0617723, -0.0041797925), Vector3(0.086845286, -3.0613403, -0.0041797925), Vector3(0.086411774, -3.0611546, -0.0041797925), Vector3(0.086119756, -3.06102, -0.0041797925), Vector3(0.08588355, -3.0608568, -0.0041797925), Vector3(0.08553878, -3.0606625, -0.0041797925), Vector3(0.08523572, -3.0604298, -0.0041797925), Vector3(0.08496693, -3.0601478, -0.0041797925), Vector3(0.08472882, -3.0598016, -0.0041797925), Vector3(0.08451945, -3.0593817, -0.0041797925), Vector3(0.08433761, -3.0588918, -0.0041797925), Vector3(0.08418253, -3.0583458, -0.0041797925), Vector3(0.084053665, -3.0580246, -0.0041797925), Vector3(0.08395055, -3.057795, -0.0041797925), Vector3(0.083739296, -3.0575378, -0.0041797925), Vector3(0.08328436, -3.0572562, -0.0041797925), Vector3(0.082859755, -3.0569522, -0.0041797925), Vector3(0.082466334, -3.056626, -0.0041797925), Vector3(0.08210532, -3.0562768, -0.0041797925), Vector3(0.08177835, -3.055903, -0.0041797925), Vector3(0.08148765, -3.0555038, -0.0041797925), Vector3(0.081236124, -3.0554194, -0.0041797925), Vector3(0.080793425, -3.0553644, -0.0041797925), Vector3(0.08026124, -3.055274, -0.0041797925), Vector3(0.07977837, -3.055147, -0.0041797925), Vector3(0.07934556, -3.054981, -0.0041797925), Vector3(0.078961104, -3.054775, -0.0041797925), Vector3(0.07862137, -3.0545275, -0.0041797925), Vector3(0.078321755, -3.0542357, -0.0041797925), Vector3(0.07805773, -3.0540683, -0.0041797925), Vector3(0.07782539, -3.0538573, -0.0041797925), Vector3(0.077621736, -3.0535903, -0.0041797925), Vector3(0.07738253, -3.0534139, -0.0041797925), Vector3(0.076877974, -3.0532763, -0.0041797925), Vector3(0.07640129, -3.053297, -0.0041797925), Vector3(0.075956546, -3.0533092, -0.0041797925), Vector3(0.075548664, -3.0532656, -0.0041797925), Vector3(0.07518358, -3.053155, -0.0041797925), Vector3(0.07486788, -3.052966, -0.0041797925), Vector3(0.07460817, -3.0526955, -0.0041797925), Vector3(0.074409634, -3.0523481, -0.0041797925), Vector3(0.074274756, -3.0519366, -0.0041797925), Vector3(0.07420254, -3.0514734, -0.0041797925), Vector3(0.07405542, -3.0509691, -0.0041797925), Vector3(0.07368134, -3.0504315, -0.0041797925), Vector3(0.073234335, -3.0498662, -0.0041797925), Vector3(0.072834134, -3.0492775, -0.0041797925), Vector3(0.07249099, -3.0486681, -0.0041797925), Vector3(0.07221412, -3.0482347, -0.0041797925), Vector3(0.072009586, -3.0477705, -0.0041797925), Vector3(0.07187959, -3.0474148, -0.0041797925), Vector3(0.07182431, -3.0473728, -0.0041797925), Vector3(0.071844414, -3.0476956, -0.0041797925), Vector3(0.07194248, -3.0482454, -0.0041797925), Vector3(0.07189488, -3.0490363, -0.0041797925), Vector3(0.07177569, -3.0498145, -0.0041797925), Vector3(0.071732834, -3.050579, -0.0041797925), Vector3(0.07176252, -3.0513275, -0.0041797925), Vector3(0.071707, -3.052059, -0.0041797925), Vector3(0.07154542, -3.05277, -0.0041797925), Vector3(0.071477786, -3.0534585, -0.0041797925), Vector3(0.07152721, -3.0541208, -0.0041797925), Vector3(0.07168947, -3.054751, -0.0041797925), Vector3(0.07193198, -3.0553327, -0.0041797925), Vector3(0.072225936, -3.0557997, -0.0041797925), Vector3(0.072555095, -3.056051, -0.0041797925), Vector3(0.07291098, -3.0561895, -0.0041797925), Vector3(0.07328901, -3.0564744, -0.0041797925), Vector3(0.0736865, -3.0567381, -0.0041797925), Vector3(0.07410192, -3.057119, -0.0041797925), Vector3(0.07453425, -3.0574353, -0.0041797925), Vector3(0.07498294, -3.0577, -0.0041797925), Vector3(0.07532545, -3.0579238, -0.0041797925), Vector3(0.07550904, -3.0581152, -0.0041797925), Vector3(0.07567858, -3.0582798, -0.0041797925), Vector3(0.075692564, -3.0584219, -0.0041797925), Vector3(0.075669914, -3.0585437, -0.0041797925), Vector3(0.0756902, -3.0586474, -0.0041797925), Vector3(0.07575625, -3.0588386, -0.0041797925), Vector3(0.07587072, -3.0592911, -0.0041797925), Vector3(0.07577744, -3.0597208, -0.0041797925), Vector3(0.075631835, -3.0601258, -0.0041797925), Vector3(0.07550883, -3.0605028, -0.0041797925), Vector3(0.07540841, -3.0608478, -0.0041797925), Vector3(0.075330734, -3.0611565, -0.0041797925), Vector3(0.075276725, -3.0615325, -0.0041797925), Vector3(0.07522372, -3.061933, -0.0041797925), Vector3(0.074919164, -3.0622766, -0.0041797925), Vector3(0.07480521, -3.062563, -0.0041797925), Vector3(0.07488138, -3.0628023, -0.0041797925), Vector3(0.075001396, -3.0632389, -0.0041797925), Vector3(0.07514123, -3.0636346, -0.0041797925), Vector3(0.07529661, -3.0639932, -0.0041797925), Vector3(0.075466305, -3.0643191, -0.0041797925), Vector3(0.07564983, -3.064615, -0.0041797925), Vector3(0.07567889, -3.0650125, -0.0041797925), Vector3(0.07556996, -3.0654948, -0.0041797925), Vector3(0.07550406, -3.0659375, -0.0041797925), Vector3(0.07548627, -3.0663397, -0.0041797925), Vector3(0.07551983, -3.0667596, -0.0041797925), Vector3(0.07560511, -3.0673275, -0.0041797925), Vector3(0.07573965, -3.0678751, -0.0041797925), Vector3(0.07591939, -3.068402, -0.0041797925), Vector3(0.0761403, -3.0689068, -0.0041797925), Vector3(0.07639964, -3.0693867, -0.0041797925), Vector3(0.0766975, -3.0698392, -0.0041797925), Vector3(0.077038646, -3.0702562, -0.0041797925), Vector3(0.07729542, -3.0706193, -0.0041797925), Vector3(0.07737586, -3.0708575, -0.0041797925), Vector3(0.07755634, -3.070893, -0.0041797925), Vector3(0.0778324, -3.0708122, -0.0041797925), Vector3(0.07817728, -3.0706756, -0.0041797925), Vector3(0.07856963, -3.0705795, -0.0041797925), Vector3(0.07887365, -3.0705047, -0.0041797925), Vector3(0.07916045, -3.0703592, -0.0041797925), Vector3(0.079536974, -3.0701578, -0.0041797925), Vector3(0.08002263, -3.0699117, -0.0041797925), Vector3(0.08063427, -3.06963, -0.0041797925), Vector3(0.08135922, -3.0693183, -0.0041797925), Vector3(0.08216236, -3.068981, -0.0041797925), Vector3(0.08301499, -3.0688128, -0.0041797925), Vector3(0.08390036, -3.068935, -0.0041797925), Vector3(0.08480917, -3.0691214, -0.0041797925), Vector3(0.08562097, -3.0692723, -0.0041797925), Vector3(0.08632277, -3.0693896, -0.0041797925), Vector3(0.08706841, -3.069475, -0.0041797925), Vector3(0.0878566, -3.069777, -0.0041797925), Vector3(0.08846652, -3.0705326, -0.0041797925), Vector3(0.08909077, -3.0712771, -0.0041797925), Vector3(0.08974776, -3.0720086, -0.0041797925), Vector3(0.090075724, -3.0727272, -0.0041797925), Vector3(0.09032058, -3.0734298, -0.0041797925), Vector3(0.090602934, -3.0741146, -0.0041797925), Vector3(0.090928346, -3.0747783, -0.0041797925), Vector3(0.091303624, -3.075413, -0.0041797925), Vector3(0.09173553, -3.0760074, -0.0041797925), Vector3(0.09222819, -3.076538, -0.0041797925), Vector3(0.09278078, -3.076974, -0.0041797925), Vector3(0.09338754, -3.0772977, -0.0041797925), Vector3(0.094040036, -3.0775259, -0.0041797925), Vector3(0.09472988, -3.0776803, -0.0041797925), Vector3(0.09538397, -3.07777, -0.0041797925), Vector3(0.09572698, -3.0777915, -0.0041797925), Vector3(0.09594861, -3.0777357, -0.0041797925), Vector3(0.095956825, -3.0776415, -0.0041797925), Vector3(0.095934615, -3.0777655, -0.0041797925), Vector3(0.09559392, -3.0778008, -0.0041797925), Vector3(0.09526869, -3.0777533, -0.0041797925), Vector3(0.09496165, -3.0776265, -0.0041797925), Vector3(0.09467627, -3.077422, -0.0041797925), Vector3(0.094416775, -3.0771427, -0.0041797925), Vector3(0.094187975, -3.076794, -0.0041797925), Vector3(0.09399485, -3.0764368, -0.0041797925), Vector3(0.093841635, -3.076222, -0.0041797925), Vector3(0.09373096, -3.0759485, -0.0041797925), Vector3(0.093663186, -3.0756104, -0.0041797925), Vector3(0.0936366, -3.0752015, -0.0041797925), Vector3(0.0936483, -3.074721, -0.0041797925), Vector3(0.09369528, -3.0742333, -0.0041797925), Vector3(0.093775176, -3.0740552, -0.0041797925), Vector3(0.0938868, -3.0738266, -0.0041797925)]
+}
+
+[sub_resource type="Animation" id="Animation_8vxmg"]
+resource_name = "throw"
+length = 0.048
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.040159337),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.42329928, -0.06399463, -0.66948545), Vector3(0.42329928, -0.056609645, -0.9350784)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.040159337),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.404707, 0, 0), Vector3(-0.79576534, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nla6h"]
+_data = {
+&"RESET": SubResource("Animation_pc0d5"),
+&"dequip": SubResource("Animation_nla6h"),
+&"equip": SubResource("Animation_seah1"),
+&"hold_to_throw": SubResource("Animation_ypg12"),
+&"idle": SubResource("Animation_26k3f"),
+&"throw": SubResource("Animation_8vxmg")
+}
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_seah1"]
+
+[node name="ArsonIncendiary" type="Node3D" unique_id=1600695075]
+script = ExtResource("1_1dgpb")
+
+[node name="Grenade" type="RigidBody3D" parent="." unique_id=2084771126]
+top_level = true
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grenade" unique_id=939373278]
+transform = Transform3D(1, -1.1920929e-07, 1.4901161e-08, 0, 1, -1.4901161e-08, 0, 0, 1, 1.4901161e-07, -0.020019472, 1.1920929e-07)
+shape = SubResource("CapsuleShape3D_seah1")
+
+[node name="Incendiary2" parent="Grenade" unique_id=1440469924 instance=ExtResource("2_xs34p")]
+transform = Transform3D(-0.064691305, -0.0008594734, -0.006268321, -0.0002704938, 0.06471433, -0.006081629, 0.006321179, -0.0060266647, -0.0644106, -0.004298568, -0.03716053, -0.00364542)
+
+[node name="Incendiary" parent="Grenade/Incendiary2" index="0" unique_id=98659808]
+surface_material_override/0 = ExtResource("3_l3mhk")
+surface_material_override/1 = ExtResource("4_std12")
+surface_material_override/2 = ExtResource("5_5mc0a")
+
+[node name="ExplosionRadius" type="Area3D" parent="Grenade" unique_id=83263472]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grenade/ExplosionRadius" unique_id=1608404638]
+transform = Transform3D(1.4343741, -5.9604645e-08, 2.9802322e-08, 0, 1.4343741, 0, -1.4901161e-08, 1.4901161e-08, 1.4343741, 0, 0, 0)
+shape = SubResource("SphereShape3D_ypg12")
+debug_color = Color(0.77254903, 0, 0.09803922, 0.7921569)
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Grenade" unique_id=800159809]
+layers = 0
+emitting = false
+amount = 30
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+mesh = SubResource("SphereMesh_8vxmg")
+emission_shape = 1
+emission_sphere_radius = 2.24
+spread = 180.0
+gravity = Vector3(0, -5, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 7.0
+color = Color(0.5449743, 0.54497427, 0.54497427, 1)
+color_initial_ramp = SubResource("Gradient_nla6h")
+
+[node name="Hand" type="RemoteTransform3D" parent="." unique_id=298106922]
+remote_path = NodePath("../Grenade")
+
+[node name="FuseTimer" type="Timer" parent="." unique_id=1510142201]
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1062011076]
+libraries/ = SubResource("AnimationLibrary_nla6h")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=888136363]
+replication_config = SubResource("SceneReplicationConfig_seah1")
+
+[connection signal="timeout" from="FuseTimer" to="." method="_on_fuse_timer_timeout"]
+
+[editable path="Grenade/Incendiary2"]

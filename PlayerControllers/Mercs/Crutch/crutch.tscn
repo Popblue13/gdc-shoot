@@ -3,13 +3,17 @@
 [ext_resource type="Script" uid="uid://b62xliocjjkte" path="res://PlayerControllers/Mercs/Crutch/crutch.gd" id="1_v83g2"]
 [ext_resource type="PackedScene" uid="uid://byblikkwgri3q" path="res://PlayerControllers/Abilities/Sprint/SprintAbility.tscn" id="2_mofov"]
 [ext_resource type="PackedScene" uid="uid://c4indsu5jqmn6" path="res://PlayerControllers/Abilities/Smg/smg.tscn" id="4_7moma"]
-[ext_resource type="PackedScene" uid="uid://btge38lo8isyd" path="res://PlayerControllers/Abilities/Footsteps/footsteps.tscn" id="5_xylcw"]
 [ext_resource type="Texture2D" uid="uid://bpgdy8e5xjpfc" path="res://PlayerControllers/Mercs/Crutch/textures/Ushanka1Mtl_baseColor.png" id="6_038mh"]
 [ext_resource type="PackedScene" uid="uid://b36uuh56645j5" path="res://PlayerControllers/Abilities/Jump/JumpAbility.tscn" id="6_f21af"]
 [ext_resource type="PackedScene" uid="uid://dk1uiyodtwjio" path="res://PlayerControllers/Abilities/WallBuilder/turretplacer.tscn" id="6_mofov"]
+[ext_resource type="PackedScene" uid="uid://cuqfn6bvsi10e" path="res://PlayerControllers/Abilities/PassiveHeal/passive_heal.tscn" id="6_v83g2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lwjk5"]
 radius = 0.38378906
+
+[sub_resource type="TorusMesh" id="TorusMesh_v83g2"]
+rings = 8
+ring_segments = 6
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_g1ecg"]
 
@@ -59,21 +63,21 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_f5gf6")
 
-[node name="Player" type="CharacterBody3D" unique_id=1167000142 node_paths=PackedStringArray("camera", "visual_body", "visual_hand", "abilities")]
+[node name="Player" type="CharacterBody3D" unique_id=1167000142 node_paths=PackedStringArray("camera", "visual_body", "abilities")]
 collision_layer = 2
 script = ExtResource("1_v83g2")
 debug_mode = true
 camera = NodePath("Camera3D")
 health = 80.0
 air_acceleration = 0.1
-speed = 0.9
+speed = 0.8
 visual_body = NodePath("crutch")
-visual_hand = NodePath("Hand")
 camera_fov = 110.0
-abilities = [NodePath("SprintAbility"), NodePath("HPSMG"), NodePath("JumpAbility"), NodePath("wallplacer")]
+abilities = [NodePath("SprintAbility"), NodePath("HPSMG"), NodePath("JumpAbility"), NodePath("wallplacer"), NodePath("Passive Heal")]
 metadata/_custom_type_script = "uid://2ip0lrtrrhsr"
 
 [node name="SprintAbility" parent="." unique_id=699710493 instance=ExtResource("2_mofov")]
+speed_multiplier = 1.2
 AbilityDescription = "sprint"
 
 [node name="JumpAbility" parent="." unique_id=27473948 instance=ExtResource("6_f21af")]
@@ -121,24 +125,30 @@ offset_right = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Hand" type="CSGSphere3D" parent="." unique_id=427775565]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25360978, 0.23060426, -0.48329479)
-radius = 0.09193548
-
 [node name="HPSMG" parent="." unique_id=1600695075 instance=ExtResource("4_7moma")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23129117, 0.58409363, 0.24758685)
+damage = -2.5
 AbilityDescription = "heal teammates. hurt enemies."
 
-[node name="Footsteps" parent="." unique_id=1784459721 instance=ExtResource("5_xylcw")]
-
 [node name="wallplacer" parent="." unique_id=1651484999 instance=ExtResource("6_mofov")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1060199, 0.17069125, -0.46327305)
+AbilityDescription = "place destructible walls"
 trigger_key = "2"
 
+[node name="Passive Heal" parent="." unique_id=971415938 instance=ExtResource("6_v83g2")]
+health_per_second = 4.0
+AbilityDescription = "passively regenerates health."
+
 [node name="crutch" type="Node3D" parent="." unique_id=1678716086]
-transform = Transform3D(0.57, 0, 0, 0, 0.53673893, 0.059256535, 0, -0.059256535, 0.53673893, 0, 0.635, -0.05389023)
+transform = Transform3D(0.57, 0, 0, 0, 0.54, 0, 0, 0, 0.54, 0, 0.635, -0.05389023)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="crutch" unique_id=1647378939]
+transform = Transform3D(0.10526316, 0, 0, 0, 0.06871052, 0.08731863, 0, -0.08731863, 0.06871052, 0, -0.20859218, -0.5810678)
+mesh = SubResource("TorusMesh_v83g2")
+skeleton = NodePath("../..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="crutch" unique_id=1865011546]
-transform = Transform3D(1.36592, 0, 0, 0, 1.8406684, -0.15075547, 0, 0.2032117, 1.365526, 0, -1.1796304, -0.031160176)
+transform = Transform3D(1.36592, 0, 0, 0, 1.8518518, 0, 0, 0, 1.3738226, 0, -1.1796304, 0.09516039)
 mesh = SubResource("CapsuleMesh_g1ecg")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_xylcw")
@@ -149,6 +159,7 @@ transform = Transform3D(100, 0, 0, 0, -100.000015, -1.5099583e-05, 0, 1.5099583e
 [node name="ushankaskib_obj_cleaner_materialmerger_gles" type="Node3D" parent="crutch/Sketchfab_model" unique_id=1409654675]
 
 [node name="Object_2" type="MeshInstance3D" parent="crutch/Sketchfab_model/ushankaskib_obj_cleaner_materialmerger_gles" unique_id=557032049]
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0.0014533969, 2.3283064e-10)
 material_override = SubResource("StandardMaterial3D_mofov")
 mesh = SubResource("ArrayMesh_my7go")
 skeleton = NodePath("")

@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://drorms66sqkvs"]
+
+[resource]
+resource_name = "Flamethrower_Metal"
+cull_mode = 2
+albedo_color = Color(0.5595439, 0.5862784, 0.59269077, 1)
+metallic = 1.0
+roughness = 0.6

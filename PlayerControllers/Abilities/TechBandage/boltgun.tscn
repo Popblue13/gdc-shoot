@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://ba65rnglgfi41"]
 
-[ext_resource type="Script" uid="uid://mk7bfvoo7r0x" path="res://PlayerControllers/Abilities/TechBandage/evil_gun_ability.gd" id="1_v1ohx"]
+[ext_resource type="Script" uid="uid://mk7bfvoo7r0x" path="res://PlayerControllers/Abilities/TechBandage/bandage.gd" id="1_v1ohx"]
 [ext_resource type="Texture2D" uid="uid://b65fa3kdr05md" path="res://PrototypeAssets/PrototypeCrosshairsAssets/PNG/White/crosshair002.png" id="4_d0jgi"]
 [ext_resource type="FontFile" uid="uid://bbiqgpxf2c38" path="res://Misc/UI/fonts/GothicA1-Black.ttf" id="5_16ouo"]
 [ext_resource type="Material" uid="uid://bm5npalrr2vm4" path="res://MapsAndGamemodes/Maps/dm_grahhh/babymeat.tres" id="6_mye5y"]

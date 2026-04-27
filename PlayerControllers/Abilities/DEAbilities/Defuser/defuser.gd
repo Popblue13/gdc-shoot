@@ -2,11 +2,11 @@ extends Ability
 
 @onready var ray_cast_3d: RayCast3D = $RayCast3D
 
-const defuse_time : float = 10.0
+const defuse_time : float = 4.5
 var cur_defuse_level : float = 10.0
 
 var is_defusing : bool = false
-
+var defused = false
 # FIX 1: Use physics process so it perfectly matches the Merc's check_abilities rate
 func _physics_process(delta: float) -> void:
 	if !is_multiplayer_authority(): return
@@ -29,20 +29,39 @@ func activate():
 	var bomb_target = hit_object if hit_object is PlantedBomb else hit_object.owner as PlantedBomb
 	
 	
-	if bomb_target and bomb_target.planted:
+	if bomb_target and bomb_target.planted and !defused:
+		$UI.show()
+		if !$AudioStreamPlayer3D.is_playing():
+			play_defuse.rpc()
+		
 		is_defusing = true
 		# Use physics delta to ensure the math is accurate to the frame rate
 		cur_defuse_level -= get_physics_process_delta_time()
 		print(cur_defuse_level)
+		$UI/PanelContainer/Label.text = str(cur_defuse_level)
+		$UI/PanelContainer/ProgressBar.value = ((cur_defuse_level/defuse_time)*100)
 		if cur_defuse_level <= 0.0:
 			# Defuse complete! Prevent spamming and tell the server.
 			cur_defuse_level = defuse_time 
 			_request_defuse.rpc_id(1, bomb_target.get_path())
+	else:
+		stop_defuse.rpc()
+		$UI.hide()
+
+@rpc("any_peer", "call_local", "reliable")
+func play_defuse():
+	$AudioStreamPlayer3D.play()
+
+@rpc("any_peer", "call_local", "reliable")
+func stop_defuse():
+	$AudioStreamPlayer3D.stop()
 
 @rpc("any_peer", "call_local", "reliable")
 func _request_defuse(bomb_path: NodePath):
 	if not multiplayer.is_server(): return
+	defused = true
 	
+	$Bombdefused.play()
 	# On a headless server, this will ALWAYS be the correct player ID
 	var defuser_id = multiplayer.get_remote_sender_id() 
 	

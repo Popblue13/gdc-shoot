@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bx84qhvosmtow"]
+
+[ext_resource type="AudioStream" uid="uid://bb4wwipniubbd" path="res://MapsAndGamemodes/Gamemodes/de/defuseloss.mp3" id="1_l8yae"]
+
+[node name="DefuseLoseSound" type="AudioStreamPlayer" unique_id=1404629346]
+stream = ExtResource("1_l8yae")

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bgx7lserrkrgs"]
 
 [ext_resource type="Script" uid="uid://i4snterwwfcp" path="res://MapsAndGamemodes/Gamemodes/PresetGamemodeWidgets/CharacterSelect/character_select.gd" id="1_flvx3"]
+[ext_resource type="Script" path="res://MapsAndGamemodes/Gamemodes/PresetGamemodeWidgets/CharacterSelect/spin_spawn.gd" id="2_8i7tb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_flvx3"]
 content_margin_left = 0.0
@@ -42,7 +43,6 @@ fill = 1
 fill_from = Vector2(0.5, 0.52136755)
 
 [node name="CharacterSelect" type="Control" unique_id=248948751]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -65,7 +65,7 @@ layout_mode = 2
 [node name="SubViewport" type="SubViewport" parent="PanelContainer/SubViewportContainer" unique_id=338155594]
 transparent_bg = true
 handle_input_locally = false
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="maybe make this ia gradient" type="CSGBox3D" parent="PanelContainer/SubViewportContainer/SubViewport" unique_id=1596898349]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0033812523, -36.001926, -3.9061258)
@@ -96,9 +96,10 @@ spot_angle = 32.99246
 
 [node name="SpinSpawn" type="Marker3D" parent="PanelContainer/SubViewportContainer/SubViewport" unique_id=379684050]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.026600122, -33.922417, -2.2191494)
+script = ExtResource("2_8i7tb")
 
 [node name="Timer" type="Timer" parent="PanelContainer/SubViewportContainer/SubViewport/SpinSpawn" unique_id=1313410776]
-wait_time = 0.2
+wait_time = 500.0
 autostart = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="PanelContainer/SubViewportContainer/SubViewport/SpinSpawn" unique_id=1095285554]

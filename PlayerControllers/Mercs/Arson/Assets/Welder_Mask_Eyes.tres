@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bxi4khb626mxc"]
+
+[resource]
+resource_name = "Welder_Mask_Eyes"
+cull_mode = 2
+albedo_color = Color(1, 0, 0.12156863, 1)
+roughness = 0.5
+emission_enabled = true
+emission = Color(0.3239728, 0, 0.029071033, 1)
+emission_energy_multiplier = 14.3
